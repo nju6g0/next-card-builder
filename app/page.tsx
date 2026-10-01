@@ -261,10 +261,12 @@ export default function Home() {
             為生命中的美好時刻，創造獨一無二的數位邀請函
           </p>
           <div className="hero-cta">
-            <Link href="/builder">
-              <button className="btn-primary">開始設計</button>
+            <Link href="/invitations/create">
+              <button className="btn-primary hidden sm:block">開始設計</button>
             </Link>
-            <button className="btn-secondary">瀏覽範本</button>
+            <Link href="/templates">
+              <button className="btn-browse-templates">瀏覽範本</button>
+            </Link>
           </div>
         </div>
         <div className="hero-visual">
@@ -342,11 +344,11 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section">
+      <section className="cta-section hidden sm:block">
         <div className="cta-content">
           <h2 className="cta-title">準備好開始了嗎？</h2>
           <p className="cta-subtitle">讓我們一起為重要的日子，留下美好的記憶</p>
-          <Link href="/builder">
+          <Link href="/invitations/create">
             <button className="btn-primary large">免費開始設計</button>
           </Link>
         </div>
@@ -356,39 +358,6 @@ export default function Home() {
           <div className="deco-circle circle-3"></div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <h3>邀請函工坊</h3>
-            <p>用心設計每一份邀請</p>
-          </div>
-          <div className="footer-links">
-            <div className="footer-column">
-              <h4>產品</h4>
-              <a href="#">範本庫</a>
-              <a href="#">定價方案</a>
-              <a href="#">使用教學</a>
-            </div>
-            <div className="footer-column">
-              <h4>關於</h4>
-              <a href="#">我們的故事</a>
-              <a href="#">聯絡我們</a>
-              <a href="#">合作夥伴</a>
-            </div>
-            <div className="footer-column">
-              <h4>支援</h4>
-              <a href="#">常見問題</a>
-              <a href="#">隱私政策</a>
-              <a href="#">服務條款</a>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <p>© 2026 邀請函工坊. 用心設計每一刻</p>
-        </div>
-      </footer>
     </div>
   );
 }
