@@ -34,29 +34,56 @@ export default function TemplatesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "var(--warm-cream)",
+        padding: "var(--spacing-xl) var(--spacing-md)",
+      }}
+    >
+      <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
+          className="section-header"
+          style={{ marginBottom: "var(--spacing-xl)" }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1
+            className="section-title"
+            style={{ fontFamily: "var(--font-serif)" }}
+          >
             邀請函範本
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="section-subtitle">
             選擇一個精美的範本快速開始，或從空白畫布自由創作
           </p>
         </motion.div>
 
         {/* Loading 狀態 */}
         {loading && (
-          <div className="flex items-center justify-center py-20">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-              <p className="text-gray-600">載入範本中...</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "5rem 0",
+            }}
+          >
+            <div style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  animation: "spin 1s linear infinite",
+                  borderRadius: "50%",
+                  height: "3rem",
+                  width: "3rem",
+                  border: "3px solid var(--soft-beige)",
+                  borderTopColor: "var(--accent-terracotta)",
+                  margin: "0 auto 1rem",
+                }}
+              ></div>
+              <p style={{ color: "var(--text-secondary)" }}>載入範本中...</p>
             </div>
           </div>
         )}
@@ -66,13 +93,32 @@ export default function TemplatesPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-red-50 border border-red-200 rounded-lg p-6 text-center"
+            style={{
+              background: "rgba(201, 125, 96, 0.1)",
+              border: "2px solid rgba(201, 125, 96, 0.3)",
+              borderRadius: "16px",
+              padding: "var(--spacing-lg)",
+              textAlign: "center",
+            }}
           >
-            <div className="text-4xl mb-3">❌</div>
-            <p className="text-red-800 font-medium mb-2">{error}</p>
+            <div
+              style={{ fontSize: "3rem", marginBottom: "var(--spacing-sm)" }}
+            >
+              ❌
+            </div>
+            <p
+              style={{
+                color: "var(--accent-terracotta)",
+                fontWeight: 500,
+                marginBottom: "var(--spacing-xs)",
+              }}
+            >
+              {error}
+            </p>
             <button
               onClick={loadTemplates}
-              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+              className="btn-primary"
+              style={{ marginTop: "var(--spacing-md)" }}
             >
               重試
             </button>
@@ -81,7 +127,13 @@ export default function TemplatesPage() {
 
         {/* 範本網格 */}
         {!loading && !error && templates.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+              gap: "var(--spacing-lg)",
+            }}
+          >
             {templates.map((template, index) => (
               <TemplateCard
                 key={template.id}
@@ -97,13 +149,25 @@ export default function TemplatesPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20"
+            style={{ textAlign: "center", padding: "5rem 0" }}
           >
-            <div className="text-6xl mb-4">📋</div>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+            <div
+              style={{ fontSize: "4rem", marginBottom: "var(--spacing-md)" }}
+            >
+              📋
+            </div>
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: 600,
+                color: "var(--deep-brown)",
+                marginBottom: "var(--spacing-xs)",
+                fontFamily: "var(--font-serif)",
+              }}
+            >
               尚無範本
             </h2>
-            <p className="text-gray-600">目前沒有可用的範本</p>
+            <p style={{ color: "var(--text-secondary)" }}>目前沒有可用的範本</p>
           </motion.div>
         )}
 
@@ -113,15 +177,45 @@ export default function TemplatesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mt-16 text-center bg-gradient-to-r from-primary to-secondary rounded-2xl p-12 text-white"
+            style={{
+              marginTop: "var(--spacing-xl)",
+              textAlign: "center",
+              background: "var(--deep-brown)",
+              borderRadius: "16px",
+              padding: "var(--spacing-xl)",
+              color: "white",
+              position: "relative",
+              overflow: "hidden",
+            }}
           >
-            <h2 className="text-3xl font-bold mb-4">找不到合適的範本？</h2>
-            <p className="text-lg mb-8 opacity-90">
+            <h2
+              style={{
+                fontSize: "2rem",
+                fontWeight: 700,
+                marginBottom: "var(--spacing-md)",
+                fontFamily: "var(--font-serif)",
+              }}
+            >
+              找不到合適的範本？
+            </h2>
+            <p
+              style={{
+                fontSize: "1.125rem",
+                marginBottom: "var(--spacing-lg)",
+                opacity: 0.9,
+              }}
+            >
               從空白畫布開始，自由發揮您的創意
             </p>
             <a
               href="/invitations/create"
-              className="inline-block px-8 py-4 bg-white text-primary rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-105"
+              className="btn-primary"
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                fontSize: "1.125rem",
+                padding: "1.25rem 3rem",
+              }}
             >
               建立空白邀請函
             </a>

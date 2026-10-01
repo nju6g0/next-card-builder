@@ -1,76 +1,47 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* 品牌資訊 */}
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <span className="text-2xl">💌</span>
-              <span className="text-xl font-bold text-white">Card Builder</span>
-            </div>
-            <p className="text-sm text-gray-400 mb-4">
-              可拖拉元件自訂邀請函的網站平台
-            </p>
-            <p className="text-xs text-gray-500">
-              使用 Next.js、TypeScript、Tailwind CSS 建構
-            </p>
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-brand">
+          <h3>邀請函工坊</h3>
+          <p>用心設計每一份邀請</p>
+        </div>
+        <div className="footer-links">
+          <div className="footer-column">
+            <h4>產品</h4>
+            <Link href="/templates">範本庫</Link>
+            <Link href="/dashboard">我的邀請函</Link>
+            <Link href="/invitations/create">開始設計</Link>
           </div>
-
-          {/* 快速連結 */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">快速連結</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/" className="hover:text-white transition">
-                  首頁
-                </Link>
-              </li>
-              <li>
-                <Link href="/templates" className="hover:text-white transition">
-                  範本
-                </Link>
-              </li>
-              <li>
-                <Link href="/dashboard" className="hover:text-white transition">
-                  我的邀請函
-                </Link>
-              </li>
-            </ul>
+          <div className="footer-column">
+            <h4>關於</h4>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+            <span className="text-text-light block">Demo 專案</span>
+            <span className="text-text-light block">純前端實作</span>
           </div>
-
-          {/* 關於 */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">關於專案</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition"
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <span className="text-gray-500">Demo 專案</span>
-              </li>
-              <li>
-                <span className="text-gray-500">純前端實作</span>
-              </li>
-            </ul>
+          <div className="footer-column">
+            <h4>技術</h4>
+            <span className="text-accent-sage block">Next.js 16.3.7</span>
+            <span className="text-accent-sage block">TypeScript 5</span>
+            <span className="text-accent-sage block">Tailwind CSS v4</span>
+            <span className="text-accent-sage block">Zustand 5</span>
+            <span className="text-accent-sage block">Framer Motion 13</span>
+            <span className="text-accent-sage block">@dnd-kit 6</span>
           </div>
         </div>
-
-        {/* 版權資訊 */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
-          <p>© {currentYear} Card Builder. Demo Project for Learning Purposes.</p>
-        </div>
+      </div>
+      <div className="footer-bottom">
+        <p>© {currentYear} 邀請函工坊. 用心設計每一刻</p>
       </div>
     </footer>
   );
