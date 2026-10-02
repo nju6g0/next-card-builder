@@ -6,7 +6,7 @@ import CommonProperties from "./CommonProperties";
 import TextProperties from "./TextProperties";
 import ImageProperties from "./ImageProperties";
 import RsvpFormProperties from "./RsvpFormProperties";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 interface PropertyPanelProps {
   className?: string;

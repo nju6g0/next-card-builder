@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
+import { motion } from "motion/react";
 
 const NAVBAR_ITEMS = [
   {
@@ -48,13 +49,21 @@ export default function Navbar() {
         <Link
           key={item.id}
           href={item.link}
-          className={`px-4 py-2 text-[0.95rem] font-medium transition-all duration-300 hover:text-accent-terracotta ${
-            isActive(item.link)
-              ? "border-b-2 border-accent-terracotta"
-              : "no-underline"
-          }`}
+          className={`relative px-4 py-2 text-[0.95rem] font-medium transition-all duration-300 hover:text-accent-terracotta `}
         >
           {item.label}
+          {isActive(item.link) && (
+            <motion.div
+              className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-terracotta"
+              layoutId="tab-indicator"
+              transition={{
+                type: "spring",
+                stiffness: 500,
+                damping: 30,
+                mass: 1,
+              }}
+            />
+          )}
         </Link>
       ),
     );
@@ -67,7 +76,7 @@ export default function Navbar() {
           key={item.id}
           href={item.link}
           onClick={() => setIsMobileMenuOpen(false)}
-          className={`px-4 py-3 text-base font-medium transition-all duration-300 ${
+          className={`relative px-4 py-3 text-base font-medium transition-all duration-300 ${
             isActive(item.link)
               ? "border-l-2 border-accent-terracotta"
               : "no-underline"

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Template } from "@/types";
 import { templatesApi } from "@/lib/mockApi";
 import TemplateCard from "@/components/ui/TemplateCard";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function TemplatesPage() {
   const [templates, setTemplates] = useState<Template[]>([]);

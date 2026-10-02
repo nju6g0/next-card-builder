@@ -32,7 +32,7 @@
 **已完成項目：**
 
 - ✅ 使用 `create-next-app` 建立 Next.js 16.3.7 專案（App Router + Turbopack）
-- ✅ 安裝依賴套件：`zustand`, `@dnd-kit/core`, `@dnd-kit/utilities`, `framer-motion`, `axios`
+- ✅ 安裝依賴套件：`zustand`, `@dnd-kit/core`, `@dnd-kit/utilities`, `motion`, `axios`
 - ✅ 設定 Tailwind CSS v4 自訂主題（品牌顏色、語義顏色、捲軸樣式）
 - ✅ 建立資料夾結構：
   - `app/` - Next.js App Router 路由

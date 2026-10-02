@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEditorStore } from '@/stores/editorStore';
-import { CANVAS_SIZES } from '@/types';
-import { motion } from 'framer-motion';
+import { useEditorStore } from "@/stores/editorStore";
+import { CANVAS_SIZES } from "@/types";
+import { motion } from "motion/react";
 
 interface EditorToolbarProps {
   onSave?: () => void;
@@ -10,7 +10,11 @@ interface EditorToolbarProps {
   className?: string;
 }
 
-export default function EditorToolbar({ onSave, onPreview, className = '' }: EditorToolbarProps) {
+export default function EditorToolbar({
+  onSave,
+  onPreview,
+  className = "",
+}: EditorToolbarProps) {
   const {
     canvasSize,
     setCanvasSize,
@@ -32,13 +36,16 @@ export default function EditorToolbar({ onSave, onPreview, className = '' }: Edi
 
   const getCurrentSizeKey = (): keyof typeof CANVAS_SIZES | null => {
     const entry = Object.entries(CANVAS_SIZES).find(
-      ([_, size]) => size.width === canvasSize.width && size.height === canvasSize.height
+      ([_, size]) =>
+        size.width === canvasSize.width && size.height === canvasSize.height,
     );
     return entry ? (entry[0] as keyof typeof CANVAS_SIZES) : null;
   };
 
   return (
-    <div className={`bg-white border-b border-neutral-200 px-4 py-3 ${className}`}>
+    <div
+      className={`bg-white border-b border-neutral-200 px-4 py-3 ${className}`}
+    >
       <div className="flex items-center justify-between">
         {/* 左側：歷史操作 */}
         <div className="flex items-center space-x-2">
@@ -48,7 +55,12 @@ export default function EditorToolbar({ onSave, onPreview, className = '' }: Edi
             className="p-2 rounded hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition"
             title="復原 (Ctrl+Z)"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -63,7 +75,12 @@ export default function EditorToolbar({ onSave, onPreview, className = '' }: Edi
             className="p-2 rounded hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition"
             title="重做 (Ctrl+Y)"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -77,12 +94,19 @@ export default function EditorToolbar({ onSave, onPreview, className = '' }: Edi
 
           {/* 元件操作 */}
           <button
-            onClick={() => selectedElementId && duplicateElement(selectedElementId)}
+            onClick={() =>
+              selectedElementId && duplicateElement(selectedElementId)
+            }
             disabled={!selectedElementId}
             className="p-2 rounded hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition"
             title="複製 (Ctrl+D)"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -92,12 +116,19 @@ export default function EditorToolbar({ onSave, onPreview, className = '' }: Edi
             </svg>
           </button>
           <button
-            onClick={() => selectedElementId && deleteElement(selectedElementId)}
+            onClick={() =>
+              selectedElementId && deleteElement(selectedElementId)
+            }
             disabled={!selectedElementId}
             className="p-2 rounded hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-danger"
             title="刪除 (Delete)"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -114,8 +145,12 @@ export default function EditorToolbar({ onSave, onPreview, className = '' }: Edi
           <div className="flex items-center space-x-2">
             <span className="text-xs text-neutral-600">畫布：</span>
             <select
-              value={getCurrentSizeKey() || ''}
-              onChange={(e) => handleCanvasSizeChange(e.target.value as keyof typeof CANVAS_SIZES)}
+              value={getCurrentSizeKey() || ""}
+              onChange={(e) =>
+                handleCanvasSizeChange(
+                  e.target.value as keyof typeof CANVAS_SIZES,
+                )
+              }
               className="text-sm border border-neutral-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="mobile">手機 (375×667)</option>
@@ -128,11 +163,16 @@ export default function EditorToolbar({ onSave, onPreview, className = '' }: Edi
           <button
             onClick={toggleGrid}
             className={`p-2 rounded transition ${
-              showGrid ? 'bg-primary text-white' : 'hover:bg-neutral-100'
+              showGrid ? "bg-primary text-white" : "hover:bg-neutral-100"
             }`}
             title="切換網格"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -145,7 +185,7 @@ export default function EditorToolbar({ onSave, onPreview, className = '' }: Edi
           {/* 清除全部 */}
           <button
             onClick={() => {
-              if (confirm('確定要清除所有元件嗎？')) {
+              if (confirm("確定要清除所有元件嗎？")) {
                 clearElements();
               }
             }}

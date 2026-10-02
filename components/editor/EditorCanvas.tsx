@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import { useEditorStore } from "@/stores/editorStore";
 import DraggableElement from "./DraggableElement";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 interface EditorCanvasProps {
   className?: string;

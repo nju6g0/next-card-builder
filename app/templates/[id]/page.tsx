@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Template } from "@/types";
-import { templatesApi, invitationsApi, rsvpApi } from '@/lib/mockApi';
+import { templatesApi, invitationsApi, rsvpApi } from "@/lib/mockApi";
 import InvitationCanvas from "@/components/ui/InvitationCanvas";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useAuthStore } from "@/stores/authStore";
 
 export default function TemplateDetailPage() {

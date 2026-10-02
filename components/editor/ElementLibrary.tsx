@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import type {
   ElementType,
   TextElement,

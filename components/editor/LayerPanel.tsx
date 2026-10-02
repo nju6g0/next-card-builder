@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useEditorStore } from "@/stores/editorStore";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import type {
   Element,
   TextElement,

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Element } from '@/types';
-import { motion } from 'framer-motion';
+import { Element } from "@/types";
+import { motion } from "motion/react";
 
 interface InvitationCanvasProps {
   elements: Element[];
@@ -18,7 +18,7 @@ interface InvitationCanvasProps {
 export default function InvitationCanvas({
   elements,
   canvasSize,
-  className = '',
+  className = "",
   scale = 1,
   showGrid = false,
 }: InvitationCanvasProps) {
@@ -28,7 +28,7 @@ export default function InvitationCanvas({
   // 渲染單個元件
   const renderElement = (element: Element) => {
     const style: React.CSSProperties = {
-      position: 'absolute',
+      position: "absolute",
       left: element.x,
       top: element.y,
       width: element.width,
@@ -37,7 +37,7 @@ export default function InvitationCanvas({
     };
 
     switch (element.type) {
-      case 'text':
+      case "text":
         return (
           <div
             key={element.id}
@@ -47,20 +47,20 @@ export default function InvitationCanvas({
               fontFamily: element.fontFamily,
               color: element.color,
               fontWeight: element.fontWeight,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              overflow: 'hidden',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+              overflow: "hidden",
             }}
           >
             {element.content}
           </div>
         );
 
-      case 'image':
+      case "image":
         if (element.isBackground) {
           // 背景圖片
           return (
@@ -70,8 +70,8 @@ export default function InvitationCanvas({
                 ...style,
                 backgroundImage: `url(${element.src})`,
                 backgroundSize: element.objectFit,
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
               }}
             />
           );
@@ -90,29 +90,29 @@ export default function InvitationCanvas({
           );
         }
 
-      case 'rsvp-form':
+      case "rsvp-form":
         // RSVP 表單預覽（唯讀模式只顯示佔位）
         return (
           <div
             key={element.id}
             style={{
               ...style,
-              border: '2px dashed #cbd5e1',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              padding: '16px',
+              border: "2px dashed #cbd5e1",
+              borderRadius: "8px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              padding: "16px",
             }}
           >
             <div className="text-center">
               <div className="text-2xl mb-2">📝</div>
               <div className="text-sm font-medium text-gray-700">RSVP 表單</div>
               <div className="text-xs text-gray-500 mt-1">
-                {element.fields.name && '姓名 '}
-                {element.fields.email && 'Email '}
-                {element.fields.attendance && '參加狀態'}
+                {element.fields.name && "姓名 "}
+                {element.fields.email && "Email "}
+                {element.fields.attendance && "參加狀態"}
               </div>
             </div>
           </div>
@@ -133,14 +133,14 @@ export default function InvitationCanvas({
         width: canvasSize.width * scale,
         height: canvasSize.height * scale,
         transform: `scale(${scale})`,
-        transformOrigin: 'top left',
+        transformOrigin: "top left",
       }}
     >
       {/* 背景 */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundColor: '#ffffff',
+          backgroundColor: "#ffffff",
         }}
       />
 
@@ -153,7 +153,7 @@ export default function InvitationCanvas({
               linear-gradient(to right, #e5e7eb 1px, transparent 1px),
               linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
             `,
-            backgroundSize: '20px 20px',
+            backgroundSize: "20px 20px",
           }}
         />
       )}
