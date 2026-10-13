@@ -1,0 +1,51 @@
+<svg width="375" height="667" viewBox="0 0 375 667" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 漸層背景 (粉紅到紫色) -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbcfe8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9d5ff;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="circleGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#f3e8ff;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="375" height="667" fill="url(#bgGradient)"/>
+  
+  <!-- 中央圓形（代表展開前的圓） -->
+  <circle cx="187.5" cy="333.5" r="40" fill="url(#circleGradient)" opacity="0.7"/>
+  
+  <!-- 標題文字 "We're" -->
+  <text x="187.5" y="250" font-family="serif" font-size="40" font-weight="700" fill="#1f2937" text-anchor="middle">
+    We're
+  </text>
+  
+  <!-- 標題文字 "Getting Married!" -->
+  <text x="187.5" y="300" font-family="serif" font-size="40" font-weight="700" fill="#1f2937" text-anchor="middle">
+    Getting
+  </text>
+  <text x="187.5" y="340" font-family="serif" font-size="40" font-weight="700" fill="#1f2937" text-anchor="middle">
+    Married!
+  </text>
+  
+  <!-- 裝飾愛心 -->
+  <g transform="translate(187.5, 450)">
+    <path d="M0,-8 C-2,-12 -8,-12 -10,-8 C-12,-4 -10,0 0,8 C10,0 12,-4 10,-8 C8,-12 2,-12 0,-8 Z" fill="#ec4899" opacity="0.6"/>
+  </g>
+  
+  <g transform="translate(100, 150) scale(0.7)">
+    <path d="M0,-8 C-2,-12 -8,-12 -10,-8 C-12,-4 -10,0 0,8 C10,0 12,-4 10,-8 C8,-12 2,-12 0,-8 Z" fill="#f472b6" opacity="0.4"/>
+  </g>
+  
+  <g transform="translate(275, 500) scale(0.6)">
+    <path d="M0,-8 C-2,-12 -8,-12 -10,-8 C-12,-4 -10,0 0,8 C10,0 12,-4 10,-8 C8,-12 2,-12 0,-8 Z" fill="#f472b6" opacity="0.4"/>
+  </g>
+  
+  <!-- 裝飾星星 -->
+  <circle cx="80" cy="120" r="3" fill="#fbbf24" opacity="0.6"/>
+  <circle cx="295" cy="540" r="3" fill="#fbbf24" opacity="0.6"/>
+  <circle cx="320" cy="200" r="2" fill="#fbbf24" opacity="0.5"/>
+  <circle cx="55" cy="450" r="2" fill="#fbbf24" opacity="0.5"/>
+</svg>

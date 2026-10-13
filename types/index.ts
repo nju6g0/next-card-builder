@@ -81,6 +81,8 @@ export interface Template {
   description: string;
   elements: Element[];
   canvasSize: { width: number; height: number };
+  isAnimated?: boolean; // 標識是否為動畫範本（獨立頁面）
+  slug?: string; // 動畫範本的路由 slug
 }
 
 // 畫布尺寸型別

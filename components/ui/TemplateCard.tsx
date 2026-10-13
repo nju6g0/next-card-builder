@@ -18,6 +18,12 @@ export default function TemplateCard({
   template,
   index = 0,
 }: TemplateCardProps) {
+  // 動畫範本導向獨立頁面，一般範本導向編輯器
+  const href =
+    template.isAnimated && template.slug
+      ? `/templates/${template.slug}`
+      : `/templates/${template.id}`;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -26,10 +32,7 @@ export default function TemplateCard({
       whileHover={{ y: -8 }}
       className="group"
     >
-      <Link
-        href={`/templates/${template.id}`}
-        style={{ textDecoration: "none" }}
-      >
+      <Link href={href} style={{ textDecoration: "none" }}>
         <div
           style={{
             background: "white",
@@ -160,7 +163,7 @@ export default function TemplateCard({
               {template.description}
             </p>
 
-            {/* 元件數量標籤 */}
+            {/* 標籤 */}
             <div
               style={{
                 marginTop: "var(--spacing-sm)",
@@ -171,11 +174,24 @@ export default function TemplateCard({
                 color: "var(--text-light)",
               }}
             >
-              <span>{template.elements.length} 個元件</span>
-              <span>•</span>
-              <span>
-                {template.canvasSize.width} × {template.canvasSize.height}
-              </span>
+              {template.isAnimated ? (
+                <span
+                  style={{
+                    color: "var(--accent-terracotta)",
+                    fontWeight: 600,
+                  }}
+                >
+                  ✨ 動畫範本
+                </span>
+              ) : (
+                <>
+                  <span>{template.elements.length} 個元件</span>
+                  <span>•</span>
+                  <span>
+                    {template.canvasSize.width} × {template.canvasSize.height}
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>
