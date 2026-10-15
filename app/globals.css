@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Color Palette - 溫馨文青 */
+  /* Colors - 使用 Tailwind v4 的命名規範 */
   --color-warm-cream: #faf7f2;
   --color-soft-beige: #e8dfd3;
   --color-warm-brown: #a5826a;
@@ -13,7 +13,7 @@
   --color-text-secondary: #7d6e5d;
   --color-text-light: #a89888;
 
-  /* Spacing */
+  /* Spacing - 使用標準命名 */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;

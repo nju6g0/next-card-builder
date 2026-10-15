@@ -34,16 +34,16 @@ export default function TemplatesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-warm-cream)] py-[var(--spacing-xl)] px-[var(--spacing-md)]">
+    <div className="min-h-screen bg-warm-cream py-xl px-md">
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="section-header mb-[var(--spacing-xl)]"
+          className="section-header mb-xl"
         >
-          <h1 className="section-title font-[var(--font-family-serif)]">
+          <h1 className="section-title font-serif">
             邀請函範本
           </h1>
           <p className="section-subtitle">
@@ -55,8 +55,8 @@ export default function TemplatesPage() {
         {loading && (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-[var(--color-soft-beige)] border-t-[var(--color-accent-terracotta)] mx-auto mb-4"></div>
-              <p className="text-[var(--color-text-secondary)]">
+              <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-soft-beige border-t-accent-terracotta mx-auto mb-4"></div>
+              <p className="text-text-secondary">
                 載入範本中...
               </p>
             </div>
@@ -68,15 +68,15 @@ export default function TemplatesPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-[var(--color-accent-terracotta)]/10 border-2 border-[var(--color-accent-terracotta)]/30 rounded-2xl p-[var(--spacing-lg)] text-center"
+            className="bg-accent-terracotta/10 border-2 border-accent-terracotta/30 rounded-2xl p-lg text-center"
           >
-            <div className="text-5xl mb-[var(--spacing-sm)]">❌</div>
-            <p className="text-[var(--color-accent-terracotta)] font-medium mb-[var(--spacing-xs)]">
+            <div className="text-5xl mb-sm">❌</div>
+            <p className="text-accent-terracotta font-medium mb-xs">
               {error}
             </p>
             <button
               onClick={loadTemplates}
-              className="btn-primary mt-[var(--spacing-md)]"
+              className="btn-primary mt-md"
             >
               重試
             </button>
@@ -85,7 +85,7 @@ export default function TemplatesPage() {
 
         {/* 範本網格 */}
         {!loading && !error && templates.length > 0 && (
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-[var(--spacing-lg)]">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-lg">
             {templates.map((template, index) => (
               <TemplateCard
                 key={template.id}
@@ -103,11 +103,11 @@ export default function TemplatesPage() {
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <div className="text-6xl mb-[var(--spacing-md)]">📋</div>
-            <h2 className="text-2xl font-semibold text-[var(--color-deep-brown)] mb-[var(--spacing-xs)] font-[var(--font-family-serif)]">
+            <div className="text-6xl mb-md">📋</div>
+            <h2 className="text-2xl font-semibold text-deep-brown mb-xs font-serif">
               尚無範本
             </h2>
-            <p className="text-[var(--color-text-secondary)]">
+            <p className="text-text-secondary">
               目前沒有可用的範本
             </p>
           </motion.div>
@@ -119,12 +119,12 @@ export default function TemplatesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mt-[var(--spacing-xl)] text-center bg-[var(--color-deep-brown)] rounded-2xl p-[var(--spacing-xl)] text-white relative overflow-hidden"
+            className="mt-xl text-center bg-deep-brown rounded-2xl p-xl text-white relative overflow-hidden"
           >
-            <h2 className="text-[2rem] font-bold mb-[var(--spacing-md)] font-[var(--font-family-serif)]">
+            <h2 className="text-[2rem] font-bold mb-md font-serif">
               找不到合適的範本？
             </h2>
-            <p className="text-lg mb-[var(--spacing-lg)] opacity-90">
+            <p className="text-lg mb-lg opacity-90">
               從空白畫布開始，自由發揮您的創意
             </p>
             <a

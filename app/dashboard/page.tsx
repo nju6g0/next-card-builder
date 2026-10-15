@@ -61,10 +61,10 @@ export default function DashboardPage() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--color-warm-cream)]">
+      <div className="min-h-screen flex items-center justify-center bg-warm-cream">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-[var(--color-soft-beige)] border-t-[var(--color-accent-terracotta)] mx-auto"></div>
-          <p className="mt-[var(--spacing-md)] text-[var(--color-text-secondary)]">
+          <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-soft-beige border-t-accent-terracotta mx-auto"></div>
+          <p className="mt-md text-text-secondary">
             載入中...
           </p>
         </div>
@@ -73,22 +73,22 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-warm-cream)] p-[var(--spacing-lg)] md:p-[var(--spacing-md)]">
+    <div className="min-h-screen bg-warm-cream p-lg md:p-md">
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
-        <div className="bg-white rounded-2xl shadow-lg p-[var(--spacing-lg)] mb-[var(--spacing-lg)] border-2 border-[var(--color-soft-beige)]">
-          <div className="flex items-center justify-between flex-wrap gap-[var(--spacing-md)]">
+        <div className="bg-white rounded-2xl shadow-lg p-lg mb-lg border-2 border-soft-beige">
+          <div className="flex items-center justify-between flex-wrap gap-md">
             <div>
-              <h1 className="text-[2rem] font-bold text-[var(--color-deep-brown)] font-[var(--font-family-serif)] mb-[var(--spacing-xs)]">
+              <h1 className="text-[2rem] font-bold text-deep-brown font-serif mb-xs">
                 我的邀請函
               </h1>
-              <p className="text-[var(--color-text-secondary)]">
+              <p className="text-text-secondary">
                 歡迎回來，{currentUser}
               </p>
             </div>
             <button
               onClick={handleLogout}
-              className="px-6 py-2.5 text-[0.9rem] font-medium text-[var(--color-warm-brown)] bg-[var(--color-soft-beige)] border-none rounded-full cursor-pointer transition-all duration-300 hover:bg-[var(--color-warm-brown)] hover:text-white"
+              className="px-6 py-2.5 text-[0.9rem] font-medium text-warm-brown bg-soft-beige border-none rounded-full cursor-pointer transition-all duration-300 hover:bg-warm-brown hover:text-white"
             >
               登出
             </button>
@@ -97,17 +97,17 @@ export default function DashboardPage() {
 
         {/* 複製成功提示 */}
         {copySuccess && (
-          <div className="fixed top-[var(--spacing-md)] right-[var(--spacing-md)] bg-[var(--color-accent-sage)] text-white px-[var(--spacing-md)] py-[var(--spacing-sm)] rounded-full shadow-lg z-50 animate-[fadeInUp_0.3s_ease] font-medium">
+          <div className="fixed top-md right-md bg-accent-sage text-white px-md py-sm rounded-full shadow-lg z-50 animate-[fadeInUp_0.3s_ease] font-medium">
             ✓ 連結已複製到剪貼簿
           </div>
         )}
 
         {/* Loading State */}
         {isLoading && invitations.length === 0 && (
-          <div className="bg-white rounded-2xl shadow-lg p-[var(--spacing-lg)] border-2 border-[var(--color-soft-beige)]">
+          <div className="bg-white rounded-2xl shadow-lg p-lg border-2 border-soft-beige">
             <div className="flex items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-[var(--color-soft-beige)] border-t-[var(--color-accent-terracotta)]"></div>
-              <span className="ml-[var(--spacing-sm)] text-[var(--color-text-secondary)]">
+              <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-soft-beige border-t-accent-terracotta"></div>
+              <span className="ml-sm text-text-secondary">
                 載入邀請函中...
               </span>
             </div>
@@ -116,16 +116,16 @@ export default function DashboardPage() {
 
         {/* Empty State */}
         {!isLoading && invitations.length === 0 && (
-          <div className="bg-white rounded-2xl shadow-lg p-[var(--spacing-lg)] border-2 border-[var(--color-soft-beige)]">
+          <div className="bg-white rounded-2xl shadow-lg p-lg border-2 border-soft-beige">
             <div className="text-center py-12">
-              <div className="text-6xl mb-[var(--spacing-md)]">📝</div>
-              <h2 className="text-2xl font-semibold text-[var(--color-deep-brown)] mb-[var(--spacing-xs)] font-[var(--font-family-serif)]">
+              <div className="text-6xl mb-md">📝</div>
+              <h2 className="text-2xl font-semibold text-deep-brown mb-xs font-serif">
                 尚無邀請函
               </h2>
-              <p className="text-[var(--color-text-secondary)] mb-[var(--spacing-lg)]">
+              <p className="text-text-secondary mb-lg">
                 開始建立您的第一個邀請函吧！
               </p>
-              <div className="flex gap-[var(--spacing-md)] justify-center flex-wrap">
+              <div className="flex gap-md justify-center flex-wrap">
                 <button onClick={handleCreateNew} className="btn-primary">
                   建立邀請函
                 </button>
@@ -143,8 +143,8 @@ export default function DashboardPage() {
         {/* Invitation Grid */}
         {!isLoading && invitations.length > 0 && (
           <div>
-            <div className="flex items-center justify-between mb-[var(--spacing-lg)] flex-wrap gap-[var(--spacing-md)]">
-              <h2 className="text-xl font-semibold text-[var(--color-deep-brown)] font-[var(--font-family-serif)]">
+            <div className="flex items-center justify-between mb-lg flex-wrap gap-md">
+              <h2 className="text-xl font-semibold text-deep-brown font-serif">
                 全部邀請函 ({invitations.length})
               </h2>
               <button onClick={handleCreateNew} className="btn-primary">
@@ -152,7 +152,7 @@ export default function DashboardPage() {
               </button>
             </div>
 
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[var(--spacing-lg)]">
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-lg">
               {invitations.map((invitation) => (
                 <InvitationCard
                   key={invitation.id}

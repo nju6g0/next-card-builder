@@ -33,9 +33,9 @@ export default function TemplateCard({
       className="group"
     >
       <Link href={href} className="no-underline">
-        <div className="bg-white rounded-2xl overflow-hidden shadow-lg border-2 border-transparent transition-all duration-300 hover:shadow-2xl hover:border-[var(--color-accent-terracotta)]">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-lg border-2 border-transparent transition-all duration-300 hover:shadow-2xl hover:border-accent-terracotta">
           {/* 範本預覽 */}
-          <div className="relative aspect-[9/16] bg-[var(--color-soft-beige)] overflow-hidden">
+          <div className="relative aspect-[9/16] bg-soft-beige overflow-hidden">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="scale-[0.4] origin-center">
                 <InvitationCanvas
@@ -47,13 +47,13 @@ export default function TemplateCard({
             </div>
 
             {/* Hover 覆蓋層 */}
-            <div className="absolute inset-0 bg-[var(--color-deep-brown)]/0 transition-all duration-300 flex items-center justify-center group-hover:bg-[var(--color-deep-brown)]/10">
+            <div className="absolute inset-0 bg-deep-brown/0 transition-all duration-300 flex items-center justify-center group-hover:bg-deep-brown/10">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileHover={{ opacity: 1, scale: 1 }}
                 className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
-                <div className="px-6 py-3 bg-white rounded-full shadow-lg font-medium text-[var(--color-accent-terracotta)]">
+                <div className="px-6 py-3 bg-white rounded-full shadow-lg font-medium text-accent-terracotta">
                   查看詳情
                 </div>
               </motion.div>
@@ -61,18 +61,18 @@ export default function TemplateCard({
           </div>
 
           {/* 範本資訊 */}
-          <div className="p-[var(--spacing-md)]">
-            <h3 className="text-lg font-semibold text-[var(--color-deep-brown)] mb-[var(--spacing-xs)] font-[var(--font-family-serif)] transition-colors duration-300 group-hover:text-[var(--color-accent-terracotta)]">
+          <div className="p-md">
+            <h3 className="text-lg font-semibold text-deep-brown mb-xs font-serif transition-colors duration-300 group-hover:text-accent-terracotta">
               {template.name}
             </h3>
-            <p className="text-[0.9rem] text-[var(--color-text-secondary)] leading-relaxed overflow-hidden line-clamp-2">
+            <p className="text-[0.9rem] text-text-secondary leading-relaxed overflow-hidden line-clamp-2">
               {template.description}
             </p>
 
             {/* 標籤 */}
-            <div className="mt-[var(--spacing-sm)] flex items-center gap-[var(--spacing-xs)] text-xs text-[var(--color-text-light)]">
+            <div className="mt-sm flex items-center gap-xs text-xs text-text-light">
               {template.isAnimated ? (
-                <span className="text-[var(--color-accent-terracotta)] font-semibold">
+                <span className="text-accent-terracotta font-semibold">
                   ✨ 動畫範本
                 </span>
               ) : (
