@@ -3,6 +3,13 @@
 import { useEditorStore } from "@/stores/editorStore";
 import { CANVAS_SIZES } from "@/types";
 import { motion } from "motion/react";
+import {
+  UndoIcon,
+  RedoIcon,
+  DuplicateIcon,
+  TrashIcon,
+  GridIcon,
+} from "@/components/icons";
 
 interface EditorToolbarProps {
   onSave?: () => void;
@@ -55,19 +62,7 @@ export default function EditorToolbar({
             className="p-2 rounded hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition"
             title="復原 (Ctrl+Z)"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-              />
-            </svg>
+            <UndoIcon />
           </button>
           <button
             onClick={redo}
@@ -75,19 +70,7 @@ export default function EditorToolbar({
             className="p-2 rounded hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition"
             title="重做 (Ctrl+Y)"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 10h-10a8 8 0 00-8 8v2m18-10l-6 6m6-6l-6-6"
-              />
-            </svg>
+            <RedoIcon />
           </button>
 
           <div className="w-px h-6 bg-neutral-300 mx-2" />
@@ -101,19 +84,7 @@ export default function EditorToolbar({
             className="p-2 rounded hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition"
             title="複製 (Ctrl+D)"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-              />
-            </svg>
+            <DuplicateIcon />
           </button>
           <button
             onClick={() =>
@@ -123,19 +94,7 @@ export default function EditorToolbar({
             className="p-2 rounded hover:bg-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition text-danger"
             title="刪除 (Delete)"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-              />
-            </svg>
+            <TrashIcon />
           </button>
         </div>
 
@@ -167,19 +126,7 @@ export default function EditorToolbar({
             }`}
             title="切換網格"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"
-              />
-            </svg>
+            <GridIcon />
           </button>
 
           {/* 清除全部 */}
