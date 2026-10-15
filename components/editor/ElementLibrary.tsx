@@ -117,6 +117,8 @@ function DraggableLibraryItem({ template }: { template: ElementTemplate }) {
       type: "library-item",
       elementType: template.type,
       defaultProps: template.defaultProps,
+      label: template.label,
+      icon: template.icon,
     },
   });
 
@@ -146,7 +148,7 @@ function DraggableLibraryItem({ template }: { template: ElementTemplate }) {
       whileTap={{ scale: 0.98 }}
       className={`
         p-4 bg-white border-2 border-neutral-200 rounded-lg cursor-move
-        hover:border-primary hover:shadow-md transition-all
+        hover:border-primary hover:shadow-md hover:cursor-grab active:cursor-grabbing transition-all
         ${isDragging ? "opacity-50" : ""}
       `}
       onClick={handleClick}

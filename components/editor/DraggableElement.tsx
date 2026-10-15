@@ -39,7 +39,7 @@ export default function DraggableElement({
     });
 
   const style = {
-    transform: CSS.Translate.toString(transform),
+    transform: isDragging ? CSS.Translate.toString(transform) : undefined,
     zIndex: element.zIndex,
     cursor: isDragging
       ? "grabbing"
@@ -48,7 +48,7 @@ export default function DraggableElement({
         : (element as any).locked
           ? "not-allowed"
           : "grab",
-    opacity: (element as any).visible === false ? 0.3 : isDragging ? 0.5 : 1,
+    opacity: (element as any).visible === false ? 0.3 : isDragging ? 0 : 1, // 拖曳時完全隱藏
   };
 
   // 開始拖拉
@@ -133,9 +133,8 @@ export default function DraggableElement({
         ...style,
       }}
       className={`
-        transition-all
         ${isSelected ? "ring-2 ring-primary ring-offset-2" : ""}
-        ${isDragging ? "opacity-50" : ""}
+        ${isDragging ? "opacity-0" : ""}
         ${(element as any).locked ? "cursor-not-allowed" : ""}
       `}
       onClick={handleClick}

@@ -201,7 +201,7 @@ export default function EditorToolbar({
           {onPreview && (
             <button
               onClick={onPreview}
-              className="px-4 py-2 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-lg hover:bg-neutral-50 transition"
+              className="px-4 py-2 text-sm font-medium text-accent-sage bg-white border border-neutral-300 rounded-lg hover:bg-neutral-50 transition"
             >
               預覽
             </button>
@@ -211,7 +211,7 @@ export default function EditorToolbar({
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={onSave}
-              className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition shadow-sm"
+              className="px-4 py-2 text-sm font-medium text-neutral-700  bg-primary rounded-lg hover:bg-primary/90 transition shadow-sm"
             >
               儲存
             </motion.button>
