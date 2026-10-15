@@ -1,30 +1,7 @@
 import type { Metadata } from "next";
-import {
-  Noto_Serif_TC,
-  Noto_Sans_TC,
-  Playfair_Display,
-} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-
-const notoSerifTC = Noto_Serif_TC({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const notoSansTC = Noto_Sans_TC({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Card Builder - 可拖拉元件自訂邀請函",
@@ -33,11 +10,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="zh-TW"
-      className={`${notoSerifTC.variable} ${notoSansTC.variable} ${playfairDisplay.variable} h-full`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="zh-TW" className="h-full">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-full flex flex-col font-sans">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
