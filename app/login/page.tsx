@@ -31,63 +31,28 @@ export default function LoginPage() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "var(--spacing-md)",
-        background: "var(--warm-cream)",
-      }}
-    >
-      <div style={{ maxWidth: "500px", width: "100%" }}>
+    <div className="min-h-screen flex items-center justify-center p-[var(--spacing-md)] bg-[var(--color-warm-cream)]">
+      <div className="max-w-[500px] w-full">
         {/* Logo / 標題 */}
-        <div style={{ textAlign: "center", marginBottom: "var(--spacing-lg)" }}>
-          <h1
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: 700,
-              color: "var(--deep-brown)",
-              fontFamily: "var(--font-serif)",
-              marginBottom: "var(--spacing-xs)",
-            }}
-          >
+        <div className="text-center mb-[var(--spacing-lg)]">
+          <h1 className="text-[2.5rem] font-bold text-[var(--color-deep-brown)] font-[var(--font-family-serif)] mb-[var(--spacing-xs)]">
             邀請函工坊
           </h1>
-          <p style={{ color: "var(--text-secondary)", fontSize: "1rem" }}>
+          <p className="text-[var(--color-text-secondary)] text-base">
             登入以開始建立您的邀請函
           </p>
         </div>
 
         {/* 登入表單 */}
-        <div
-          style={{
-            background: "white",
-            borderRadius: "16px",
-            boxShadow: "0 4px 20px rgba(107, 84, 68, 0.1)",
-            padding: "var(--spacing-lg)",
-            border: "2px solid var(--soft-beige)",
-          }}
-        >
+        <div className="bg-white rounded-2xl shadow-lg p-[var(--spacing-lg)] border-2 border-[var(--color-soft-beige)]">
           <form
             onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--spacing-md)",
-            }}
+            className="flex flex-col gap-[var(--spacing-md)]"
           >
             <div>
               <label
                 htmlFor="email"
-                style={{
-                  display: "block",
-                  fontSize: "0.9rem",
-                  fontWeight: 500,
-                  color: "var(--text-primary)",
-                  marginBottom: "var(--spacing-xs)",
-                }}
+                className="block text-[0.9rem] font-medium text-[var(--color-text-primary)] mb-[var(--spacing-xs)]"
               >
                 Email 地址
               </label>
@@ -99,38 +64,12 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "0.875rem 1rem",
-                  border: "2px solid var(--soft-beige)",
-                  borderRadius: "8px",
-                  fontSize: "1rem",
-                  color: "var(--text-primary)",
-                  background: "var(--warm-cream)",
-                  outline: "none",
-                  transition: "all 0.3s ease",
-                  fontFamily: "var(--font-sans)",
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor =
-                    "var(--accent-terracotta)";
-                  e.currentTarget.style.background = "white";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = "var(--soft-beige)";
-                  e.currentTarget.style.background = "var(--warm-cream)";
-                }}
+                className="w-full px-4 py-3.5 border-2 border-[var(--color-soft-beige)] rounded-lg text-base text-[var(--color-text-primary)] bg-[var(--color-warm-cream)] outline-none transition-all duration-300 font-[var(--font-family-sans)] focus:border-[var(--color-accent-terracotta)] focus:bg-white disabled:opacity-60 disabled:cursor-not-allowed"
                 placeholder="your@email.com"
                 disabled={isLoading}
               />
               {error && (
-                <p
-                  style={{
-                    marginTop: "var(--spacing-xs)",
-                    fontSize: "0.875rem",
-                    color: "var(--accent-terracotta)",
-                  }}
-                >
+                <p className="mt-[var(--spacing-xs)] text-sm text-[var(--color-accent-terracotta)]">
                   {error}
                 </p>
               )}
@@ -139,139 +78,43 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn-primary"
-              style={{
-                width: "100%",
-                padding: "1rem",
-                fontSize: "1rem",
-                cursor: isLoading ? "not-allowed" : "pointer",
-                opacity: isLoading ? 0.6 : 1,
-              }}
+              className="btn-primary w-full text-base disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isLoading ? "登入中..." : "登入"}
             </button>
           </form>
 
           {/* 說明文字 */}
-          <div
-            style={{
-              marginTop: "var(--spacing-md)",
-              textAlign: "center",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "0.8rem",
-                color: "var(--text-light)",
-                marginBottom: "0.25rem",
-              }}
-            >
+          <div className="mt-[var(--spacing-md)] text-center">
+            <p className="text-xs text-[var(--color-text-light)] mb-1">
               這是一個 demo 專案，無需密碼即可登入
             </p>
-            <p
-              style={{
-                fontSize: "0.8rem",
-                color: "var(--text-light)",
-              }}
-            >
+            <p className="text-xs text-[var(--color-text-light)]">
               輸入任何有效的 email 地址即可開始使用
             </p>
           </div>
         </div>
 
         {/* 功能介紹 */}
-        <div
-          style={{
-            background: "white",
-            borderRadius: "16px",
-            boxShadow: "0 4px 20px rgba(107, 84, 68, 0.08)",
-            padding: "var(--spacing-md)",
-            marginTop: "var(--spacing-md)",
-            border: "1px solid var(--soft-beige)",
-          }}
-        >
-          <h3
-            style={{
-              fontSize: "0.95rem",
-              fontWeight: 600,
-              color: "var(--deep-brown)",
-              marginBottom: "var(--spacing-sm)",
-              fontFamily: "var(--font-serif)",
-            }}
-          >
+        <div className="bg-white rounded-2xl shadow-lg p-[var(--spacing-md)] mt-[var(--spacing-md)] border border-[var(--color-soft-beige)]">
+          <h3 className="text-[0.95rem] font-semibold text-[var(--color-deep-brown)] mb-[var(--spacing-sm)] font-[var(--font-family-serif)]">
             平台功能
           </h3>
-          <ul
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--spacing-xs)",
-              listStyle: "none",
-              padding: 0,
-            }}
-          >
-            <li
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "var(--spacing-xs)",
-                fontSize: "0.9rem",
-                color: "var(--text-secondary)",
-              }}
-            >
-              <span
-                style={{ color: "var(--accent-sage)", marginTop: "0.125rem" }}
-              >
-                ✓
-              </span>
+          <ul className="flex flex-col gap-[var(--spacing-xs)] list-none p-0">
+            <li className="flex items-start gap-[var(--spacing-xs)] text-[0.9rem] text-[var(--color-text-secondary)]">
+              <span className="text-[var(--color-accent-sage)] mt-0.5">✓</span>
               <span>拖拉元件自由設計邀請函</span>
             </li>
-            <li
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "var(--spacing-xs)",
-                fontSize: "0.9rem",
-                color: "var(--text-secondary)",
-              }}
-            >
-              <span
-                style={{ color: "var(--accent-sage)", marginTop: "0.125rem" }}
-              >
-                ✓
-              </span>
+            <li className="flex items-start gap-[var(--spacing-xs)] text-[0.9rem] text-[var(--color-text-secondary)]">
+              <span className="text-[var(--color-accent-sage)] mt-0.5">✓</span>
               <span>選擇精美範本快速開始</span>
             </li>
-            <li
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "var(--spacing-xs)",
-                fontSize: "0.9rem",
-                color: "var(--text-secondary)",
-              }}
-            >
-              <span
-                style={{ color: "var(--accent-sage)", marginTop: "0.125rem" }}
-              >
-                ✓
-              </span>
+            <li className="flex items-start gap-[var(--spacing-xs)] text-[0.9rem] text-[var(--color-text-secondary)]">
+              <span className="text-[var(--color-accent-sage)] mt-0.5">✓</span>
               <span>內建 RSVP 表單收集回覆</span>
             </li>
-            <li
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "var(--spacing-xs)",
-                fontSize: "0.9rem",
-                color: "var(--text-secondary)",
-              }}
-            >
-              <span
-                style={{ color: "var(--accent-sage)", marginTop: "0.125rem" }}
-              >
-                ✓
-              </span>
+            <li className="flex items-start gap-[var(--spacing-xs)] text-[0.9rem] text-[var(--color-text-secondary)]">
+              <span className="text-[var(--color-accent-sage)] mt-0.5">✓</span>
               <span>管理所有邀請函與回覆統計</span>
             </li>
           </ul>

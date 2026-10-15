@@ -32,51 +32,12 @@ export default function TemplateCard({
       whileHover={{ y: -8 }}
       className="group"
     >
-      <Link href={href} style={{ textDecoration: "none" }}>
-        <div
-          style={{
-            background: "white",
-            borderRadius: "16px",
-            overflow: "hidden",
-            boxShadow: "0 4px 20px rgba(107, 84, 68, 0.1)",
-            transition: "all 0.3s ease",
-            border: "2px solid transparent",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow =
-              "0 8px 40px rgba(107, 84, 68, 0.15)";
-            e.currentTarget.style.borderColor = "var(--accent-terracotta)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow =
-              "0 4px 20px rgba(107, 84, 68, 0.1)";
-            e.currentTarget.style.borderColor = "transparent";
-          }}
-        >
+      <Link href={href} className="no-underline">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-lg border-2 border-transparent transition-all duration-300 hover:shadow-2xl hover:border-[var(--color-accent-terracotta)]">
           {/* 範本預覽 */}
-          <div
-            style={{
-              position: "relative",
-              aspectRatio: "9/16",
-              background: "var(--soft-beige)",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <div
-                style={{
-                  transform: "scale(0.4)",
-                  transformOrigin: "center",
-                }}
-              >
+          <div className="relative aspect-[9/16] bg-[var(--color-soft-beige)] overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="scale-[0.4] origin-center">
                 <InvitationCanvas
                   elements={template.elements}
                   canvasSize={template.canvasSize}
@@ -86,42 +47,13 @@ export default function TemplateCard({
             </div>
 
             {/* Hover 覆蓋層 */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(107, 84, 68, 0)",
-                transition: "all 0.3s ease",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              className="template-overlay"
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(107, 84, 68, 0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(107, 84, 68, 0)";
-              }}
-            >
+            <div className="absolute inset-0 bg-[var(--color-deep-brown)]/0 transition-all duration-300 flex items-center justify-center group-hover:bg-[var(--color-deep-brown)]/10">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileHover={{ opacity: 1, scale: 1 }}
-                className="opacity-0 group-hover:opacity-100"
-                style={{
-                  transition: "opacity 0.3s ease",
-                }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
-                <div
-                  style={{
-                    padding: "0.75rem 1.5rem",
-                    background: "white",
-                    borderRadius: "50px",
-                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-                    fontWeight: 500,
-                    color: "var(--accent-terracotta)",
-                  }}
-                >
+                <div className="px-6 py-3 bg-white rounded-full shadow-lg font-medium text-[var(--color-accent-terracotta)]">
                   查看詳情
                 </div>
               </motion.div>
@@ -129,58 +61,18 @@ export default function TemplateCard({
           </div>
 
           {/* 範本資訊 */}
-          <div style={{ padding: "var(--spacing-md)" }}>
-            <h3
-              style={{
-                fontSize: "1.125rem",
-                fontWeight: 600,
-                color: "var(--deep-brown)",
-                marginBottom: "var(--spacing-xs)",
-                fontFamily: "var(--font-serif)",
-                transition: "color 0.3s ease",
-              }}
-              className="template-title"
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--accent-terracotta)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--deep-brown)";
-              }}
-            >
+          <div className="p-[var(--spacing-md)]">
+            <h3 className="text-lg font-semibold text-[var(--color-deep-brown)] mb-[var(--spacing-xs)] font-[var(--font-family-serif)] transition-colors duration-300 group-hover:text-[var(--color-accent-terracotta)]">
               {template.name}
             </h3>
-            <p
-              style={{
-                fontSize: "0.9rem",
-                color: "var(--text-secondary)",
-                lineHeight: "1.6",
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
+            <p className="text-[0.9rem] text-[var(--color-text-secondary)] leading-relaxed overflow-hidden line-clamp-2">
               {template.description}
             </p>
 
             {/* 標籤 */}
-            <div
-              style={{
-                marginTop: "var(--spacing-sm)",
-                display: "flex",
-                alignItems: "center",
-                gap: "var(--spacing-xs)",
-                fontSize: "0.8rem",
-                color: "var(--text-light)",
-              }}
-            >
+            <div className="mt-[var(--spacing-sm)] flex items-center gap-[var(--spacing-xs)] text-xs text-[var(--color-text-light)]">
               {template.isAnimated ? (
-                <span
-                  style={{
-                    color: "var(--accent-terracotta)",
-                    fontWeight: 600,
-                  }}
-                >
+                <span className="text-[var(--color-accent-terracotta)] font-semibold">
                   ✨ 動畫範本
                 </span>
               ) : (

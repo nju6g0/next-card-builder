@@ -20,14 +20,15 @@
   --spacing-lg: 4rem;
   --spacing-xl: 6rem;
 
-  /* Font Families - Using Google Fonts directly */
+  /* Font Families */
   --font-family-serif: "Noto Serif TC", serif;
   --font-family-sans: "Noto Sans TC", sans-serif;
   --font-family-playfair: "Playfair Display", serif;
 }
 
 :root {
-  /* Legacy CSS Variables for backward compatibility */
+  /* Legacy CSS Variables for backward compatibility with existing inline styles */
+  /* TODO: Remove these once all inline styles are migrated to Tailwind */
   --warm-cream: #faf7f2;
   --soft-beige: #e8dfd3;
   --warm-brown: #a5826a;
@@ -38,15 +39,11 @@
   --text-primary: #4a3f35;
   --text-secondary: #7d6e5d;
   --text-light: #a89888;
-
-  /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 4rem;
   --spacing-xl: 6rem;
-
-  /* Typography - Using Google Fonts directly */
   --font-serif: "Noto Serif TC", serif;
   --font-sans: "Noto Sans TC", sans-serif;
   --font-playfair: "Playfair Display", serif;
@@ -57,9 +54,9 @@
 }
 
 body {
-  background: var(--warm-cream);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
+  background: var(--color-warm-cream);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -158,85 +155,88 @@ body {
   opacity: 0;
 }
 
-.btn-primary {
-  padding: 1rem 2.5rem;
-  background: var(--accent-terracotta);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(201, 125, 96, 0.2);
-}
+/* Component Classes using Tailwind */
+@layer components {
+  .btn-primary {
+    padding: 0.625rem 1.5rem;
+    background: var(--color-accent-terracotta);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-family-sans);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(201, 125, 96, 0.2);
+  }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(201, 125, 96, 0.3);
-  background: #b86f55;
-}
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(201, 125, 96, 0.3);
+    background: #b86f55;
+  }
 
-.btn-primary.large {
-  padding: 1.25rem 3rem;
-  font-size: 1.125rem;
-}
+  .btn-primary.large {
+    padding: 1.25rem 3rem;
+    font-size: 1.125rem;
+  }
 
-.btn-secondary {
-  padding: 1rem 2.5rem;
-  background: transparent;
-  color: var(--warm-brown);
-  border: 2px solid var(--warm-brown);
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background: var(--warm-brown);
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* Browse Templates Button - Primary on mobile, Secondary on desktop */
-.btn-browse-templates {
-  padding: 1rem 2.5rem;
-  background: var(--accent-terracotta);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(201, 125, 96, 0.2);
-}
-
-.btn-browse-templates:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(201, 125, 96, 0.3);
-  background: #b86f55;
-}
-
-@media (min-width: 640px) {
-  .btn-browse-templates {
-    width: 100%;
-    padding: 1rem 2.5rem;
+  .btn-secondary {
+    padding: 0.625rem 1.5rem;
     background: transparent;
-    color: var(--warm-brown);
-    border: 2px solid var(--warm-brown);
-    box-shadow: none;
+    color: var(--color-warm-brown);
+    border: 2px solid var(--color-warm-brown);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-family-sans);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-warm-brown);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Browse Templates Button - Primary on mobile, Secondary on desktop */
+  .btn-browse-templates {
+    padding: 0.625rem 1.5rem;
+    background: var(--color-accent-terracotta);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-family-sans);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(201, 125, 96, 0.2);
   }
 
   .btn-browse-templates:hover {
-    background: var(--warm-brown);
-    color: white;
-    box-shadow: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(201, 125, 96, 0.3);
+    background: #b86f55;
+  }
+
+  @media (min-width: 640px) {
+    .btn-browse-templates {
+      width: 100%;
+      padding: 0.625rem 1.5rem;
+      background: transparent;
+      color: var(--color-warm-brown);
+      border: 2px solid var(--color-warm-brown);
+      box-shadow: none;
+    }
+
+    .btn-browse-templates:hover {
+      background: var(--color-warm-brown);
+      color: white;
+      box-shadow: none;
+    }
   }
 }
 
