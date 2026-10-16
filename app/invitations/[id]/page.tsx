@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import InvitationCanvas from "@/components/ui/InvitationCanvas";
+import WeddingPreview from "@/components/restricted-editor/WeddingPreview";
+import PartyPreview from "@/components/restricted-editor/PartyPreview";
+import { getRestrictedTemplateById } from "@/lib/templates/templateRegistry";
 import { rsvpApi } from "@/lib/mockApi";
 import type { Invitation, RsvpFormElement, SubmitRsvpData } from "@/types";
 
@@ -195,6 +198,35 @@ export default function InvitationPublicPage() {
   const rsvpForm = getRsvpFormElement();
   const hasRsvpForm = !!rsvpForm;
 
+  // 判斷是否為受限邀請函
+  const isRestricted =
+    invitation.isRestricted && invitation.restrictedTemplateId;
+  const restrictedTemplate = isRestricted
+    ? getRestrictedTemplateById(invitation.restrictedTemplateId!)
+    : null;
+  const animationType = restrictedTemplate?.animationConfig?.type;
+
+  // 受限邀請函使用全螢幕展示
+  if (isRestricted && restrictedTemplate && animationType) {
+    return (
+      <div className="h-screen w-screen overflow-hidden bg-black">
+        {animationType === "wedding" && (
+          <WeddingPreview
+            userValues={invitation.userValues || {}}
+            isPlaying={true}
+          />
+        )}
+        {animationType === "party" && (
+          <PartyPreview
+            userValues={invitation.userValues || {}}
+            isPlaying={true}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // 一般邀請函展示
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 py-8 px-4">
       <div className="max-w-6xl mx-auto">

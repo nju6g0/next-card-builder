@@ -13,7 +13,7 @@ export const MOCK_TEMPLATES: Template[] = [
     thumbnail: "/templates/party-animated.svg",
     canvasSize: { width: 375, height: 667 },
     isAnimated: true,
-    slug: "party",
+    slug: "party-animated",
     elements: [], // 動畫範本不需要元素數據
   },
   {

@@ -94,6 +94,9 @@ export interface Invitation {
   updatedAt: string;
   createdBy: string; // user email
   templateId?: string; // 如果從範本建立
+  isRestricted?: boolean; // 標記為受限編輯（來自受限模板）
+  restrictedTemplateId?: string; // 來源受限模板 ID
+  userValues?: Record<string, any>; // 使用者自訂值 (propertyKey: value)
 }
 
 // RSVP 回覆
@@ -106,6 +109,23 @@ export interface RsvpResponse {
   submittedAt: string;
 }
 
+// 可編輯屬性定義
+export interface EditableProperty {
+  id: string; // 屬性唯一 ID
+  label: string; // 使用者介面顯示名稱
+  propertyKey: string; // 對應到模板中的屬性 key
+  type: "text" | "color" | "image" | "number";
+  defaultValue: any;
+  constraints?: {
+    minLength?: number;
+    maxLength?: number;
+    allowedFormats?: string[]; // 圖片格式
+    min?: number; // 數字最小值
+    max?: number; // 數字最大值
+  };
+  group?: string; // 分組，例如 "文字內容"、"顏色設定"
+}
+
 // 範本
 export interface Template {
   id: string;
@@ -116,6 +136,17 @@ export interface Template {
   canvasSize: { width: number; height: number };
   isAnimated?: boolean; // 標識是否為動畫範本（獨立頁面）
   slug?: string; // 動畫範本的路由 slug
+}
+
+// 受限編輯範本（僅允許編輯特定屬性）
+export interface RestrictedTemplate extends Template {
+  isRestricted: true; // 標記為受限編輯模板
+  editableProperties: EditableProperty[]; // 可編輯的屬性列表
+  animationConfig?: {
+    // 動畫設定（不可編輯）
+    type: "wedding" | "party";
+    duration?: number;
+  };
 }
 
 // 畫布尺寸型別

@@ -1,12 +1,13 @@
 "use client";
 
 import { Template } from "@/types";
+import type { RestrictedTemplate } from "@/types";
 import { motion } from "motion/react";
 import Link from "next/link";
 import InvitationCanvas from "./InvitationCanvas";
 
 interface TemplateCardProps {
-  template: Template;
+  template: Template | RestrictedTemplate;
   index?: number;
 }
 
@@ -18,11 +19,21 @@ export default function TemplateCard({
   template,
   index = 0,
 }: TemplateCardProps) {
-  // 動畫範本導向獨立頁面，一般範本導向編輯器
-  const href =
-    template.isAnimated && template.slug
-      ? `/templates/${template.slug}`
-      : `/templates/${template.id}`;
+  // 判斷是否為受限模板
+  const isRestricted = "isRestricted" in template && template.isRestricted;
+
+  // 決定連結路徑
+  let href: string;
+  if (isRestricted) {
+    // 受限模板導向展示頁面
+    href = `/templates/restricted/${template.id}`;
+  } else if (template.isAnimated && template.slug) {
+    // 動畫範本導向獨立頁面
+    href = `/templates/${template.slug}`;
+  } else {
+    // 一般範本導向編輯器
+    href = `/templates/${template.id}`;
+  }
 
   return (
     <motion.div
@@ -36,15 +47,30 @@ export default function TemplateCard({
         <div className="bg-white rounded-2xl overflow-hidden shadow-lg border-2 border-transparent transition-all duration-300 hover:shadow-2xl hover:border-accent-terracotta">
           {/* 範本預覽 */}
           <div className="relative aspect-[9/16] bg-soft-beige overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="scale-[0.4] origin-center">
-                <InvitationCanvas
-                  elements={template.elements}
-                  canvasSize={template.canvasSize}
-                  scale={1}
-                />
+            {isRestricted ? (
+              // 受限模板顯示縮圖或佔位圖
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent-terracotta/20 to-accent-sage/20">
+                <div className="text-center">
+                  <div className="text-6xl mb-4">
+                    {template.name.includes("Wedding") ? "💍" : "🎉"}
+                  </div>
+                  <p className="text-sm font-medium text-deep-brown">
+                    動畫模板預覽
+                  </p>
+                </div>
               </div>
-            </div>
+            ) : (
+              // 一般模板使用 InvitationCanvas
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="scale-[0.4] origin-center">
+                  <InvitationCanvas
+                    elements={template.elements}
+                    canvasSize={template.canvasSize}
+                    scale={1}
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Hover 覆蓋層 */}
             <div className="absolute inset-0 bg-deep-brown/0 transition-all duration-300 flex items-center justify-center group-hover:bg-deep-brown/10">
@@ -54,7 +80,7 @@ export default function TemplateCard({
                 className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
                 <div className="px-6 py-3 bg-white rounded-full shadow-lg font-medium text-accent-terracotta">
-                  查看詳情
+                  {isRestricted ? "查看範本" : "查看詳情"}
                 </div>
               </motion.div>
             </div>
@@ -71,7 +97,11 @@ export default function TemplateCard({
 
             {/* 標籤 */}
             <div className="mt-sm flex items-center gap-xs text-xs text-text-light">
-              {template.isAnimated ? (
+              {isRestricted ? (
+                <span className="text-accent-terracotta font-semibold">
+                  🎨 可自訂動畫範本
+                </span>
+              ) : template.isAnimated ? (
                 <span className="text-accent-terracotta font-semibold">
                   ✨ 動畫範本
                 </span>

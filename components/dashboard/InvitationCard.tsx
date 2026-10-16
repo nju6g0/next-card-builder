@@ -31,7 +31,12 @@ export function InvitationCard({
   };
 
   const handleEdit = () => {
-    router.push(`/invitations/edit/${invitation.id}`);
+    // 判斷是否為受限邀請函
+    if (invitation.isRestricted) {
+      router.push(`/invitations/restricted-edit-existing/${invitation.id}`);
+    } else {
+      router.push(`/invitations/edit/${invitation.id}`);
+    }
   };
 
   const handleViewRsvp = () => {
@@ -70,10 +75,22 @@ export function InvitationCard({
         <h3 className="font-serif font-semibold text-deep-brown text-lg mb-xs overflow-hidden text-ellipsis whitespace-nowrap">
           {invitation.title}
         </h3>
+
+        {/* 受限邀請函標籤 */}
+        {invitation.isRestricted && (
+          <div className="mb-xs">
+            <span className="inline-block px-2 py-1 bg-accent-terracotta/10 text-accent-terracotta text-xs font-semibold rounded">
+              🎨 動畫邀請函
+            </span>
+          </div>
+        )}
+
         <div className="text-xs text-text-light flex flex-col gap-1 mb-md">
           <p>建立時間：{formatDate(invitation.createdAt)}</p>
           <p>更新時間：{formatDate(invitation.updatedAt)}</p>
-          <p>元件數量：{invitation.elements.length}</p>
+          {!invitation.isRestricted && (
+            <p>元件數量：{invitation.elements.length}</p>
+          )}
         </div>
 
         {/* 操作按鈕 */}

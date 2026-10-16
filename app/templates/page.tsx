@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import { Template } from "@/types";
 import { templatesApi } from "@/lib/mockApi";
+import { getAllRestrictedTemplates } from "@/lib/templates/templateRegistry";
 import TemplateCard from "@/components/ui/TemplateCard";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function TemplatesPage() {
   const [templates, setTemplates] = useState<Template[]>([]);
@@ -21,8 +23,12 @@ export default function TemplatesPage() {
       setLoading(true);
       setError(null);
       const data = await templatesApi.getAll();
+
+      // 合併受限模板（動畫模板）
+      const restrictedTemplates = getAllRestrictedTemplates();
+
       if (data.success && data.data) {
-        setTemplates(data.data);
+        setTemplates([...data.data, ...restrictedTemplates]);
       } else {
         setError(data.error || "載入範本失敗");
       }
@@ -77,14 +83,58 @@ export default function TemplatesPage() {
 
         {/* 範本網格 */}
         {!loading && !error && templates.length > 0 && (
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-lg">
-            {templates.map((template, index) => (
-              <TemplateCard
-                key={template.id}
-                template={template}
-                index={index}
-              />
-            ))}
+          <div className="space-y-xl">
+            {/* 動畫模板區塊 */}
+            {templates.filter((t) => "isRestricted" in t && t.isRestricted)
+              .length > 0 && (
+              <div>
+                <div className="mb-lg">
+                  <h2 className="text-[1.75rem] font-bold text-deep-brown font-serif mb-xs">
+                    🎨 動畫邀請函模板
+                  </h2>
+                  <p className="text-text-secondary">
+                    精緻動畫效果，只需自訂文字、顏色和圖片即可使用
+                  </p>
+                </div>
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-lg">
+                  {templates
+                    .filter((t) => "isRestricted" in t && t.isRestricted)
+                    .map((template, index) => (
+                      <TemplateCard
+                        key={template.id}
+                        template={template}
+                        index={index}
+                      />
+                    ))}
+                </div>
+              </div>
+            )}
+
+            {/* 一般模板區塊 */}
+            {templates.filter((t) => !("isRestricted" in t && t.isRestricted))
+              .length > 0 && (
+              <div>
+                <div className="mb-lg">
+                  <h2 className="text-[1.75rem] font-bold text-deep-brown font-serif mb-xs">
+                    📝 自由編輯模板
+                  </h2>
+                  <p className="text-text-secondary">
+                    完全自由的編輯體驗，可新增、刪除和移動任何元素
+                  </p>
+                </div>
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-lg">
+                  {templates
+                    .filter((t) => !("isRestricted" in t && t.isRestricted))
+                    .map((template, index) => (
+                      <TemplateCard
+                        key={template.id}
+                        template={template}
+                        index={index}
+                      />
+                    ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

@@ -158,6 +158,10 @@ export const invitationsApi = {
         updatedAt: new Date().toISOString(),
         createdBy: email,
         templateId: data.templateId,
+        // 受限模板相關欄位
+        isRestricted: (data as any).isRestricted,
+        restrictedTemplateId: (data as any).restrictedTemplateId,
+        userValues: (data as any).userValues,
       };
 
       invitations.push(newInvitation);
