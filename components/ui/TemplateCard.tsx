@@ -46,31 +46,17 @@ export default function TemplateCard({
       <Link href={href} className="no-underline">
         <div className="bg-white rounded-2xl overflow-hidden shadow-lg border-2 border-transparent transition-all duration-300 hover:shadow-2xl hover:border-accent-terracotta">
           {/* 範本預覽 */}
-          <div className="relative aspect-[9/16] bg-soft-beige overflow-hidden">
-            {isRestricted ? (
-              // 受限模板顯示縮圖或佔位圖
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent-terracotta/20 to-accent-sage/20">
-                <div className="text-center">
-                  <div className="text-6xl mb-4">
-                    {template.name.includes("Wedding") ? "💍" : "🎉"}
-                  </div>
-                  <p className="text-sm font-medium text-deep-brown">
-                    動畫模板預覽
-                  </p>
+          <div className="relative aspect-[5/4] bg-soft-beige overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent-terracotta/20 to-accent-sage/20">
+              <div className="text-center">
+                <div className="text-6xl mb-4">
+                  {template.name.includes("Wedding") ? "💍" : "🎉"}
                 </div>
+                <p className="text-sm font-medium text-deep-brown">
+                  動畫模板預覽
+                </p>
               </div>
-            ) : (
-              // 一般模板使用 InvitationCanvas
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="scale-[0.4] origin-center">
-                  <InvitationCanvas
-                    elements={template.elements}
-                    canvasSize={template.canvasSize}
-                    scale={1}
-                  />
-                </div>
-              </div>
-            )}
+            </div>
 
             {/* Hover 覆蓋層 */}
             <div className="absolute inset-0 bg-deep-brown/0 transition-all duration-300 flex items-center justify-center group-hover:bg-deep-brown/10">

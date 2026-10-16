@@ -54,7 +54,7 @@ export function InvitationCard({
         className="relative bg-soft-beige cursor-pointer group"
         onClick={handlePreview}
       >
-        <div className="aspect-[9/16] flex items-center justify-center overflow-hidden">
+        <div className="aspect-[5/4] flex items-center justify-center overflow-hidden">
           <div className="scale-[0.35] origin-center">
             <InvitationCanvas
               elements={invitation.elements}
