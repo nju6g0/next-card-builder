@@ -1,0 +1,24 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#F5F1E8" rx="8"/>
+  
+  <!-- Card Stack (back card) -->
+  <rect x="26" y="14" width="28" height="36" rx="3" fill="#C4A57B"/>
+  
+  <!-- Card Stack (front card) -->
+  <rect x="22" y="16" width="28" height="36" rx="3" fill="#FBF9F4" stroke="#C4A57B" stroke-width="1.5"/>
+  
+  <!-- Heart on card -->
+  <path d="M36 28 C 34 26, 30 26, 28 28 C 26 26, 22 26, 20 28 C 18 30, 18 34, 20 38 L 28 46 L 36 38 C 38 34, 38 30, 36 28 Z" fill="#C9877D"/>
+  
+  <!-- Heart glow line (center) -->
+  <path d="M28 27 L 28 23" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Plant decoration -->
+  <ellipse cx="37" cy="44" rx="2" ry="3" fill="#A8B5A0"/>
+  <ellipse cx="40" cy="42" rx="1.5" ry="2.5" fill="#A8B5A0"/>
+  
+  <!-- Star decorations -->
+  <path d="M10 12L11 14L13 15L11 16L10 18L9 16L7 15L9 14L10 12Z" fill="#C4A57B"/>
+  <path d="M52 20L53 22L55 23L53 24L52 26L51 24L49 23L51 22L52 20Z" fill="#D4A574"/>
+</svg>

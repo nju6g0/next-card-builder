@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: "用心設計每一份邀請，為生命中的美好時刻創造獨一無二的數位邀請函",
   icons: {
     icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/logo-icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
     ],
     apple: "/logo-icon.svg",
   },
