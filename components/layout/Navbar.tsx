@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
+import Brand from "@/components/ui/Brand";
 
 const NAVBAR_ITEMS = [
   {
@@ -96,25 +97,9 @@ export default function Navbar() {
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center h-[72px]">
           {/* Logo / 品牌 */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-3 no-underline">
-              <Image
-                src="/logo-icon.svg"
-                alt="Cardian"
-                width={48}
-                height={48}
-                className="w-12 h-12"
-              />
-              <div className="flex flex-col">
-                <span className="text-xl font-bold text-deep-brown font-serif leading-tight">
-                  Cardian 卡典
-                </span>
-                <span className="text-xs text-text-secondary font-normal leading-tight">
-                  做出讓人心動的卡片
-                </span>
-              </div>
-            </Link>
-          </div>
+          <Link href="/">
+            <Brand.Horizontal />
+          </Link>
           <div className="hidden md:flex items-center gap-2">
             {renderNavbarItems()}
             {isInitialized && isAuthenticated && (

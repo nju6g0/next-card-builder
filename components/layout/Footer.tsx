@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Brand from "@/components/ui/Brand";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,19 +7,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div className="footer-brand">
-          <div className="flex items-center gap-2 mb-2">
-            <Image
-              src="/logo-icon.svg"
-              alt="Cardian"
-              width={40}
-              height={40}
-              className="w-10 h-10"
-            />
-            <h3 className="m-0">Cardian 卡典</h3>
-          </div>
-          <p>做出讓人心動的卡片</p>
-        </div>
+        <Brand.Vertical />
         <div className="footer-links">
           <div className="footer-column">
             <h4>產品</h4>

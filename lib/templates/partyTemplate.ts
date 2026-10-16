@@ -7,7 +7,7 @@ export const partyRestrictedTemplate: RestrictedTemplate = {
   description: "活潑派對動畫邀請函，帶有趣味的文字動畫效果",
   isAnimated: true,
   isRestricted: true,
-  slug: "wedding-animated",
+  slug: "party-animated",
   canvasSize: { width: 375, height: 667 },
   elements: [], // 動畫模板不使用 elements，而是使用獨立頁面
 
@@ -53,7 +53,8 @@ export const partyRestrictedTemplate: RestrictedTemplate = {
       label: "背景圖片 URL",
       propertyKey: "backgroundImage",
       type: "image",
-      defaultValue: "https://picsum.photos/800/600",
+      defaultValue:
+        "https://fastly.picsum.photos/id/696/4310/2864.jpg?hmac=jwUqQi3SVy1U14f8Ku4wwrF-VEifNP0FQkk7WIUqkw8",
       constraints: {
         allowedFormats: ["jpg", "jpeg", "png", "webp"],
       },

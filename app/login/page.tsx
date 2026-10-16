@@ -2,9 +2,9 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { useAuthStore } from "@/stores/authStore";
 import { Button } from "@/components/ui/Button";
+import Brand from "@/components/ui/Brand";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,21 +35,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-md bg-warm-cream">
       <div className="max-w-[500px] w-full">
-        {/* Logo / 標題 */}
-        <div className="text-center mb-lg">
-          <div className="flex justify-center mb-4">
-            <Image
-              src="/logo-icon.svg"
-              alt="Cardian"
-              width={80}
-              height={80}
-              className="w-20 h-20"
-            />
-          </div>
-          <h1 className="text-[2.5rem] font-bold text-deep-brown font-serif mb-xs">
-            Cardian 卡典
-          </h1>
-          <p className="text-text-secondary text-base">做出讓人心動的卡片</p>
+        <div className="mb-4 flex items-center justify-center">
+          <Brand.Vertical />
         </div>
 
         {/* 登入表單 */}

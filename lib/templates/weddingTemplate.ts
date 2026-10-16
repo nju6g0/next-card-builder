@@ -7,7 +7,7 @@ export const weddingRestrictedTemplate: RestrictedTemplate = {
   description: "浪漫婚禮動畫邀請函，帶有優雅的拱門開場動畫",
   isAnimated: true,
   isRestricted: true,
-  slug: "party-animated",
+  slug: "wedding-animated",
   canvasSize: { width: 375, height: 667 },
   elements: [], // 動畫模板不使用 elements，而是使用獨立頁面
 
@@ -86,7 +86,8 @@ export const weddingRestrictedTemplate: RestrictedTemplate = {
       label: "背景圖片 URL",
       propertyKey: "backgroundImage",
       type: "image",
-      defaultValue: "https://picsum.photos/800/600",
+      defaultValue:
+        "https://fastly.picsum.photos/id/815/2074/1383.jpg?hmac=z5kVymrNUTKCDBhKG3oays-sesL-_APZSoaWQJInU4s",
       constraints: {
         allowedFormats: ["jpg", "jpeg", "png", "webp"],
       },
