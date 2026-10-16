@@ -32,7 +32,8 @@ const NAVBAR_ITEMS = [
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { isAuthenticated, currentUser, logout } = useAuthStore();
+  const { isAuthenticated, currentUser, logout, isInitialized } =
+    useAuthStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
@@ -46,48 +47,48 @@ export default function Navbar() {
   };
 
   const renderNavbarItems = () => {
-    return NAVBAR_ITEMS.filter((item) => !item.needAuth || isAuthenticated).map(
-      (item) => (
-        <Link
-          key={item.id}
-          href={item.link}
-          className={`relative px-4 py-2 text-[0.95rem] font-medium transition-all duration-300 hover:text-accent-terracotta `}
-        >
-          {item.label}
-          {isActive(item.link) && (
-            <motion.div
-              className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-terracotta"
-              layoutId="tab-indicator"
-              transition={{
-                type: "spring",
-                stiffness: 500,
-                damping: 30,
-                mass: 1,
-              }}
-            />
-          )}
-        </Link>
-      ),
-    );
+    return NAVBAR_ITEMS.filter(
+      (item) => !item.needAuth || (isInitialized && isAuthenticated),
+    ).map((item) => (
+      <Link
+        key={item.id}
+        href={item.link}
+        className={`relative px-4 py-2 text-[0.95rem] font-medium transition-all duration-300 hover:text-accent-terracotta `}
+      >
+        {item.label}
+        {isActive(item.link) && (
+          <motion.div
+            className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-terracotta"
+            layoutId="tab-indicator"
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 30,
+              mass: 1,
+            }}
+          />
+        )}
+      </Link>
+    ));
   };
 
   const renderMobileNavbarItems = () => {
-    return NAVBAR_ITEMS.filter((item) => !item.needAuth || isAuthenticated).map(
-      (item) => (
-        <Link
-          key={item.id}
-          href={item.link}
-          onClick={() => setIsMobileMenuOpen(false)}
-          className={`relative px-4 py-3 text-base font-medium transition-all duration-300 ${
-            isActive(item.link)
-              ? "border-l-2 border-accent-terracotta"
-              : "no-underline"
-          }`}
-        >
-          {item.label}
-        </Link>
-      ),
-    );
+    return NAVBAR_ITEMS.filter(
+      (item) => !item.needAuth || (isInitialized && isAuthenticated),
+    ).map((item) => (
+      <Link
+        key={item.id}
+        href={item.link}
+        onClick={() => setIsMobileMenuOpen(false)}
+        className={`relative px-4 py-3 text-base font-medium transition-all duration-300 ${
+          isActive(item.link)
+            ? "border-l-2 border-accent-terracotta"
+            : "no-underline"
+        }`}
+      >
+        {item.label}
+      </Link>
+    ));
   };
 
   return (
@@ -116,7 +117,7 @@ export default function Navbar() {
           </div>
           <div className="hidden md:flex items-center gap-2">
             {renderNavbarItems()}
-            {isAuthenticated && (
+            {isInitialized && isAuthenticated && (
               <Link href="/invitations/create">
                 <Button variant="primary" className="ml-2">
                   建立邀請函
@@ -127,7 +128,7 @@ export default function Navbar() {
 
           {/* 使用者選單（桌面） */}
           <div className="hidden md:flex items-center gap-4">
-            {isAuthenticated && currentUser ? (
+            {!isInitialized ? null : isAuthenticated && currentUser ? (
               <div className="flex items-center gap-4">
                 <span className="text-[0.9rem] text-text-secondary">
                   {currentUser}
@@ -196,7 +197,7 @@ export default function Navbar() {
 
           {/* 使用者資訊（手機版） */}
           <div className="p-4 border-t border-soft-beige">
-            {isAuthenticated && currentUser ? (
+            {!isInitialized ? null : isAuthenticated && currentUser ? (
               <div className="flex flex-col gap-4">
                 <div className="text-sm text-center">Hi, {currentUser}</div>
                 <button

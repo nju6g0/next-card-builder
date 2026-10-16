@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { AuthInitializer } from "@/components/providers/AuthInitializer";
 
 export const metadata: Metadata = {
   title: "Cardian 卡典 - 做出讓人心動的卡片",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
+        <AuthInitializer />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

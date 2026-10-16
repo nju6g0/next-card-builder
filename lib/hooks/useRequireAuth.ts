@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/stores/authStore';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/stores/authStore";
 
 /**
  * 路由守衛 Hook
@@ -11,13 +11,15 @@ import { useAuthStore } from '@/stores/authStore';
  */
 export function useRequireAuth() {
   const router = useRouter();
-  const { currentUser, isAuthenticated } = useAuthStore();
+  const { currentUser, isAuthenticated, isInitialized } = useAuthStore();
 
   useEffect(() => {
-    if (!isAuthenticated || !currentUser) {
-      router.push('/login');
+    // 只有在初始化完成後才檢查認證狀態
+    if (isInitialized && (!isAuthenticated || !currentUser)) {
+      router.push("/login");
     }
-  }, [isAuthenticated, currentUser, router]);
+  }, [isInitialized, isAuthenticated, currentUser, router]);
 
-  return currentUser;
+  // 在初始化完成前返回 null
+  return isInitialized ? currentUser : null;
 }

@@ -6,6 +6,7 @@ interface AuthState {
   currentUser: string | null;
   user: string | null; // 別名，指向 currentUser
   isAuthenticated: boolean;
+  isInitialized: boolean; // 標記是否已從 localStorage 初始化
   login: (email: string) => { success: boolean; error?: string };
   logout: () => void;
 }
@@ -22,6 +23,7 @@ export const useAuthStore = create<AuthState>()(
         return get().currentUser;
       }, // 別名 getter
       isAuthenticated: false,
+      isInitialized: false,
 
       /**
        * 登入功能
