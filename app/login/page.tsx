@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useAuthStore } from "@/stores/authStore";
 
 export default function LoginPage() {
@@ -35,20 +36,24 @@ export default function LoginPage() {
       <div className="max-w-[500px] w-full">
         {/* Logo / 標題 */}
         <div className="text-center mb-lg">
+          <div className="flex justify-center mb-4">
+            <Image
+              src="/logo-icon.svg"
+              alt="Cardian"
+              width={80}
+              height={80}
+              className="w-20 h-20"
+            />
+          </div>
           <h1 className="text-[2.5rem] font-bold text-deep-brown font-serif mb-xs">
-            邀請函工坊
+            Cardian 卡典
           </h1>
-          <p className="text-text-secondary text-base">
-            登入以開始建立您的邀請函
-          </p>
+          <p className="text-text-secondary text-base">做出讓人心動的卡片</p>
         </div>
 
         {/* 登入表單 */}
         <div className="bg-white rounded-2xl shadow-lg p-lg border-2 border-soft-beige">
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-md"
-          >
+          <form onSubmit={handleSubmit} className="flex flex-col gap-md">
             <div>
               <label
                 htmlFor="email"
@@ -69,9 +74,7 @@ export default function LoginPage() {
                 disabled={isLoading}
               />
               {error && (
-                <p className="mt-xs text-sm text-accent-terracotta">
-                  {error}
-                </p>
+                <p className="mt-xs text-sm text-accent-terracotta">{error}</p>
               )}
             </div>
 

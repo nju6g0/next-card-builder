@@ -1,0 +1,39 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Decorative stars -->
+  <path d="M25 30L27 36L33 38L27 40L25 46L23 40L17 38L23 36L25 30Z" fill="#C4A57B"/>
+  <path d="M165 45L167 51L173 53L167 55L165 61L163 55L157 53L163 51L165 45Z" fill="#D4A574"/>
+  <path d="M155 90L157 96L163 98L157 100L155 106L153 100L147 98L153 96L155 90Z" fill="#C4A57B"/>
+  
+  <!-- Curved line decoration -->
+  <path d="M20 70 Q 35 85, 50 95" stroke="#C9A68A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Card Stack (back card) -->
+  <rect x="75" y="45" width="85" height="110" rx="8" fill="#C4A57B"/>
+  
+  <!-- Card Stack (front card) -->
+  <rect x="65" y="52" width="85" height="110" rx="8" fill="#FBF9F4" stroke="#C4A57B" stroke-width="2.5"/>
+  <rect x="70" y="57" width="75" height="100" rx="6" fill="none" stroke="#E8DCC8" stroke-width="1.5"/>
+  
+  <!-- Heart on card -->
+  <path d="M107.5 95 C 102.5 90, 92.5 90, 87.5 95 C 82.5 90, 72.5 90, 67.5 95 C 62.5 100, 62.5 110, 67.5 120 L 87.5 140 L 107.5 120 C 112.5 110, 112.5 100, 107.5 95 Z" fill="#C9877D" opacity="0.9"/>
+  
+  <!-- Heart glow lines -->
+  <path d="M80 88 L 84 80" stroke="#D4A574" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M95 88 L 91 80" stroke="#D4A574" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M87.5 87 L 87.5 78" stroke="#D4A574" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Plant decoration on card -->
+  <ellipse cx="110" cy="140" rx="4.5" ry="7" fill="#A8B5A0"/>
+  <ellipse cx="119" cy="135" rx="4" ry="6" fill="#A8B5A0"/>
+  <ellipse cx="103" cy="136" rx="3.5" ry="5.5" fill="#B8C5B0"/>
+  <path d="M110 152 Q 110 146, 110 140" stroke="#8A9A80" stroke-width="2" fill="none"/>
+  
+  <!-- Image placeholder icon -->
+  <rect x="125" y="52" width="60" height="45" rx="6" fill="none" stroke="#C4A57B" stroke-width="2.5" stroke-dasharray="6 5"/>
+  <rect x="140" y="72" width="18" height="14" rx="3" fill="#C4A57B" opacity="0.4"/>
+  <circle cx="146" cy="77" r="3" fill="#FBF9F4"/>
+  <path d="M137 87 L 146 78 L 155 87 L 162 80" stroke="#D4A574" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Cursor/pointer -->
+  <path d="M145 95 L 145 120 L 153 112 L 162 123 L 168 120 L 159 109 L 173 109 L 145 95 Z" fill="#5C4939"/>
+</svg>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -7,8 +8,17 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-brand">
-          <h3>邀請函工坊</h3>
-          <p>用心設計每一份邀請</p>
+          <div className="flex items-center gap-2 mb-2">
+            <Image
+              src="/logo-icon.svg"
+              alt="Cardian"
+              width={40}
+              height={40}
+              className="w-10 h-10"
+            />
+            <h3 className="m-0">Cardian 卡典</h3>
+          </div>
+          <p>做出讓人心動的卡片</p>
         </div>
         <div className="footer-links">
           <div className="footer-column">
@@ -41,7 +51,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© {currentYear} 邀請函工坊. 用心設計每一刻</p>
+        <p>© {currentYear} Cardian 卡典. 做出讓人心動的卡片</p>
       </div>
     </footer>
   );

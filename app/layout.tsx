@@ -4,8 +4,15 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Card Builder - 可拖拉元件自訂邀請函",
-  description: "使用拖拉元件自由設計邀請函，支援範本選擇與 RSVP 表單功能",
+  title: "Cardian 卡典 - 做出讓人心動的卡片",
+  description: "用心設計每一份邀請，為生命中的美好時刻創造獨一無二的數位邀請函",
+  icons: {
+    icon: [
+      { url: "/logo-icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/logo-icon.svg",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

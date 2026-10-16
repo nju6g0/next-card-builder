@@ -1,4 +1,4 @@
-# Card Builder - 可拖拉元件自訂邀請函網站
+# Cardian 卡典 - 做出讓人心動的卡片
 
 一個純前端 demo 的邀請函設計平台，使用者可以透過拖拉元件（文字、圖片、RSVP 表單）自由設計邀請函，或從預設範本開始編輯。
 
@@ -15,7 +15,7 @@
 ## 📦 專案結構
 
 ```
-next-card-builder/
+cardian/
 ├── app/                    # Next.js App Router 路由頁面
 │   ├── page.tsx           # 首頁
 │   ├── layout.tsx         # 根佈局
