@@ -20,6 +20,9 @@
   --spacing-lg: 4rem;
   --spacing-xl: 6rem;
 
+  /* Max Width - 明確定義以保留 Tailwind 預設值 */
+  --max-width-md: 28rem; /* 448px - Tailwind 預設值 */
+
   /* Font Families */
   --font-family-serif: "Noto Serif TC", serif;
   --font-family-sans: "Noto Sans TC", sans-serif;

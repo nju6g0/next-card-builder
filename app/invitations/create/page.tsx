@@ -199,29 +199,36 @@ function CreateInvitationContent() {
 
       {/* 標題編輯對話框 */}
       {showTitleDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-neutral-900 mb-4">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md">
+            <h3 className="text-xl font-semibold text-neutral-900 mb-4 font-serif">
               編輯邀請函標題
             </h3>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-3 border-2 border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
               placeholder="請輸入標題"
               autoFocus
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setShowTitleDialog(false);
+                } else if (e.key === "Escape") {
+                  setShowTitleDialog(false);
+                }
+              }}
             />
-            <div className="flex justify-end gap-2 mt-4">
+            <div className="flex justify-end gap-3 mt-6">
               <button
                 onClick={() => setShowTitleDialog(false)}
-                className="px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+                className="px-5 py-2.5 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors font-medium"
               >
                 取消
               </button>
               <button
                 onClick={() => setShowTitleDialog(false)}
-                className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+                className="px-5 py-2.5 bg-primary text-deep-brown rounded-lg hover:bg-primary-dark transition-colors font-medium"
               >
                 確定
               </button>
