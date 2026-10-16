@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useEditorStore } from '@/stores/editorStore';
-import type { ImageElement } from '@/types';
+import { useState } from "react";
+import { useEditorStore } from "@/stores/editorStore";
+import type { ImageElement } from "@/types";
 
 interface ImagePropertiesProps {
   element: ImageElement;
 }
 
 const OBJECT_FITS = [
-  { label: '覆蓋', value: 'cover' },
-  { label: '包含', value: 'contain' },
-  { label: '填滿', value: 'fill' },
+  { label: "覆蓋", value: "cover" },
+  { label: "包含", value: "contain" },
+  { label: "填滿", value: "fill" },
 ];
 
 export default function ImageProperties({ element }: ImagePropertiesProps) {
@@ -31,12 +31,17 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
       >
         <h4 className="text-sm font-semibold text-neutral-900">圖片樣式</h4>
         <svg
-          className={`w-4 h-4 text-neutral-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-neutral-500 transition-transform ${isExpanded ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
 
@@ -45,15 +50,53 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
           {/* 圖片 URL */}
           <div>
             <label className="block text-xs font-medium text-neutral-700 mb-1">
-              圖片來源
+              圖片網址 (URL)
             </label>
             <textarea
               value={element.src}
-              onChange={(e) => handleChange('src', e.target.value)}
+              onChange={(e) => handleChange("src", e.target.value)}
               rows={3}
               className="w-full px-2 py-1.5 text-xs border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary font-mono resize-none"
-              placeholder="https://..."
+              placeholder="https://example.com/image.jpg"
             />
+            <div className="mt-2 text-xs text-neutral-500 space-y-1">
+              <p>💡 免費圖片來源建議：</p>
+              <ul className="list-disc list-inside ml-2 space-y-0.5">
+                <li>
+                  <a
+                    href="https://unsplash.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Unsplash
+                  </a>
+                  {" - 高品質免費圖片"}
+                </li>
+                <li>
+                  <a
+                    href="https://imgur.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Imgur
+                  </a>
+                  {" - 圖片上傳分享"}
+                </li>
+                <li>
+                  <a
+                    href="https://postimages.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    PostImages
+                  </a>
+                  {" - 免註冊上傳"}
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Alt 文字 */}
@@ -64,7 +107,7 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
             <input
               type="text"
               value={element.alt}
-              onChange={(e) => handleChange('alt', e.target.value)}
+              onChange={(e) => handleChange("alt", e.target.value)}
               className="w-full px-2 py-1.5 text-sm border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="圖片描述"
             />
@@ -79,11 +122,11 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
               {OBJECT_FITS.map((fit) => (
                 <button
                   key={fit.value}
-                  onClick={() => handleChange('objectFit', fit.value)}
+                  onClick={() => handleChange("objectFit", fit.value)}
                   className={`px-2 py-1.5 text-xs rounded transition ${
                     element.objectFit === fit.value
-                      ? 'bg-primary text-white'
-                      : 'bg-neutral-100 hover:bg-neutral-200'
+                      ? "bg-primary text-white"
+                      : "bg-neutral-100 hover:bg-neutral-200"
                   }`}
                 >
                   {fit.label}
@@ -102,7 +145,7 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
               min="0"
               max="20"
               value={element.blur || 0}
-              onChange={(e) => handleChange('blur', parseInt(e.target.value))}
+              onChange={(e) => handleChange("blur", parseInt(e.target.value))}
               className="w-full"
             />
             <div className="flex justify-between text-xs text-neutral-500 mt-1">
@@ -117,7 +160,7 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
               <input
                 type="checkbox"
                 checked={element.isBackground}
-                onChange={(e) => handleChange('isBackground', e.target.checked)}
+                onChange={(e) => handleChange("isBackground", e.target.checked)}
                 className="rounded border-neutral-300 text-primary focus:ring-primary"
               />
               <span className="text-sm text-neutral-700">設為背景圖片</span>
@@ -138,11 +181,11 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
                 alt={element.alt}
                 className="w-full h-full"
                 style={{
-                  objectFit: element.objectFit || 'cover',
+                  objectFit: element.objectFit || "cover",
                   filter: element.blur ? `blur(${element.blur}px)` : undefined,
                 }}
                 onError={(e) => {
-                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.style.display = "none";
                   const parent = e.currentTarget.parentElement;
                   if (parent) {
                     parent.innerHTML = `

@@ -78,9 +78,9 @@ const ELEMENT_TEMPLATES: ElementTemplate[] = [
       </svg>
     ),
     label: "圖片",
-    description: "新增圖片",
+    description: "使用圖片 URL",
     defaultProps: {
-      src: "https://picsum.photos/200/300",
+      src: "",
       alt: "圖片",
       isBackground: false,
       objectFit: "cover",
