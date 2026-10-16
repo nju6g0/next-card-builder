@@ -5,6 +5,8 @@ import type {
   TextElement,
   ImageElement,
   RsvpFormElement,
+  AnimatedTextWeddingElement,
+  AnimatedTextPartyElement,
   CanvasSize,
 } from "@/types";
 
@@ -43,7 +45,9 @@ interface EditorState {
       | Partial<BaseElement>
       | Partial<TextElement>
       | Partial<ImageElement>
-      | Partial<RsvpFormElement>,
+      | Partial<RsvpFormElement>
+      | Partial<AnimatedTextWeddingElement>
+      | Partial<AnimatedTextPartyElement>,
   ) => void;
   deleteElement: (id: string) => void;
   duplicateElement: (id: string) => void;

@@ -257,6 +257,8 @@ export default function TemplateDetailPage() {
                       {element.type === "text" && "📝"}
                       {element.type === "image" && "🖼️"}
                       {element.type === "rsvp-form" && "📋"}
+                      {element.type === "animated-text-wedding" && "✨"}
+                      {element.type === "animated-text-party" && "🎉"}
                     </div>
                     <div className="flex-1">
                       <div className="text-sm font-medium text-gray-900">
@@ -264,6 +266,10 @@ export default function TemplateDetailPage() {
                         {element.type === "image" &&
                           (element.isBackground ? "背景圖片" : "圖片元件")}
                         {element.type === "rsvp-form" && "RSVP 表單"}
+                        {element.type === "animated-text-wedding" &&
+                          "Wedding 動畫文字"}
+                        {element.type === "animated-text-party" &&
+                          "Party 動畫文字"}
                       </div>
                       <div className="text-xs text-gray-500">
                         {element.type === "text" &&
@@ -272,6 +278,10 @@ export default function TemplateDetailPage() {
                           `${element.width}×${element.height}`}
                         {element.type === "rsvp-form" &&
                           "姓名 · Email · 參加狀態"}
+                        {element.type === "animated-text-wedding" &&
+                          `"${element.content.substring(0, 20)}..."`}
+                        {element.type === "animated-text-party" &&
+                          `"${element.content.substring(0, 20)}..."`}
                       </div>
                     </div>
                   </div>

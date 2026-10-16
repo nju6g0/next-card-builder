@@ -2,6 +2,8 @@
 
 import { Element } from "@/types";
 import { motion } from "motion/react";
+import AnimatedTextWeddingRenderer from "@/components/elements/AnimatedTextWeddingRenderer";
+import AnimatedTextPartyRenderer from "@/components/elements/AnimatedTextPartyRenderer";
 
 interface InvitationCanvasProps {
   elements: Element[];
@@ -115,6 +117,22 @@ export default function InvitationCanvas({
                 {element.fields.attendance && "參加狀態"}
               </div>
             </div>
+          </div>
+        );
+
+      case "animated-text-wedding":
+        // Wedding 動畫文字
+        return (
+          <div key={element.id} style={style}>
+            <AnimatedTextWeddingRenderer element={element} isSelected={false} />
+          </div>
+        );
+
+      case "animated-text-party":
+        // Party 動畫文字
+        return (
+          <div key={element.id} style={style}>
+            <AnimatedTextPartyRenderer element={element} isSelected={false} />
           </div>
         );
 

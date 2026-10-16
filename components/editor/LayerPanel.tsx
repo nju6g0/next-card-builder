@@ -125,6 +125,8 @@ function LayerItem({ element, isSelected, onSelect, index }: LayerItemProps) {
           {element.type === "text" && "文字元件"}
           {element.type === "image" && "圖片元件"}
           {element.type === "rsvp-form" && "RSVP 表單"}
+          {element.type === "animated-text-wedding" && "Wedding 動畫"}
+          {element.type === "animated-text-party" && "Party 動畫"}
         </p>
       </div>
 

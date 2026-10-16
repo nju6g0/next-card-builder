@@ -7,11 +7,15 @@ import type {
   TextElement,
   ImageElement,
   RsvpFormElement,
+  AnimatedTextWeddingElement,
+  AnimatedTextPartyElement,
 } from "@/types";
 import { useEditorStore } from "@/stores/editorStore";
 import TextElementRenderer from "@/components/elements/TextElementRenderer";
 import ImageElementRenderer from "@/components/elements/ImageElementRenderer";
 import RsvpFormElementRenderer from "@/components/elements/RsvpFormElementRenderer";
+import AnimatedTextWeddingRenderer from "@/components/elements/AnimatedTextWeddingRenderer";
+import AnimatedTextPartyRenderer from "@/components/elements/AnimatedTextPartyRenderer";
 
 interface DraggableElementProps {
   element: BaseElement;
@@ -113,6 +117,22 @@ export default function DraggableElement({
             isSelected={isSelected}
             isEditing={isEditing}
             onDoubleClick={handleDoubleClick}
+          />
+        );
+
+      case "animated-text-wedding":
+        return (
+          <AnimatedTextWeddingRenderer
+            element={element as AnimatedTextWeddingElement}
+            isSelected={isSelected}
+          />
+        );
+
+      case "animated-text-party":
+        return (
+          <AnimatedTextPartyRenderer
+            element={element as AnimatedTextPartyElement}
+            isSelected={isSelected}
           />
         );
 

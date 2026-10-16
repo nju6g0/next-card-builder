@@ -1,11 +1,19 @@
 "use client";
 
 import { useEditorStore } from "@/stores/editorStore";
-import type { TextElement, ImageElement, RsvpFormElement } from "@/types";
+import type {
+  TextElement,
+  ImageElement,
+  RsvpFormElement,
+  AnimatedTextWeddingElement,
+  AnimatedTextPartyElement,
+} from "@/types";
 import CommonProperties from "./CommonProperties";
 import TextProperties from "./TextProperties";
 import ImageProperties from "./ImageProperties";
 import RsvpFormProperties from "./RsvpFormProperties";
+import AnimatedTextWeddingProperties from "./AnimatedTextWeddingProperties";
+import AnimatedTextPartyProperties from "./AnimatedTextPartyProperties";
 import { motion, AnimatePresence } from "motion/react";
 
 interface PropertyPanelProps {
@@ -65,6 +73,9 @@ export default function PropertyPanel({ className = "" }: PropertyPanelProps) {
                 {selectedElement.type === "text" && "文字"}
                 {selectedElement.type === "image" && "圖片"}
                 {selectedElement.type === "rsvp-form" && "RSVP"}
+                {selectedElement.type === "animated-text-wedding" &&
+                  "Wedding 動畫"}
+                {selectedElement.type === "animated-text-party" && "Party 動畫"}
               </span>
             </div>
             <p className="text-xs text-neutral-500">
@@ -86,6 +97,16 @@ export default function PropertyPanel({ className = "" }: PropertyPanelProps) {
           )}
           {selectedElement.type === "rsvp-form" && (
             <RsvpFormProperties element={selectedElement as RsvpFormElement} />
+          )}
+          {selectedElement.type === "animated-text-wedding" && (
+            <AnimatedTextWeddingProperties
+              element={selectedElement as AnimatedTextWeddingElement}
+            />
+          )}
+          {selectedElement.type === "animated-text-party" && (
+            <AnimatedTextPartyProperties
+              element={selectedElement as AnimatedTextPartyElement}
+            />
           )}
         </motion.div>
       </AnimatePresence>

@@ -8,6 +8,8 @@ import type {
   TextElement,
   ImageElement,
   RsvpFormElement,
+  AnimatedTextWeddingElement,
+  AnimatedTextPartyElement,
 } from "@/types";
 import { useEditorStore } from "@/stores/editorStore";
 
@@ -20,7 +22,13 @@ interface ElementTemplate {
   icon: React.ReactNode;
   label: string;
   description: string;
-  defaultProps: Partial<TextElement | ImageElement | RsvpFormElement>;
+  defaultProps: Partial<
+    | TextElement
+    | ImageElement
+    | RsvpFormElement
+    | AnimatedTextWeddingElement
+    | AnimatedTextPartyElement
+  >;
 }
 
 const ELEMENT_TEMPLATES: ElementTemplate[] = [
@@ -104,6 +112,63 @@ const ELEMENT_TEMPLATES: ElementTemplate[] = [
         attendance: true,
         message: false,
       },
+    },
+  },
+  {
+    type: "animated-text-wedding",
+    icon: (
+      <svg
+        className="w-6 h-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+        />
+      </svg>
+    ),
+    label: "Wedding 動畫",
+    description: "淡入旋轉動畫文字",
+    defaultProps: {
+      content: "We're Getting Married!",
+      fontSize: 32,
+      fontFamily: "Playfair Display",
+      color: "#000000",
+      fontWeight: 700,
+      animationDelay: 0,
+    },
+  },
+  {
+    type: "animated-text-party",
+    icon: (
+      <svg
+        className="w-6 h-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+    ),
+    label: "Party 動畫",
+    description: "逐字飛入動畫文字",
+    defaultProps: {
+      content: "Welcome to the Party!",
+      fontSize: 32,
+      fontFamily: "Playfair Display",
+      color: "#ffffff",
+      fontWeight: 600,
+      animationDelay: 0,
+      charStaggerDelay: 0.05,
     },
   },
 ];

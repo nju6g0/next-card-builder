@@ -1,5 +1,10 @@
 // 元件基礎類型
-export type ElementType = "text" | "image" | "rsvp-form";
+export type ElementType =
+  | "text"
+  | "image"
+  | "rsvp-form"
+  | "animated-text-wedding"
+  | "animated-text-party";
 
 // 基礎元件介面（扁平結構以便拖拉編輯）
 export interface BaseElement {
@@ -48,8 +53,36 @@ export interface RsvpFormElement extends BaseElement {
   };
 }
 
+// Wedding 風格動畫文字元件
+export interface AnimatedTextWeddingElement extends BaseElement {
+  type: "animated-text-wedding";
+  content: string;
+  fontSize: number;
+  color: string;
+  fontFamily: string;
+  fontWeight: number;
+  animationDelay: number; // 動畫開始延遲（秒）
+}
+
+// Party 風格動畫文字元件
+export interface AnimatedTextPartyElement extends BaseElement {
+  type: "animated-text-party";
+  content: string;
+  fontSize: number;
+  color: string;
+  fontFamily: string;
+  fontWeight: number;
+  animationDelay: number; // 動畫開始延遲（秒）
+  charStaggerDelay: number; // 每個字符的延遲間隔（秒）
+}
+
 // 聯合型別
-export type Element = TextElement | ImageElement | RsvpFormElement;
+export type Element =
+  | TextElement
+  | ImageElement
+  | RsvpFormElement
+  | AnimatedTextWeddingElement
+  | AnimatedTextPartyElement;
 
 // 邀請函資料
 export interface Invitation {
