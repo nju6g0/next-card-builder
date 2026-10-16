@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
 import { motion } from "motion/react";
+import { Button } from "@/components/ui/Button";
 
 const NAVBAR_ITEMS = [
   {
@@ -116,8 +117,10 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-2">
             {renderNavbarItems()}
             {isAuthenticated && (
-              <Link href="/invitations/create" className="btn-primary ml-2">
-                建立邀請函
+              <Link href="/invitations/create">
+                <Button variant="primary" className="ml-2">
+                  建立邀請函
+                </Button>
               </Link>
             )}
           </div>
@@ -137,8 +140,8 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link href="/login" className="btn-primary">
-                登入
+              <Link href="/login">
+                <Button variant="primary">登入</Button>
               </Link>
             )}
           </div>
@@ -204,12 +207,10 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link
-                href="/login"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="btn-primary block w-full px-4 py-3 text-center no-underline"
-              >
-                登入
+              <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button variant="primary" className="block w-full text-center">
+                  登入
+                </Button>
               </Link>
             )}
           </div>

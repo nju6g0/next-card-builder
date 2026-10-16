@@ -5,6 +5,7 @@ import { Template } from "@/types";
 import { templatesApi } from "@/lib/mockApi";
 import TemplateCard from "@/components/ui/TemplateCard";
 import { motion } from "motion/react";
+import { Button } from "@/components/ui/Button";
 
 export default function TemplatesPage() {
   const [templates, setTemplates] = useState<Template[]>([]);
@@ -43,9 +44,7 @@ export default function TemplatesPage() {
           transition={{ duration: 0.5 }}
           className="section-header mb-xl"
         >
-          <h1 className="section-title font-serif">
-            邀請函範本
-          </h1>
+          <h1 className="section-title font-serif">邀請函範本</h1>
           <p className="section-subtitle">
             選擇一個精美的範本快速開始，或從空白畫布自由創作
           </p>
@@ -56,9 +55,7 @@ export default function TemplatesPage() {
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-soft-beige border-t-accent-terracotta mx-auto mb-4"></div>
-              <p className="text-text-secondary">
-                載入範本中...
-              </p>
+              <p className="text-text-secondary">載入範本中...</p>
             </div>
           </div>
         )}
@@ -71,15 +68,10 @@ export default function TemplatesPage() {
             className="bg-accent-terracotta/10 border-2 border-accent-terracotta/30 rounded-2xl p-lg text-center"
           >
             <div className="text-5xl mb-sm">❌</div>
-            <p className="text-accent-terracotta font-medium mb-xs">
-              {error}
-            </p>
-            <button
-              onClick={loadTemplates}
-              className="btn-primary mt-md"
-            >
+            <p className="text-accent-terracotta font-medium mb-xs">{error}</p>
+            <Button onClick={loadTemplates} variant="primary" className="mt-md">
               重試
-            </button>
+            </Button>
           </motion.div>
         )}
 
@@ -107,9 +99,7 @@ export default function TemplatesPage() {
             <h2 className="text-2xl font-semibold text-deep-brown mb-xs font-serif">
               尚無範本
             </h2>
-            <p className="text-text-secondary">
-              目前沒有可用的範本
-            </p>
+            <p className="text-text-secondary">目前沒有可用的範本</p>
           </motion.div>
         )}
 
@@ -127,11 +117,10 @@ export default function TemplatesPage() {
             <p className="text-lg mb-lg opacity-90">
               從空白畫布開始，自由發揮您的創意
             </p>
-            <a
-              href="/invitations/create"
-              className="btn-primary inline-block no-underline text-lg px-12 py-5"
-            >
-              建立空白邀請函
+            <a href="/invitations/create">
+              <Button variant="primary" size="large">
+                建立空白邀請函
+              </Button>
             </a>
           </motion.div>
         )}

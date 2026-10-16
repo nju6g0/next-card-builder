@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useAuthStore } from "@/stores/authStore";
+import { Button } from "@/components/ui/Button";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -78,13 +79,14 @@ export default function LoginPage() {
               )}
             </div>
 
-            <button
+            <Button
               type="submit"
               disabled={isLoading}
-              className="btn-primary w-full text-base disabled:cursor-not-allowed disabled:opacity-60"
+              variant="primary"
+              className="w-full text-base disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isLoading ? "登入中..." : "登入"}
-            </button>
+            </Button>
           </form>
 
           {/* 說明文字 */}

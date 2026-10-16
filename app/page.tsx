@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useAuthStore } from "@/stores/authStore";
+import { Button } from "@/components/ui/Button";
 
 export default function Home() {
   const { isAuthenticated, currentUser } = useAuthStore();
@@ -262,10 +263,12 @@ export default function Home() {
           </p>
           <div className="hero-cta">
             <Link href="/invitations/create">
-              <button className="btn-primary hidden sm:block">開始設計</button>
+              <Button variant="primary" className="hidden sm:block">
+                開始設計
+              </Button>
             </Link>
             <Link href="/templates">
-              <button className="btn-browse-templates">瀏覽範本</button>
+              <Button variant="browse-templates">瀏覽範本</Button>
             </Link>
           </div>
         </div>
@@ -349,7 +352,9 @@ export default function Home() {
           <h2 className="cta-title">準備好開始了嗎？</h2>
           <p className="cta-subtitle">讓我們一起為重要的日子，留下美好的記憶</p>
           <Link href="/invitations/create">
-            <button className="btn-primary large">免費開始設計</button>
+            <Button variant="primary" size="large">
+              免費開始設計
+            </Button>
           </Link>
         </div>
         <div className="cta-decoration">

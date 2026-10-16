@@ -7,6 +7,7 @@ import { useInvitationStore } from "@/stores/invitationStore";
 import { useRouter } from "next/navigation";
 import { InvitationCard } from "@/components/dashboard/InvitationCard";
 import { copyToClipboard } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
 
 export default function DashboardPage() {
   const currentUser = useRequireAuth();
@@ -64,9 +65,7 @@ export default function DashboardPage() {
       <div className="min-h-screen flex items-center justify-center bg-warm-cream">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-soft-beige border-t-accent-terracotta mx-auto"></div>
-          <p className="mt-md text-text-secondary">
-            載入中...
-          </p>
+          <p className="mt-md text-text-secondary">載入中...</p>
         </div>
       </div>
     );
@@ -82,9 +81,7 @@ export default function DashboardPage() {
               <h1 className="text-[2rem] font-bold text-deep-brown font-serif mb-xs">
                 我的邀請函
               </h1>
-              <p className="text-text-secondary">
-                歡迎回來，{currentUser}
-              </p>
+              <p className="text-text-secondary">歡迎回來，{currentUser}</p>
             </div>
             <button
               onClick={handleLogout}
@@ -107,9 +104,7 @@ export default function DashboardPage() {
           <div className="bg-white rounded-2xl shadow-lg p-lg border-2 border-soft-beige">
             <div className="flex items-center justify-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-[3px] border-soft-beige border-t-accent-terracotta"></div>
-              <span className="ml-sm text-text-secondary">
-                載入邀請函中...
-              </span>
+              <span className="ml-sm text-text-secondary">載入邀請函中...</span>
             </div>
           </div>
         )}
@@ -126,15 +121,12 @@ export default function DashboardPage() {
                 開始建立您的第一個邀請函吧！
               </p>
               <div className="flex gap-md justify-center flex-wrap">
-                <button onClick={handleCreateNew} className="btn-primary">
+                <Button onClick={handleCreateNew} variant="primary">
                   建立邀請函
-                </button>
-                <button
-                  onClick={handleBrowseTemplates}
-                  className="btn-secondary"
-                >
+                </Button>
+                <Button onClick={handleBrowseTemplates} variant="secondary">
                   瀏覽範本
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -147,9 +139,9 @@ export default function DashboardPage() {
               <h2 className="text-xl font-semibold text-deep-brown font-serif">
                 全部邀請函 ({invitations.length})
               </h2>
-              <button onClick={handleCreateNew} className="btn-primary">
+              <Button onClick={handleCreateNew} variant="primary">
                 + 建立新邀請函
-              </button>
+              </Button>
             </div>
 
             <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-lg">
