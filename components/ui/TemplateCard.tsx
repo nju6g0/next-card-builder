@@ -25,8 +25,8 @@ export default function TemplateCard({
   // 決定連結路徑
   let href: string;
   if (isRestricted) {
-    // 受限模板導向展示頁面
-    href = `/templates/restricted/${template.id}`;
+    // 受限模板導向展示頁面（簡化路徑）
+    href = `/templates/${template.id}`;
   } else if (template.isAnimated && template.slug) {
     // 動畫範本導向獨立頁面
     href = `/templates/${template.slug}`;

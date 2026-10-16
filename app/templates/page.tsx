@@ -1,44 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Template } from "@/types";
-import { templatesApi } from "@/lib/mockApi";
 import { getAllRestrictedTemplates } from "@/lib/templates/templateRegistry";
 import TemplateCard from "@/components/ui/TemplateCard";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
-import Link from "next/link";
 
 export default function TemplatesPage() {
-  const [templates, setTemplates] = useState<Template[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadTemplates();
+    // 模擬載入
+    const timer = setTimeout(() => setLoading(false), 300);
+    return () => clearTimeout(timer);
   }, []);
 
-  const loadTemplates = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await templatesApi.getAll();
-
-      // 合併受限模板（動畫模板）
-      const restrictedTemplates = getAllRestrictedTemplates();
-
-      if (data.success && data.data) {
-        setTemplates([...data.data, ...restrictedTemplates]);
-      } else {
-        setError(data.error || "載入範本失敗");
-      }
-    } catch (err) {
-      setError("載入範本時發生錯誤");
-      console.error("Error loading templates:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // 只使用受限模板
+  const templates = getAllRestrictedTemplates();
 
   return (
     <div className="min-h-screen bg-warm-cream py-xl px-md">
@@ -52,7 +30,7 @@ export default function TemplatesPage() {
         >
           <h1 className="section-title font-serif">邀請函範本</h1>
           <p className="section-subtitle">
-            選擇一個精美的範本快速開始，或從空白畫布自由創作
+            選擇精美的動畫範本，只需自訂文字、顏色和圖片即可快速完成
           </p>
         </motion.div>
 
@@ -66,95 +44,21 @@ export default function TemplatesPage() {
           </div>
         )}
 
-        {/* Error 狀態 */}
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-accent-terracotta/10 border-2 border-accent-terracotta/30 rounded-2xl p-lg text-center"
-          >
-            <div className="text-5xl mb-sm">❌</div>
-            <p className="text-accent-terracotta font-medium mb-xs">{error}</p>
-            <Button onClick={loadTemplates} variant="primary" className="mt-md">
-              重試
-            </Button>
-          </motion.div>
-        )}
-
         {/* 範本網格 */}
-        {!loading && !error && templates.length > 0 && (
-          <div className="space-y-xl">
-            {/* 動畫模板區塊 */}
-            {templates.filter((t) => "isRestricted" in t && t.isRestricted)
-              .length > 0 && (
-              <div>
-                <div className="mb-lg">
-                  <h2 className="text-[1.75rem] font-bold text-deep-brown font-serif mb-xs">
-                    🎨 動畫邀請函模板
-                  </h2>
-                  <p className="text-text-secondary">
-                    精緻動畫效果，只需自訂文字、顏色和圖片即可使用
-                  </p>
-                </div>
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-lg">
-                  {templates
-                    .filter((t) => "isRestricted" in t && t.isRestricted)
-                    .map((template, index) => (
-                      <TemplateCard
-                        key={template.id}
-                        template={template}
-                        index={index}
-                      />
-                    ))}
-                </div>
-              </div>
-            )}
-
-            {/* 一般模板區塊 */}
-            {templates.filter((t) => !("isRestricted" in t && t.isRestricted))
-              .length > 0 && (
-              <div>
-                <div className="mb-lg">
-                  <h2 className="text-[1.75rem] font-bold text-deep-brown font-serif mb-xs">
-                    📝 自由編輯模板
-                  </h2>
-                  <p className="text-text-secondary">
-                    完全自由的編輯體驗，可新增、刪除和移動任何元素
-                  </p>
-                </div>
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-lg">
-                  {templates
-                    .filter((t) => !("isRestricted" in t && t.isRestricted))
-                    .map((template, index) => (
-                      <TemplateCard
-                        key={template.id}
-                        template={template}
-                        index={index}
-                      />
-                    ))}
-                </div>
-              </div>
-            )}
+        {!loading && (
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-lg">
+            {templates.map((template, index) => (
+              <TemplateCard
+                key={template.id}
+                template={template}
+                index={index}
+              />
+            ))}
           </div>
         )}
 
-        {/* 空狀態 */}
-        {!loading && !error && templates.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-20"
-          >
-            <div className="text-6xl mb-md">📋</div>
-            <h2 className="text-2xl font-semibold text-deep-brown mb-xs font-serif">
-              尚無範本
-            </h2>
-            <p className="text-text-secondary">目前沒有可用的範本</p>
-          </motion.div>
-        )}
-
         {/* CTA Section */}
-        {!loading && !error && templates.length > 0 && (
+        {!loading && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -162,10 +66,10 @@ export default function TemplatesPage() {
             className="mt-xl text-center bg-deep-brown rounded-2xl p-xl text-white relative overflow-hidden"
           >
             <h2 className="text-[2rem] font-bold mb-md font-serif">
-              找不到合適的範本？
+              想要更多自由度？
             </h2>
             <p className="text-lg mb-lg opacity-90">
-              從空白畫布開始，自由發揮您的創意
+              從空白畫布開始，完全自由地設計您的邀請函
             </p>
             <a href="/invitations/create">
               <Button variant="primary" size="large">
