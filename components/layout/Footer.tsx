@@ -26,6 +26,7 @@ export default function Footer() {
             </a>
             <span className="text-text-light block">Demo 專案</span>
             <span className="text-text-light block">純前端實作</span>
+            <span className="text-text-light block">AI 協作</span>
           </div>
           <div className="footer-column">
             <h4>技術</h4>

@@ -168,7 +168,7 @@ export default function WeddingPreview({
                     className="inline-block"
                     style={{ textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}
                     key={char + index}
-                    initial={{ y: 50, rotate: 100 }}
+                    initial={{ y: 80, rotate: 100 }}
                     animate={{ y: 0, rotate: 0 }}
                     transition={{
                       duration: 0.6,
