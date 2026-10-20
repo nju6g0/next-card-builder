@@ -37,11 +37,67 @@ export const partyRestrictedTemplate: RestrictedTemplate = {
       group: "文字內容",
     },
 
+    // RSVP 設定組
+    {
+      id: "rsvp-title",
+      label: "RSVP 標題",
+      propertyKey: "rsvpTitle",
+      type: "text",
+      defaultValue: "Join the Party!",
+      constraints: {
+        maxLength: 30,
+      },
+      group: "RSVP 設定",
+    },
+    {
+      id: "submit-button-text",
+      label: "提交按鈕文字",
+      propertyKey: "submitButtonText",
+      type: "text",
+      defaultValue: "Count Me In!",
+      constraints: {
+        maxLength: 20,
+      },
+      group: "RSVP 設定",
+    },
+
     // 顏色設定組
     {
       id: "intro-text-color",
       label: "開場文字顏色",
       propertyKey: "introTextColor",
+      type: "color",
+      defaultValue: "#ffffff",
+      group: "顏色設定",
+    },
+    {
+      id: "form-bg-color",
+      label: "表單背景顏色",
+      propertyKey: "formBgColor",
+      type: "color",
+      defaultValue: "rgba(255, 255, 255, 0.95)",
+      group: "顏色設定",
+    },
+    {
+      id: "form-text-color",
+      label: "表單文字顏色",
+      propertyKey: "formTextColor",
+      type: "color",
+      defaultValue: "#1a1a1a",
+      group: "顏色設定",
+    },
+    {
+      id: "button-bg-color",
+      label: "按鈕背景顏色",
+      propertyKey: "buttonBgColor",
+      type: "color",
+      defaultValue: "#ff6b6b",
+      group: "顏色設定",
+    },
+    {
+      id: "button-text-color",
+      label: "按鈕文字顏色",
+      propertyKey: "buttonTextColor",
       type: "color",
       defaultValue: "#ffffff",
       group: "顏色設定",

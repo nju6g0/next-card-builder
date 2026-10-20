@@ -206,7 +206,7 @@ export default function InvitationPublicPage() {
     : null;
   const animationType = restrictedTemplate?.animationConfig?.type;
 
-  // 受限邀請函使用全螢幕展示
+  // 受限邀請函使用全螢幕展示，並傳入 RSVP 相關 props
   if (isRestricted && restrictedTemplate && animationType) {
     return (
       <div className="h-screen w-screen overflow-hidden bg-black">
@@ -214,12 +214,16 @@ export default function InvitationPublicPage() {
           <WeddingPreview
             userValues={invitation.userValues || {}}
             isPlaying={true}
+            invitationId={invitationId}
+            isPublicView={true}
           />
         )}
         {animationType === "party" && (
           <PartyPreview
             userValues={invitation.userValues || {}}
             isPlaying={true}
+            invitationId={invitationId}
+            isPublicView={true}
           />
         )}
       </div>

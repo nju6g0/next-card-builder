@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { rsvpApi } from "@/lib/mockApi";
 
 interface FormFieldProps {
   label: string;
@@ -40,17 +41,26 @@ const FormField = ({
 interface WeddingPreviewProps {
   userValues: Record<string, any>;
   isPlaying?: boolean;
+  invitationId?: string; // 用於 RSVP 提交
+  isPublicView?: boolean; // 是否為公開頁面（訪客檢視）
 }
 
 export default function WeddingPreview({
   userValues,
   isPlaying = true,
+  invitationId,
+  isPublicView = false,
 }: WeddingPreviewProps) {
   const [scales, setScales] = useState({ scaleX: 1, scaleY: 1 });
   const [initialSize, setInitialSize] = useState({ width: 0, height: 0 });
   const [showArch, setShowArch] = useState(true);
-  const [formData, setFormData] = useState({ email: "", name: "" });
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    attendance: "yes" as "yes" | "no",
+  });
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [key, setKey] = useState(0);
 
   // 從 userValues 獲取值
@@ -65,18 +75,59 @@ export default function WeddingPreview({
   const imageUrl =
     userValues.backgroundImage || "https://picsum.photos/800/600";
 
-  const handleRSVP = () => {
+  // RSVP 相關設定
+  const rsvpTitle = userValues.rsvpTitle || "RSVP";
+  const rsvpEnabled = userValues.rsvpEnabled !== false; // 預設啟用
+  const submitButtonText = userValues.submitButtonText || "Submit";
+
+  const handleRSVP = async () => {
+    // 如果是預覽模式或沒有 invitationId，只做前端驗證
+    if (!isPublicView || !invitationId) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regex.test(formData.email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      if (formData.name.trim() === "") {
+        alert("Please enter your name.");
+        return;
+      }
+      console.log("RSVP submitted (preview mode):", formData);
+      setRsvpSubmitted(true);
+      return;
+    }
+
+    // 公開頁面：真實提交
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regex.test(formData.email)) {
-      alert("Please enter a valid email address.");
+      alert("請輸入有效的電子郵件地址");
       return;
     }
     if (formData.name.trim() === "") {
-      alert("Please enter your name.");
+      alert("請輸入您的姓名");
       return;
     }
-    console.log("RSVP submitted:", formData);
-    setRsvpSubmitted(true);
+
+    setIsSubmitting(true);
+    try {
+      const result = await rsvpApi.submit(invitationId, {
+        name: formData.name,
+        email: formData.email,
+        attendance: formData.attendance,
+      });
+
+      if (result.success) {
+        setRsvpSubmitted(true);
+        // 不重置表單，讓使用者看到他們填寫的內容
+      } else {
+        alert("提交失敗，請稍後再試");
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+      alert("提交時發生錯誤");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -103,7 +154,7 @@ export default function WeddingPreview({
     if (isPlaying) {
       setShowArch(true);
       setRsvpSubmitted(false);
-      setFormData({ email: "", name: "" });
+      setFormData({ email: "", name: "", attendance: "yes" });
       setKey((prev) => prev + 1);
     }
   }, [isPlaying]);
@@ -188,20 +239,42 @@ export default function WeddingPreview({
             </p>
           </div>
           {rsvpSubmitted ? (
-            <p
-              className="text-center text-sm mt-2 px-4 py-1 max-w-3xl drop-shadow-lg"
-              style={{ color: `${textColor}cc` }}
+            <div
+              className="w-full max-w-3xl flex flex-col items-center gap-4 p-6 rounded-lg shadow-lg backdrop-blur-md"
+              style={{ backgroundColor: formBgColor }}
             >
-              Hi, {formData.name}! Thank you for your RSVP!
-            </p>
-          ) : (
+              <div className="text-center">
+                <div className="text-4xl mb-4">✓</div>
+                <p
+                  className="text-lg font-medium"
+                  style={{ color: formTextColor }}
+                >
+                  Thank you, {formData.name}!
+                </p>
+                <p
+                  className="text-sm mt-2"
+                  style={{ color: `${formTextColor}99` }}
+                >
+                  {formData.attendance === "yes"
+                    ? "We're excited to see you there!"
+                    : "Thank you for letting us know."}
+                </p>
+              </div>
+            </div>
+          ) : rsvpEnabled ? (
             <form
               onSubmit={(e) => e.preventDefault()}
               className="w-full max-w-3xl flex flex-col items-center gap-4 p-6 rounded-lg shadow-lg backdrop-blur-md"
               style={{ backgroundColor: formBgColor }}
             >
+              <h3
+                className="text-xl font-semibold w-full text-center mb-2"
+                style={{ color: formTextColor }}
+              >
+                {rsvpTitle}
+              </h3>
               <FormField
-                label="Enter your email to RSVP:"
+                label="Enter your email:"
                 type="email"
                 value={formData.email}
                 onChange={(e) =>
@@ -218,19 +291,75 @@ export default function WeddingPreview({
                 }
                 textColor={formTextColor}
               />
+              <div className="w-full flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium"
+                  style={{ color: formTextColor }}
+                >
+                  Will you attend?
+                </label>
+                <div className="flex gap-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="attendance"
+                      value="yes"
+                      checked={formData.attendance === "yes"}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          attendance: e.target.value as "yes" | "no",
+                        })
+                      }
+                      className="w-4 h-4"
+                      style={{ accentColor: formTextColor }}
+                    />
+                    <span className="text-sm" style={{ color: formTextColor }}>
+                      Yes, I'll be there
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="attendance"
+                      value="no"
+                      checked={formData.attendance === "no"}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          attendance: e.target.value as "yes" | "no",
+                        })
+                      }
+                      className="w-4 h-4"
+                      style={{ accentColor: formTextColor }}
+                    />
+                    <span className="text-sm" style={{ color: formTextColor }}>
+                      Sorry, I can't make it
+                    </span>
+                  </label>
+                </div>
+              </div>
               <button
                 type="button"
-                className="px-4 py-2 rounded-full hover:opacity-80 transition-opacity cursor-pointer shadow-2xl"
+                className="px-4 py-2 rounded-full hover:opacity-80 transition-opacity cursor-pointer shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 style={{
                   backgroundColor: buttonBgColor,
                   color: buttonTextColor,
                 }}
                 onClick={handleRSVP}
+                disabled={isSubmitting}
               >
-                Submit
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
+                    Submitting...
+                  </>
+                ) : (
+                  submitButtonText
+                )}
               </button>
             </form>
-          )}
+          ) : null}
         </>
       )}
     </div>

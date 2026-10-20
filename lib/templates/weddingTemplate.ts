@@ -38,6 +38,30 @@ export const weddingRestrictedTemplate: RestrictedTemplate = {
       group: "文字內容",
     },
 
+    // RSVP 設定組
+    {
+      id: "rsvp-title",
+      label: "RSVP 標題",
+      propertyKey: "rsvpTitle",
+      type: "text",
+      defaultValue: "RSVP",
+      constraints: {
+        maxLength: 30,
+      },
+      group: "RSVP 設定",
+    },
+    {
+      id: "submit-button-text",
+      label: "提交按鈕文字",
+      propertyKey: "submitButtonText",
+      type: "text",
+      defaultValue: "Submit",
+      constraints: {
+        maxLength: 20,
+      },
+      group: "RSVP 設定",
+    },
+
     // 顏色設定組
     {
       id: "text-color",
