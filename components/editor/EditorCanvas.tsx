@@ -5,6 +5,7 @@ import { useDroppable } from "@dnd-kit/core";
 import { useEditorStore } from "@/stores/editorStore";
 import DraggableElement from "./DraggableElement";
 import { motion } from "motion/react";
+import { UploadIcon } from "@/components/icons";
 
 interface EditorCanvasProps {
   className?: string;
@@ -110,19 +111,7 @@ export default function EditorCanvas({ className = "" }: EditorCanvasProps) {
           {elements.length === 0 && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-neutral-400">
-                <svg
-                  className="mx-auto h-12 w-12 mb-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  />
-                </svg>
+                <UploadIcon className="mx-auto h-12 w-12 mb-4" />
                 <p className="text-sm font-medium">拖拉元件到此處開始設計</p>
                 <p className="text-xs mt-1">或從右側元件庫選擇</p>
               </div>

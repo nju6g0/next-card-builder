@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import InvitationCanvas from "./InvitationCanvas";
 import type { Element, CanvasSize } from "@/types";
+import { CloseIcon } from "@/components/icons";
 
 interface PreviewModalProps {
   isOpen: boolean;
@@ -121,19 +122,7 @@ export default function PreviewModal({
                     className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
                     title="關閉 (ESC)"
                   >
-                    <svg
-                      className="w-5 h-5 text-neutral-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    <CloseIcon className="w-5 h-5 text-neutral-600" />
                   </button>
                 </div>
               </div>

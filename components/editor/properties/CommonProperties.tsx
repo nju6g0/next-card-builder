@@ -1,15 +1,22 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useEditorStore } from '@/stores/editorStore';
-import type { BaseElement } from '@/types';
+import { useState } from "react";
+import { useEditorStore } from "@/stores/editorStore";
+import type { BaseElement } from "@/types";
+import { ChevronDownIcon } from "@/components/icons";
 
 interface CommonPropertiesProps {
   element: BaseElement;
 }
 
 export default function CommonProperties({ element }: CommonPropertiesProps) {
-  const { updateElement, moveElementUp, moveElementDown, moveElementToTop, moveElementToBottom } = useEditorStore();
+  const {
+    updateElement,
+    moveElementUp,
+    moveElementDown,
+    moveElementToTop,
+    moveElementToBottom,
+  } = useEditorStore();
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleChange = (field: keyof BaseElement, value: number) => {
@@ -24,14 +31,9 @@ export default function CommonProperties({ element }: CommonPropertiesProps) {
         className="w-full flex items-center justify-between mb-3 text-left"
       >
         <h4 className="text-sm font-semibold text-neutral-900">位置與尺寸</h4>
-        <svg
-          className={`w-4 h-4 text-neutral-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        <ChevronDownIcon
+          className={`w-4 h-4 text-neutral-500 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+        />
       </button>
 
       {isExpanded && (
@@ -45,7 +47,9 @@ export default function CommonProperties({ element }: CommonPropertiesProps) {
               <input
                 type="number"
                 value={Math.round(element.x)}
-                onChange={(e) => handleChange('x', parseFloat(e.target.value) || 0)}
+                onChange={(e) =>
+                  handleChange("x", parseFloat(e.target.value) || 0)
+                }
                 className="w-full px-2 py-1.5 text-sm border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
@@ -56,7 +60,9 @@ export default function CommonProperties({ element }: CommonPropertiesProps) {
               <input
                 type="number"
                 value={Math.round(element.y)}
-                onChange={(e) => handleChange('y', parseFloat(e.target.value) || 0)}
+                onChange={(e) =>
+                  handleChange("y", parseFloat(e.target.value) || 0)
+                }
                 className="w-full px-2 py-1.5 text-sm border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
@@ -71,7 +77,9 @@ export default function CommonProperties({ element }: CommonPropertiesProps) {
               <input
                 type="number"
                 value={Math.round(element.width)}
-                onChange={(e) => handleChange('width', parseFloat(e.target.value) || 1)}
+                onChange={(e) =>
+                  handleChange("width", parseFloat(e.target.value) || 1)
+                }
                 min="1"
                 className="w-full px-2 py-1.5 text-sm border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               />
@@ -83,7 +91,9 @@ export default function CommonProperties({ element }: CommonPropertiesProps) {
               <input
                 type="number"
                 value={Math.round(element.height)}
-                onChange={(e) => handleChange('height', parseFloat(e.target.value) || 1)}
+                onChange={(e) =>
+                  handleChange("height", parseFloat(e.target.value) || 1)
+                }
                 min="1"
                 className="w-full px-2 py-1.5 text-sm border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               />

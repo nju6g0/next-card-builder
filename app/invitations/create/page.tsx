@@ -10,6 +10,7 @@ import PreviewModal from "@/components/ui/PreviewModal";
 import { templatesApi } from "@/lib/mockApi";
 import { cleanupInvitationStorage } from "@/lib/cleanup-storage";
 import type { Template } from "@/types";
+import { ArrowLeftIcon, EditIcon } from "@/components/icons";
 
 function CreateInvitationContent() {
   const router = useRouter();
@@ -125,19 +126,7 @@ function CreateInvitationContent() {
             className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
             title="返回"
           >
-            <svg
-              className="w-5 h-5 text-neutral-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
+            <ArrowLeftIcon className="w-5 h-5 text-neutral-600" />
           </button>
           <div className="h-8 w-px bg-neutral-200"></div>
           <div className="flex items-center gap-2">
@@ -148,19 +137,7 @@ function CreateInvitationContent() {
               <h1 className="text-lg font-semibold text-neutral-900">
                 {title}
               </h1>
-              <svg
-                className="w-4 h-4 text-neutral-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                />
-              </svg>
+              <EditIcon className="w-4 h-4 text-neutral-400" />
             </button>
           </div>
         </div>

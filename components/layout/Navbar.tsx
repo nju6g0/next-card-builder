@@ -8,6 +8,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/Button";
 import Brand from "@/components/ui/Brand";
+import { CloseIcon, MenuIcon } from "@/components/icons";
 
 const NAVBAR_ITEMS = [
   {
@@ -140,33 +141,9 @@ export default function Navbar() {
               aria-label="開啟選單"
             >
               {isMobileMenuOpen ? (
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <CloseIcon className="h-6 w-6" />
               ) : (
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
+                <MenuIcon className="h-6 w-6" />
               )}
             </button>
           </div>

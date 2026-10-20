@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useEditorStore } from "@/stores/editorStore";
 import type { RsvpFormElement } from "@/types";
+import { ChevronDownIcon } from "@/components/icons";
 
 interface RsvpFormPropertiesProps {
   element: RsvpFormElement;
@@ -43,19 +44,9 @@ export default function RsvpFormProperties({
         className="w-full flex items-center justify-between mb-3 text-left"
       >
         <h4 className="text-sm font-semibold text-neutral-900">表單設定</h4>
-        <svg
+        <ChevronDownIcon
           className={`w-4 h-4 text-neutral-500 transition-transform ${isExpanded ? "rotate-180" : ""}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        />
       </button>
 
       {isExpanded && (

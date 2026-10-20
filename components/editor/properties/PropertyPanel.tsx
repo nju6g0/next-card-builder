@@ -8,6 +8,7 @@ import type {
   AnimatedTextWeddingElement,
   AnimatedTextPartyElement,
 } from "@/types";
+import { CursorClickIcon } from "@/components/icons";
 import CommonProperties from "./CommonProperties";
 import TextProperties from "./TextProperties";
 import ImageProperties from "./ImageProperties";
@@ -29,19 +30,7 @@ export default function PropertyPanel({ className = "" }: PropertyPanelProps) {
     return (
       <div className={`bg-neutral-50 border-l border-neutral-200 ${className}`}>
         <div className="p-6 text-center">
-          <svg
-            className="mx-auto h-16 w-16 text-neutral-300 mb-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1}
-              d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
-            />
-          </svg>
+          <CursorClickIcon className="mx-auto h-16 w-16 text-neutral-300 mb-4" />
           <p className="text-sm text-neutral-600 font-medium mb-1">
             未選取元件
           </p>

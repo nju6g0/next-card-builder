@@ -12,6 +12,14 @@ import type {
   AnimatedTextPartyElement,
 } from "@/types";
 import { useEditorStore } from "@/stores/editorStore";
+import {
+  EditIcon,
+  ImageIcon,
+  DocumentIcon,
+  SparklesIcon,
+  EmojiIcon,
+  ChevronDownIcon,
+} from "@/components/icons";
 
 interface ElementLibraryProps {
   className?: string;
@@ -34,21 +42,7 @@ interface ElementTemplate {
 const ELEMENT_TEMPLATES: ElementTemplate[] = [
   {
     type: "text",
-    icon: (
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-        />
-      </svg>
-    ),
+    icon: <EditIcon className="w-6 h-6" />,
     label: "文字",
     description: "新增文字內容",
     defaultProps: {
@@ -62,21 +56,7 @@ const ELEMENT_TEMPLATES: ElementTemplate[] = [
   },
   {
     type: "image",
-    icon: (
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-        />
-      </svg>
-    ),
+    icon: <ImageIcon className="w-6 h-6" />,
     label: "圖片",
     description: "使用圖片 URL",
     defaultProps: {
@@ -88,21 +68,7 @@ const ELEMENT_TEMPLATES: ElementTemplate[] = [
   },
   {
     type: "rsvp-form",
-    icon: (
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-        />
-      </svg>
-    ),
+    icon: <DocumentIcon className="w-6 h-6" />,
     label: "RSVP 表單",
     description: "新增回覆表單",
     defaultProps: {
@@ -116,21 +82,7 @@ const ELEMENT_TEMPLATES: ElementTemplate[] = [
   },
   {
     type: "animated-text-wedding",
-    icon: (
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-        />
-      </svg>
-    ),
+    icon: <SparklesIcon className="w-6 h-6" />,
     label: "Wedding 動畫",
     description: "淡入旋轉動畫文字",
     defaultProps: {
@@ -144,21 +96,7 @@ const ELEMENT_TEMPLATES: ElementTemplate[] = [
   },
   {
     type: "animated-text-party",
-    icon: (
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
+    icon: <EmojiIcon className="w-6 h-6" />,
     label: "Party 動畫",
     description: "逐字飛入動畫文字",
     defaultProps: {
@@ -250,21 +188,11 @@ export default function ElementLibrary({
           className="p-1 rounded hover:bg-neutral-200 transition"
           title={isCollapsed ? "展開" : "收合"}
         >
-          <svg
+          <ChevronDownIcon
             className={`w-5 h-5 text-neutral-600 transition-transform ${
               isCollapsed ? "rotate-180" : ""
             }`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          />
         </button>
       </div>
 

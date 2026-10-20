@@ -8,6 +8,7 @@ import PartyPreview from "@/components/restricted-editor/PartyPreview";
 import { getRestrictedTemplateById } from "@/lib/templates/templateRegistry";
 import { rsvpApi } from "@/lib/mockApi";
 import type { Invitation, RsvpFormElement, SubmitRsvpData } from "@/types";
+import { AlertTriangleIcon, CheckIcon } from "@/components/icons";
 
 export default function InvitationPublicPage() {
   const params = useParams();
@@ -173,19 +174,7 @@ export default function InvitationPublicPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-50">
         <div className="text-center max-w-md">
-          <svg
-            className="w-16 h-16 text-red-500 mx-auto mb-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
+          <AlertTriangleIcon className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-semibold text-neutral-900 mb-2">
             {error || "找不到邀請函"}
           </h2>
@@ -264,19 +253,7 @@ export default function InvitationPublicPage() {
             {submitSuccess && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <div className="flex items-center gap-2 text-green-700">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
+                  <CheckIcon className="w-5 h-5" />
                   <p className="font-medium">
                     感謝您的回覆！我們已收到您的 RSVP。
                   </p>

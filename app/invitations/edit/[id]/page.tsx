@@ -8,6 +8,13 @@ import { useInvitationStore } from "@/stores/invitationStore";
 import Editor from "@/components/editor/Editor";
 import PreviewModal from "@/components/ui/PreviewModal";
 import type { Invitation } from "@/types";
+import {
+  AlertTriangleIcon,
+  ArrowLeftIcon,
+  EditIcon,
+  ExternalLinkIcon,
+  DownloadIcon,
+} from "@/components/icons";
 
 export default function EditInvitationPage() {
   const router = useRouter();
@@ -134,19 +141,7 @@ export default function EditInvitationPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-100">
         <div className="text-center max-w-md">
-          <svg
-            className="w-16 h-16 text-red-500 mx-auto mb-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
+          <AlertTriangleIcon className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-semibold text-neutral-900 mb-2">
             {error}
           </h2>
@@ -176,19 +171,7 @@ export default function EditInvitationPage() {
             className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
             title="返回"
           >
-            <svg
-              className="w-5 h-5 text-neutral-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
+            <ArrowLeftIcon className="w-5 h-5 text-neutral-600" />
           </button>
           <div className="h-8 w-px bg-neutral-200"></div>
           <div className="flex items-center gap-2">
@@ -199,19 +182,7 @@ export default function EditInvitationPage() {
               <h1 className="text-lg font-semibold text-neutral-900">
                 {title}
               </h1>
-              <svg
-                className="w-4 h-4 text-neutral-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                />
-              </svg>
+              <EditIcon className="w-4 h-4 text-neutral-400" />
             </button>
             <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">
               已儲存
@@ -227,19 +198,7 @@ export default function EditInvitationPage() {
             onClick={handleViewPublic}
             className="px-4 py-2 text-neutral-700 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors flex items-center gap-2"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
+            <ExternalLinkIcon className="w-4 h-4" />
             查看公開頁面
           </button>
           <button
@@ -260,19 +219,7 @@ export default function EditInvitationPage() {
               </>
             ) : (
               <>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-                  />
-                </svg>
+                <DownloadIcon className="w-4 h-4" />
                 儲存變更
               </>
             )}

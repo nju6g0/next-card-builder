@@ -1,37 +1,38 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useEditorStore } from '@/stores/editorStore';
-import type { TextElement } from '@/types';
+import { useState } from "react";
+import { useEditorStore } from "@/stores/editorStore";
+import type { TextElement } from "@/types";
+import { ChevronDownIcon } from "@/components/icons";
 
 interface TextPropertiesProps {
   element: TextElement;
 }
 
 const FONT_FAMILIES = [
-  'Arial',
-  'Helvetica',
-  'Times New Roman',
-  'Georgia',
-  'Courier New',
-  'Verdana',
-  'Impact',
-  'Comic Sans MS',
-  'Trebuchet MS',
+  "Arial",
+  "Helvetica",
+  "Times New Roman",
+  "Georgia",
+  "Courier New",
+  "Verdana",
+  "Impact",
+  "Comic Sans MS",
+  "Trebuchet MS",
 ];
 
 const FONT_WEIGHTS = [
-  { label: '細', value: 300 },
-  { label: '正常', value: 400 },
-  { label: '中等', value: 500 },
-  { label: '粗體', value: 700 },
-  { label: '特粗', value: 900 },
+  { label: "細", value: 300 },
+  { label: "正常", value: 400 },
+  { label: "中等", value: 500 },
+  { label: "粗體", value: 700 },
+  { label: "特粗", value: 900 },
 ];
 
 const TEXT_ALIGNS = [
-  { label: '靠左', value: 'left', icon: '⬅' },
-  { label: '置中', value: 'center', icon: '↔' },
-  { label: '靠右', value: 'right', icon: '➡' },
+  { label: "靠左", value: "left", icon: "⬅" },
+  { label: "置中", value: "center", icon: "↔" },
+  { label: "靠右", value: "right", icon: "➡" },
 ];
 
 export default function TextProperties({ element }: TextPropertiesProps) {
@@ -50,14 +51,9 @@ export default function TextProperties({ element }: TextPropertiesProps) {
         className="w-full flex items-center justify-between mb-3 text-left"
       >
         <h4 className="text-sm font-semibold text-neutral-900">文字樣式</h4>
-        <svg
-          className={`w-4 h-4 text-neutral-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        <ChevronDownIcon
+          className={`w-4 h-4 text-neutral-500 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+        />
       </button>
 
       {isExpanded && (
@@ -69,7 +65,7 @@ export default function TextProperties({ element }: TextPropertiesProps) {
             </label>
             <select
               value={element.fontFamily}
-              onChange={(e) => handleChange('fontFamily', e.target.value)}
+              onChange={(e) => handleChange("fontFamily", e.target.value)}
               className="w-full px-2 py-1.5 text-sm border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               style={{ fontFamily: element.fontFamily }}
             >
@@ -91,7 +87,9 @@ export default function TextProperties({ element }: TextPropertiesProps) {
               min="8"
               max="120"
               value={element.fontSize}
-              onChange={(e) => handleChange('fontSize', parseInt(e.target.value))}
+              onChange={(e) =>
+                handleChange("fontSize", parseInt(e.target.value))
+              }
               className="w-full"
             />
             <div className="flex justify-between text-xs text-neutral-500 mt-1">
@@ -109,13 +107,13 @@ export default function TextProperties({ element }: TextPropertiesProps) {
               <input
                 type="color"
                 value={element.color}
-                onChange={(e) => handleChange('color', e.target.value)}
+                onChange={(e) => handleChange("color", e.target.value)}
                 className="w-12 h-9 rounded border border-neutral-300 cursor-pointer"
               />
               <input
                 type="text"
                 value={element.color}
-                onChange={(e) => handleChange('color', e.target.value)}
+                onChange={(e) => handleChange("color", e.target.value)}
                 className="flex-1 px-2 py-1.5 text-sm border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-primary font-mono"
                 placeholder="#000000"
               />
@@ -131,11 +129,11 @@ export default function TextProperties({ element }: TextPropertiesProps) {
               {FONT_WEIGHTS.map((weight) => (
                 <button
                   key={weight.value}
-                  onClick={() => handleChange('fontWeight', weight.value)}
+                  onClick={() => handleChange("fontWeight", weight.value)}
                   className={`px-2 py-1.5 text-xs rounded transition ${
                     element.fontWeight === weight.value
-                      ? 'bg-primary text-white'
-                      : 'bg-neutral-100 hover:bg-neutral-200'
+                      ? "bg-primary text-white"
+                      : "bg-neutral-100 hover:bg-neutral-200"
                   }`}
                   style={{ fontWeight: weight.value }}
                 >
@@ -154,11 +152,11 @@ export default function TextProperties({ element }: TextPropertiesProps) {
               {TEXT_ALIGNS.map((align) => (
                 <button
                   key={align.value}
-                  onClick={() => handleChange('textAlign', align.value)}
+                  onClick={() => handleChange("textAlign", align.value)}
                   className={`px-2 py-1.5 text-sm rounded transition ${
                     element.textAlign === align.value
-                      ? 'bg-primary text-white'
-                      : 'bg-neutral-100 hover:bg-neutral-200'
+                      ? "bg-primary text-white"
+                      : "bg-neutral-100 hover:bg-neutral-200"
                   }`}
                   title={align.label}
                 >
@@ -180,10 +178,10 @@ export default function TextProperties({ element }: TextPropertiesProps) {
                 fontSize: Math.min(element.fontSize, 16),
                 color: element.color,
                 fontWeight: element.fontWeight,
-                textAlign: element.textAlign || 'left',
+                textAlign: element.textAlign || "left",
               }}
             >
-              {element.content || '(空白)'}
+              {element.content || "(空白)"}
             </div>
           </div>
         </div>

@@ -7,6 +7,16 @@ import WeddingPreview from "@/components/restricted-editor/WeddingPreview";
 import PartyPreview from "@/components/restricted-editor/PartyPreview";
 import type { RestrictedTemplate } from "@/types";
 import { useAuthStore } from "@/stores/authStore";
+import {
+  ArrowLeftIcon,
+  EditIcon,
+  RefreshIcon,
+  ExpandIcon,
+  PlayIcon,
+  PencilIcon,
+  DeviceIcon,
+  CloseIcon,
+} from "@/components/icons";
 
 type ViewportSize = "mobile" | "tablet" | "desktop";
 
@@ -135,19 +145,7 @@ export default function RestrictedTemplateDetailPage() {
                 onClick={() => router.push("/templates")}
                 className="text-neutral-600 hover:text-neutral-900 transition-colors"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  />
-                </svg>
+                <ArrowLeftIcon className="w-5 h-5" />
               </button>
               <h1 className="text-3xl font-bold text-deep-brown font-serif">
                 {template.name}
@@ -163,19 +161,7 @@ export default function RestrictedTemplateDetailPage() {
             onClick={handleUseTemplate}
             className="px-6 py-3 bg-accent-terracotta text-white font-semibold rounded-lg hover:bg-accent-terracotta/90 transition-colors shadow-lg flex items-center space-x-2"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-              />
-            </svg>
+            <EditIcon className="w-5 h-5" />
             <span>使用此範本</span>
           </button>
         </div>
@@ -216,19 +202,7 @@ export default function RestrictedTemplateDetailPage() {
                   onClick={handleReplay}
                   className="flex items-center space-x-2 px-4 py-2 bg-soft-beige hover:bg-warm-brown hover:text-white rounded-lg transition-colors text-sm font-medium text-warm-brown"
                 >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                    />
-                  </svg>
+                  <RefreshIcon className="w-4 h-4" />
                   <span>重播</span>
                 </button>
 
@@ -236,19 +210,7 @@ export default function RestrictedTemplateDetailPage() {
                   onClick={handleOpenFullscreen}
                   className="flex items-center space-x-2 px-4 py-2 bg-accent-terracotta hover:bg-accent-terracotta/90 text-white rounded-lg transition-colors text-sm font-medium"
                 >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                    />
-                  </svg>
+                  <ExpandIcon className="w-4 h-4" />
                   <span>全螢幕預覽</span>
                 </button>
               </div>
@@ -333,17 +295,7 @@ export default function RestrictedTemplateDetailPage() {
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
                   <div className="flex-shrink-0 w-8 h-8 bg-accent-terracotta/10 rounded-lg flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 text-accent-terracotta"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <PlayIcon className="w-5 h-5 text-accent-terracotta" />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium text-neutral-900 mb-1">
@@ -357,13 +309,7 @@ export default function RestrictedTemplateDetailPage() {
 
                 <div className="flex items-start space-x-3">
                   <div className="flex-shrink-0 w-8 h-8 bg-accent-sage/10 rounded-lg flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 text-accent-sage"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                    </svg>
+                    <PencilIcon className="w-5 h-5 text-accent-sage" />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium text-neutral-900 mb-1">
@@ -377,17 +323,7 @@ export default function RestrictedTemplateDetailPage() {
 
                 <div className="flex items-start space-x-3">
                   <div className="flex-shrink-0 w-8 h-8 bg-accent-terracotta/10 rounded-lg flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 text-accent-terracotta"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <DeviceIcon className="w-5 h-5 text-accent-terracotta" />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium text-neutral-900 mb-1">
@@ -437,19 +373,7 @@ export default function RestrictedTemplateDetailPage() {
               onClick={handleUseTemplate}
               className="w-full px-6 py-4 bg-accent-terracotta text-white font-semibold rounded-lg hover:bg-accent-terracotta/90 transition-colors shadow-lg flex items-center justify-center space-x-2"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                />
-              </svg>
+              <EditIcon className="w-5 h-5" />
               <span>使用此範本</span>
             </button>
           </div>
@@ -497,19 +421,7 @@ export default function RestrictedTemplateDetailPage() {
                 onClick={handleReplay}
                 className="flex items-center space-x-2 px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-full transition-all duration-200 hover:scale-105"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
+                <RefreshIcon className="w-5 h-5" />
                 <span>重播</span>
               </button>
 
@@ -517,19 +429,7 @@ export default function RestrictedTemplateDetailPage() {
                 onClick={handleCloseFullscreen}
                 className="flex items-center space-x-2 px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-full transition-all duration-200 hover:scale-105"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <CloseIcon className="w-5 h-5" />
                 <span>關閉</span>
               </button>
             </div>
