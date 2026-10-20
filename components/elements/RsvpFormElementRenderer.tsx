@@ -183,7 +183,7 @@ export default function RsvpFormElementRenderer({
 
         <button
           disabled
-          className="w-full px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium opacity-50 cursor-not-allowed"
+          className="w-full px-4 py-2 bg-primary text-text-primary cursor-pointer rounded-lg text-sm font-medium opacity-50 cursor-not-allowed"
         >
           送出回覆
         </button>

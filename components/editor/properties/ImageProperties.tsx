@@ -15,11 +15,31 @@ const OBJECT_FITS = [
 ];
 
 export default function ImageProperties({ element }: ImagePropertiesProps) {
-  const { updateElement } = useEditorStore();
+  const { updateElement, canvasSize } = useEditorStore();
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleChange = (field: keyof ImageElement, value: any) => {
     updateElement(element.id, { [field]: value });
+  };
+
+  const handleBackgroundToggle = (isBackground: boolean) => {
+    if (isBackground) {
+      // 設為背景時，自動調整位置和尺寸以填滿畫布
+      updateElement(element.id, {
+        isBackground: true,
+        x: 0,
+        y: 0,
+        width: canvasSize.width,
+        height: canvasSize.height,
+        zIndex: -1, // 設為最底層
+      });
+    } else {
+      // 取消背景時，恢復為正常元素
+      updateElement(element.id, {
+        isBackground: false,
+        zIndex: 1,
+      });
+    }
   };
 
   return (
@@ -160,13 +180,13 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
               <input
                 type="checkbox"
                 checked={element.isBackground}
-                onChange={(e) => handleChange("isBackground", e.target.checked)}
+                onChange={(e) => handleBackgroundToggle(e.target.checked)}
                 className="rounded border-neutral-300 text-primary focus:ring-primary"
               />
               <span className="text-sm text-neutral-700">設為背景圖片</span>
             </label>
             <p className="text-xs text-neutral-500 mt-1 ml-6">
-              背景圖片會自動調整到元件大小
+              背景圖片會自動填滿整個畫布並置於最底層
             </p>
           </div>
 

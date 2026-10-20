@@ -34,6 +34,11 @@ export default function EditorCanvas({ className = "" }: EditorCanvasProps) {
     }
   };
 
+  // 找出背景圖片元素
+  const backgroundImage = elements.find(
+    (el) => el.type === "image" && (el as any).isBackground,
+  );
+
   return (
     <div
       className={`flex items-center justify-center p-8 bg-neutral-100 ${className}`}
@@ -52,6 +57,27 @@ export default function EditorCanvas({ className = "" }: EditorCanvasProps) {
           }}
           onClick={handleCanvasClick}
         >
+          {/* 背景圖片 */}
+          {backgroundImage && (
+            <div
+              className="absolute inset-0 pointer-events-none z-0"
+              style={{
+                backgroundImage: `url(${(backgroundImage as any).src})`,
+                backgroundSize:
+                  (backgroundImage as any).objectFit === "contain"
+                    ? "contain"
+                    : (backgroundImage as any).objectFit === "fill"
+                      ? "100% 100%"
+                      : "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                filter: (backgroundImage as any).blur
+                  ? `blur(${(backgroundImage as any).blur}px)`
+                  : undefined,
+              }}
+            />
+          )}
+
           {/* 網格背景 */}
           {showGrid && (
             <div
@@ -66,8 +92,9 @@ export default function EditorCanvas({ className = "" }: EditorCanvasProps) {
             />
           )}
 
-          {/* 渲染所有元件 */}
+          {/* 渲染所有元件（排除背景圖片，因為它已經被渲染為背景） */}
           {elements
+            .filter((el) => !(el.type === "image" && (el as any).isBackground))
             .slice()
             .sort((a, b) => a.zIndex - b.zIndex)
             .map((element) => (

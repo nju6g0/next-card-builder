@@ -412,7 +412,7 @@ export default function InvitationPublicPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-6 py-3 bg-primary text-text-primary font-medium rounded-lg hover:bg-primary-dark transition-colors cursor-pointer hover:underline disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>

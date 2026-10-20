@@ -85,7 +85,8 @@ function LayerItem({ element, isSelected, onSelect, index }: LayerItemProps) {
         const textEl = element as TextElement;
         return textEl.content?.substring(0, 20) || "文字";
       case "image":
-        return "圖片";
+        const imgEl = element as ImageElement;
+        return imgEl.isBackground ? "背景圖片" : "圖片";
       case "rsvp-form":
         const rsvpEl = element as RsvpFormElement;
         return rsvpEl.title || "RSVP 表單";
@@ -94,6 +95,8 @@ function LayerItem({ element, isSelected, onSelect, index }: LayerItemProps) {
 
   const isLocked = (element as any).locked || false;
   const isVisible = (element as any).visible !== false;
+  const isBackground =
+    element.type === "image" && (element as ImageElement).isBackground;
 
   return (
     <motion.div
@@ -118,12 +121,19 @@ function LayerItem({ element, isSelected, onSelect, index }: LayerItemProps) {
 
       {/* Label */}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-neutral-900 truncate">
-          {getLabel()}
-        </p>
+        <div className="flex items-center gap-1">
+          <p className="text-sm font-medium text-neutral-900 truncate">
+            {getLabel()}
+          </p>
+          {isBackground && (
+            <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">
+              背景
+            </span>
+          )}
+        </div>
         <p className="text-xs text-neutral-500">
           {element.type === "text" && "文字元件"}
-          {element.type === "image" && "圖片元件"}
+          {element.type === "image" && (isBackground ? "畫布背景" : "圖片元件")}
           {element.type === "rsvp-form" && "RSVP 表單"}
           {element.type === "animated-text-wedding" && "Wedding 動畫"}
           {element.type === "animated-text-party" && "Party 動畫"}

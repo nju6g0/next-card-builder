@@ -24,8 +24,15 @@ export default function InvitationCanvas({
   scale = 1,
   showGrid = false,
 }: InvitationCanvasProps) {
-  // 按 zIndex 排序元件
-  const sortedElements = [...elements].sort((a, b) => a.zIndex - b.zIndex);
+  // 找出背景圖片元素
+  const backgroundImage = elements.find(
+    (el) => el.type === "image" && (el as any).isBackground,
+  );
+
+  // 按 zIndex 排序元件（排除背景圖片，因為它會被單獨渲染）
+  const sortedElements = [...elements]
+    .filter((el) => !(el.type === "image" && (el as any).isBackground))
+    .sort((a, b) => a.zIndex - b.zIndex);
 
   // 渲染單個元件
   const renderElement = (element: Element) => {
@@ -63,34 +70,19 @@ export default function InvitationCanvas({
         );
 
       case "image":
-        if (element.isBackground) {
-          // 背景圖片
-          return (
-            <div
-              key={element.id}
-              style={{
-                ...style,
-                backgroundImage: `url(${element.src})`,
-                backgroundSize: element.objectFit,
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-            />
-          );
-        } else {
-          // 一般圖片
-          return (
-            <img
-              key={element.id}
-              src={element.src}
-              alt={element.alt}
-              style={{
-                ...style,
-                objectFit: element.objectFit,
-              }}
-            />
-          );
-        }
+        // 一般圖片（背景圖片已單獨處理，不應該到這裡）
+        return (
+          <img
+            key={element.id}
+            src={element.src}
+            alt={element.alt}
+            style={{
+              ...style,
+              objectFit: element.objectFit || "cover",
+              filter: element.blur ? `blur(${element.blur}px)` : undefined,
+            }}
+          />
+        );
 
       case "rsvp-form":
         // RSVP 表單預覽（唯讀模式只顯示佔位）
@@ -162,10 +154,31 @@ export default function InvitationCanvas({
         }}
       />
 
+      {/* 背景圖片 */}
+      {backgroundImage && (
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${(backgroundImage as any).src})`,
+            backgroundSize:
+              (backgroundImage as any).objectFit === "contain"
+                ? "contain"
+                : (backgroundImage as any).objectFit === "fill"
+                  ? "100% 100%"
+                  : "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            filter: (backgroundImage as any).blur
+              ? `blur(${(backgroundImage as any).blur}px)`
+              : undefined,
+          }}
+        />
+      )}
+
       {/* 網格線（可選） */}
       {showGrid && (
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-10"
           style={{
             backgroundImage: `
               linear-gradient(to right, #e5e7eb 1px, transparent 1px),
