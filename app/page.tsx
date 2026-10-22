@@ -1,12 +1,21 @@
-"use client";
-
 import Link from "next/link";
-import { useAuthStore } from "@/stores/authStore";
 import { Button } from "@/components/ui/Button";
+import HomeClientAuth from "@/components/home/HomeClientAuth";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cardian 卡典 - 用心設計每一份邀請",
+  description:
+    "為生命中的美好時刻，創造獨一無二的數位邀請函。精選範本、自由編輯、即時分享。",
+  openGraph: {
+    title: "Cardian 卡典 - 用心設計每一份邀請",
+    description: "為生命中的美好時刻，創造獨一無二的數位邀請函",
+    type: "website",
+    locale: "zh_TW",
+  },
+};
 
 export default function Home() {
-  const { isAuthenticated, currentUser } = useAuthStore();
-
   return (
     <div className="landing-page">
       {/* Hero Section */}
@@ -128,6 +137,9 @@ export default function Home() {
           <div className="deco-circle circle-3"></div>
         </div>
       </section>
+
+      {/* Client-side auth check (hidden component for auth state) */}
+      <HomeClientAuth />
     </div>
   );
 }

@@ -5,6 +5,9 @@ import Footer from "@/components/layout/Footer";
 import { AuthInitializer } from "@/components/providers/AuthInitializer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+  ),
   title: "Cardian 卡典 - 做出讓人心動的卡片",
   description: "用心設計每一份邀請，為生命中的美好時刻創造獨一無二的數位邀請函",
   icons: {
@@ -13,6 +16,13 @@ export const metadata: Metadata = {
       { url: "/logo-icon.svg", type: "image/svg+xml" },
     ],
     apple: "/logo-icon.svg",
+  },
+  openGraph: {
+    title: "Cardian 卡典 - 做出讓人心動的卡片",
+    description:
+      "用心設計每一份邀請，為生命中的美好時刻創造獨一無二的數位邀請函",
+    type: "website",
+    locale: "zh_TW",
   },
 };
 
