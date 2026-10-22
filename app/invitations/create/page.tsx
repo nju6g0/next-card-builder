@@ -74,7 +74,7 @@ function CreateInvitationContent() {
     try {
       const result = await createInvitation({
         title,
-        elements: elements as any, // Cast to Element[]
+        elements: elements,
         canvasSize,
         templateId: searchParams.get("template") || undefined,
       });
@@ -218,7 +218,7 @@ function CreateInvitationContent() {
       <PreviewModal
         isOpen={showPreview}
         onClose={() => setShowPreview(false)}
-        elements={elements as any}
+        elements={elements}
         canvasSize={canvasSize}
         title={title}
       />

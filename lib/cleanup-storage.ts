@@ -28,7 +28,7 @@ export function cleanupInvitationStorage(): void {
         publicInvitations[0].id
       ) {
         // 提取 ID 並儲存為新格式
-        const ids = publicInvitations.map((inv: any) => inv.id);
+        const ids = publicInvitations.map((inv: { id: string }) => inv.id);
         localStorage.setItem("public-invitations", JSON.stringify(ids));
         console.log(
           "✓ 已將 public-invitations 從舊格式轉換為新格式（只儲存 ID）",

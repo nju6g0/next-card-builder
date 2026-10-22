@@ -87,16 +87,14 @@ export default function EditInvitationPage() {
     try {
       const result = await updateInvitation(invitationId, {
         title,
-        elements: elements as any, // Cast to Element[]
+        elements: elements,
         canvasSize,
       });
 
       if (result) {
         // 更新本地狀態
         setInvitation((prev) =>
-          prev
-            ? { ...prev, title, elements: elements as any, canvasSize }
-            : null,
+          prev ? { ...prev, title, elements: elements, canvasSize } : null,
         );
         alert("儲存成功！");
         router.push(`/invitations/${invitationId}`);
@@ -276,7 +274,7 @@ export default function EditInvitationPage() {
       <PreviewModal
         isOpen={showPreview}
         onClose={() => setShowPreview(false)}
-        elements={elements as any}
+        elements={elements}
         canvasSize={canvasSize}
         title={title}
       />

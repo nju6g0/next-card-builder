@@ -14,8 +14,8 @@ export function generatePlaceholder(
   width: number,
   height: number,
   text?: string,
-  bgColor: string = 'cccccc',
-  textColor: string = '333333'
+  bgColor: string = "cccccc",
+  textColor: string = "333333",
 ): string {
   const displayText = text || `${width}x${height}`;
   return `https://via.placeholder.com/${width}x${height}/${bgColor}/${textColor}?text=${encodeURIComponent(displayText)}`;
@@ -26,41 +26,44 @@ export function generatePlaceholder(
  * @param dateString - ISO 8601 日期字串
  * @param format - 格式類型
  */
-export function formatDate(dateString: string, format: 'full' | 'date' | 'time' | 'relative' = 'full'): string {
+export function formatDate(
+  dateString: string,
+  format: "full" | "date" | "time" | "relative" = "full",
+): string {
   const date = new Date(dateString);
-  
+
   if (isNaN(date.getTime())) {
-    return '無效日期';
+    return "無效日期";
   }
 
   switch (format) {
-    case 'full':
-      return date.toLocaleString('zh-TW', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
+    case "full":
+      return date.toLocaleString("zh-TW", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
       });
-    
-    case 'date':
-      return date.toLocaleDateString('zh-TW', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
+
+    case "date":
+      return date.toLocaleDateString("zh-TW", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
       });
-    
-    case 'time':
-      return date.toLocaleTimeString('zh-TW', {
-        hour: '2-digit',
-        minute: '2-digit',
+
+    case "time":
+      return date.toLocaleTimeString("zh-TW", {
+        hour: "2-digit",
+        minute: "2-digit",
       });
-    
-    case 'relative':
+
+    case "relative":
       return getRelativeTime(date);
-    
+
     default:
-      return date.toLocaleString('zh-TW');
+      return date.toLocaleString("zh-TW");
   }
 }
 
@@ -76,7 +79,7 @@ function getRelativeTime(date: Date): string {
   const diffDay = Math.floor(diffHour / 24);
 
   if (diffSec < 60) {
-    return '剛剛';
+    return "剛剛";
   } else if (diffMin < 60) {
     return `${diffMin} 分鐘前`;
   } else if (diffHour < 24) {
@@ -84,7 +87,7 @@ function getRelativeTime(date: Date): string {
   } else if (diffDay < 30) {
     return `${diffDay} 天前`;
   } else {
-    return formatDate(date.toISOString(), 'date');
+    return formatDate(date.toISOString(), "date");
   }
 }
 
@@ -97,14 +100,14 @@ export function truncate(text: string, maxLength: number): string {
   if (text.length <= maxLength) {
     return text;
   }
-  return text.substring(0, maxLength) + '...';
+  return text.substring(0, maxLength) + "...";
 }
 
 /**
  * 分類名稱轉換為顯示名稱
  */
 export function cn(...classes: (string | undefined | null | false)[]): string {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 /**
@@ -117,9 +120,9 @@ export function sleep(ms: number): Promise<void> {
 /**
  * Debounce 函式
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
 
@@ -144,7 +147,7 @@ export async function copyToClipboard(text: string): Promise<boolean> {
     await navigator.clipboard.writeText(text);
     return true;
   } catch (error) {
-    console.error('Failed to copy to clipboard:', error);
+    console.error("Failed to copy to clipboard:", error);
     return false;
   }
 }
@@ -154,12 +157,12 @@ export async function copyToClipboard(text: string): Promise<boolean> {
  */
 export function randomColor(): string {
   const colors = [
-    '#6366f1', // primary
-    '#8b5cf6', // secondary
-    '#ec4899', // accent
-    '#10b981', // success
-    '#f59e0b', // warning
-    '#3b82f6', // info
+    "#6366f1", // primary
+    "#8b5cf6", // secondary
+    "#ec4899", // accent
+    "#10b981", // success
+    "#f59e0b", // warning
+    "#3b82f6", // info
   ];
   return colors[Math.floor(Math.random() * colors.length)];
 }
@@ -174,4 +177,32 @@ export function isValidUrl(string: string): boolean {
   } catch {
     return false;
   }
+}
+
+/**
+ * 檢查元素是否鎖定
+ */
+export function isElementLocked(element: { locked?: boolean }): boolean {
+  return element.locked === true;
+}
+
+/**
+ * 檢查元素是否可見
+ */
+export function isElementVisible(element: { visible?: boolean }): boolean {
+  return element.visible !== false;
+}
+
+/**
+ * 獲取元素的游標樣式
+ */
+export function getElementCursor(
+  element: { locked?: boolean },
+  isEditing: boolean,
+  isResizing: boolean,
+): string {
+  if (isEditing) return "default";
+  if (isElementLocked(element)) return "not-allowed";
+  if (isResizing) return "default";
+  return "grab";
 }

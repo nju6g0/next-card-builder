@@ -27,7 +27,7 @@ const VIEWPORT_SIZES = {
 
 interface TemplateDetailClientProps {
   template: RestrictedTemplate;
-  defaultUserValues: Record<string, any>;
+  defaultUserValues: Record<string, string | number | boolean>;
 }
 
 export default function TemplateDetailClient({
@@ -55,7 +55,9 @@ export default function TemplateDetailClient({
 
   const handleUseTemplate = () => {
     if (!isAuthenticated || !currentUser) {
-      router.push(`/login?redirect=/invitations/restricted-edit/${template.id}`);
+      router.push(
+        `/login?redirect=/invitations/restricted-edit/${template.id}`,
+      );
       return;
     }
     router.push(`/invitations/restricted-edit/${template.id}`);

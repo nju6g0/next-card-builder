@@ -6,18 +6,19 @@ import { useState } from "react";
 
 interface PropertyInputProps {
   property: EditableProperty;
-  value: any;
-  onChange: (value: any) => void;
+  value: string | number | boolean;
+  onChange: (value: string | number | boolean) => void;
 }
 
 // 文字輸入元件
 function TextInput({ property, value, onChange }: PropertyInputProps) {
   const maxLength = property.constraints?.maxLength;
+  const stringValue = typeof value === "string" ? value : String(value || "");
 
   return (
     <div className="space-y-1">
       <textarea
-        value={value || ""}
+        value={stringValue}
         onChange={(e) => onChange(e.target.value)}
         maxLength={maxLength}
         rows={3}
@@ -26,7 +27,7 @@ function TextInput({ property, value, onChange }: PropertyInputProps) {
       />
       {maxLength && (
         <div className="text-xs text-neutral-500 text-right">
-          {(value || "").length} / {maxLength}
+          {stringValue.length} / {maxLength}
         </div>
       )}
     </div>
@@ -35,17 +36,19 @@ function TextInput({ property, value, onChange }: PropertyInputProps) {
 
 // 顏色選擇元件
 function ColorInput({ property, value, onChange }: PropertyInputProps) {
+  const stringValue = typeof value === "string" ? value : "#000000";
+
   return (
     <div className="flex items-center space-x-3">
       <input
         type="color"
-        value={value || "#000000"}
+        value={stringValue}
         onChange={(e) => onChange(e.target.value)}
         className="w-12 h-12 border border-neutral-300 rounded cursor-pointer"
       />
       <input
         type="text"
-        value={value || ""}
+        value={stringValue}
         onChange={(e) => onChange(e.target.value)}
         placeholder="#000000"
         pattern="^#[0-9A-Fa-f]{6}$"
@@ -58,12 +61,13 @@ function ColorInput({ property, value, onChange }: PropertyInputProps) {
 // 圖片 URL 輸入元件
 function ImageInput({ property, value, onChange }: PropertyInputProps) {
   const [previewError, setPreviewError] = useState(false);
+  const stringValue = typeof value === "string" ? value : "";
 
   return (
     <div className="space-y-3">
       <input
         type="url"
-        value={value || ""}
+        value={stringValue}
         onChange={(e) => {
           onChange(e.target.value);
           setPreviewError(false);
@@ -71,11 +75,11 @@ function ImageInput({ property, value, onChange }: PropertyInputProps) {
         placeholder="https://example.com/image.jpg"
         className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
       />
-      {value && (
+      {stringValue && (
         <div className="relative w-full h-32 bg-neutral-100 rounded-md overflow-hidden border border-neutral-200">
           {!previewError ? (
             <img
-              src={value}
+              src={stringValue}
               alt="預覽"
               className="w-full h-full object-cover"
               onError={() => setPreviewError(true)}
@@ -89,7 +93,8 @@ function ImageInput({ property, value, onChange }: PropertyInputProps) {
       )}
       {property.constraints?.allowedFormats && (
         <div className="text-xs text-neutral-500">
-          支援格式：{property.constraints.allowedFormats.join(", ").toUpperCase()}
+          支援格式：
+          {property.constraints.allowedFormats.join(", ").toUpperCase()}
         </div>
       )}
     </div>
@@ -100,12 +105,18 @@ function ImageInput({ property, value, onChange }: PropertyInputProps) {
 function NumberInput({ property, value, onChange }: PropertyInputProps) {
   const min = property.constraints?.min;
   const max = property.constraints?.max;
+  const numberValue =
+    typeof value === "number"
+      ? value
+      : typeof value === "string"
+        ? parseFloat(value)
+        : 0;
 
   return (
     <div className="space-y-1">
       <input
         type="number"
-        value={value ?? ""}
+        value={isNaN(numberValue) ? "" : numberValue}
         onChange={(e) => onChange(parseFloat(e.target.value))}
         min={min}
         max={max}
@@ -127,9 +138,10 @@ function NumberInput({ property, value, onChange }: PropertyInputProps) {
 // 屬性欄位元件
 function PropertyField({ property }: { property: EditableProperty }) {
   const { getValue, setValue } = useRestrictedEditorStore();
-  const value = getValue(property.propertyKey);
+  const rawValue = getValue(property.propertyKey);
+  const value = rawValue ?? property.defaultValue;
 
-  const handleChange = (newValue: any) => {
+  const handleChange = (newValue: string | number | boolean) => {
     setValue(property.propertyKey, newValue);
   };
 

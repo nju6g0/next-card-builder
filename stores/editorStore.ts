@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import type {
+  Element,
   BaseElement,
   TextElement,
   ImageElement,
@@ -17,17 +18,17 @@ interface EditorState {
   showGrid: boolean;
 
   // 元件管理
-  elements: BaseElement[];
+  elements: Element[];
   selectedElementId: string | null;
   editingElementId: string | null;
 
   // 歷史記錄 (Undo/Redo)
-  history: BaseElement[][];
+  history: Element[][];
   historyIndex: number;
   maxHistory: number;
 
   // 複製/貼上
-  clipboard: BaseElement | null;
+  clipboard: Element | null;
 
   // UI 狀態
   isDragging: boolean;
@@ -38,7 +39,7 @@ interface EditorState {
   toggleGrid: () => void;
 
   // 元件 CRUD
-  addElement: (element: BaseElement) => void;
+  addElement: (element: Element) => void;
   updateElement: (
     id: string,
     updates:
@@ -54,7 +55,7 @@ interface EditorState {
 
   // 選取管理
   selectElement: (id: string | null) => void;
-  getSelectedElement: () => BaseElement | null;
+  getSelectedElement: () => Element | null;
 
   // 編輯管理
   setEditingElement: (id: string | null) => void;
@@ -67,7 +68,7 @@ interface EditorState {
   updateZIndex: (id: string, zIndex: number) => void;
 
   // 批次操作
-  setElements: (elements: BaseElement[]) => void;
+  setElements: (elements: Element[]) => void;
   clearElements: () => void;
 
   // 複製/貼上
@@ -110,7 +111,7 @@ const generateId = () =>
   `element-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 // 深拷貝元件
-const cloneElement = (element: BaseElement): BaseElement => {
+const cloneElement = (element: Element): Element => {
   return JSON.parse(JSON.stringify(element));
 };
 
@@ -161,7 +162,7 @@ export const useEditorStore = create<EditorState>()(
       updateElement: (id, updates) => {
         set((state) => {
           const newElements = state.elements.map((el) =>
-            el.id === id ? ({ ...el, ...updates } as BaseElement) : el,
+            el.id === id ? ({ ...el, ...updates } as Element) : el,
           );
 
           return {
@@ -195,7 +196,7 @@ export const useEditorStore = create<EditorState>()(
 
           const maxZIndex = Math.max(...state.elements.map((e) => e.zIndex));
 
-          const newElement: BaseElement = {
+          const newElement: Element = {
             ...cloneElement(element),
             id: generateId(),
             x: element.x + 20,
@@ -353,7 +354,7 @@ export const useEditorStore = create<EditorState>()(
               ? Math.max(...state.elements.map((e) => e.zIndex))
               : 0;
 
-          const newElement: BaseElement = {
+          const newElement: Element = {
             ...cloneElement(state.clipboard),
             id: generateId(),
             x: state.clipboard.x + 20,

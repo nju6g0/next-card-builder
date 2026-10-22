@@ -65,8 +65,8 @@ function LayerItem({ element, isSelected, onSelect, index }: LayerItemProps) {
     }
   };
 
-  const isLocked = (element as any).locked || false;
-  const isVisible = (element as any).visible !== false;
+  const isLocked = element.locked || false;
+  const isVisible = element.visible !== false;
   const isBackground =
     element.type === "image" && (element as ImageElement).isBackground;
 
@@ -125,7 +125,7 @@ function LayerItem({ element, isSelected, onSelect, index }: LayerItemProps) {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            updateElement(element.id, { visible: !isVisible } as any);
+            updateElement(element.id, { ...element, visible: !isVisible });
           }}
           className="p-1 hover:bg-neutral-200 rounded transition-colors"
           title={isVisible ? "隱藏" : "顯示"}
@@ -141,7 +141,7 @@ function LayerItem({ element, isSelected, onSelect, index }: LayerItemProps) {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            updateElement(element.id, { locked: !isLocked } as any);
+            updateElement(element.id, { ...element, locked: !isLocked });
           }}
           className="p-1 hover:bg-neutral-200 rounded transition-colors"
           title={isLocked ? "解鎖" : "鎖定"}

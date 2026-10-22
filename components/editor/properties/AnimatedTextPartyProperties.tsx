@@ -33,7 +33,10 @@ export default function AnimatedTextPartyProperties({
   const { updateElement } = useEditorStore();
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const handleChange = (field: keyof AnimatedTextPartyElement, value: any) => {
+  const handleChange = (
+    field: keyof AnimatedTextPartyElement,
+    value: string | number | boolean,
+  ) => {
     updateElement(element.id, { [field]: value });
   };
 

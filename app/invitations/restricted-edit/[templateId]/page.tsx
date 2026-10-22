@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import RestrictedEditor from "@/components/restricted-editor/RestrictedEditor";
 import { getRestrictedTemplateById } from "@/lib/templates/templateRegistry";
 import type { RestrictedTemplate } from "@/types";
@@ -50,16 +51,14 @@ export default function RestrictedEditPage() {
       <div className="h-screen flex items-center justify-center bg-neutral-50">
         <div className="text-center">
           <div className="text-6xl mb-4">❌</div>
-          <h1 className="text-2xl font-bold text-neutral-900 mb-2">
-            載入失敗
-          </h1>
+          <h1 className="text-2xl font-bold text-neutral-900 mb-2">載入失敗</h1>
           <p className="text-neutral-600 mb-6">{error || "未知錯誤"}</p>
-          <a
+          <Link
             href="/templates"
             className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors inline-block"
           >
             返回模板列表
-          </a>
+          </Link>
         </div>
       </div>
     );

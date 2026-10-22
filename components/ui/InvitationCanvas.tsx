@@ -1,6 +1,6 @@
 "use client";
 
-import { Element } from "@/types";
+import { Element, ImageElement } from "@/types";
 import { motion } from "motion/react";
 import AnimatedTextWeddingRenderer from "@/components/elements/AnimatedTextWeddingRenderer";
 import AnimatedTextPartyRenderer from "@/components/elements/AnimatedTextPartyRenderer";
@@ -26,12 +26,15 @@ export default function InvitationCanvas({
 }: InvitationCanvasProps) {
   // 找出背景圖片元素
   const backgroundImage = elements.find(
-    (el) => el.type === "image" && (el as any).isBackground,
+    (el): el is ImageElement => el.type === "image" && el.isBackground,
   );
 
   // 按 zIndex 排序元件（排除背景圖片，因為它會被單獨渲染）
   const sortedElements = [...elements]
-    .filter((el) => !(el.type === "image" && (el as any).isBackground))
+    .filter(
+      (el): el is Exclude<Element, ImageElement & { isBackground: true }> =>
+        !(el.type === "image" && (el as ImageElement).isBackground),
+    )
     .sort((a, b) => a.zIndex - b.zIndex);
 
   // 渲染單個元件
@@ -159,17 +162,17 @@ export default function InvitationCanvas({
         <div
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url(${(backgroundImage as any).src})`,
+            backgroundImage: `url(${backgroundImage.src})`,
             backgroundSize:
-              (backgroundImage as any).objectFit === "contain"
+              backgroundImage.objectFit === "contain"
                 ? "contain"
-                : (backgroundImage as any).objectFit === "fill"
+                : backgroundImage.objectFit === "fill"
                   ? "100% 100%"
                   : "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            filter: (backgroundImage as any).blur
-              ? `blur(${(backgroundImage as any).blur}px)`
+            filter: backgroundImage.blur
+              ? `blur(${backgroundImage.blur}px)`
               : undefined,
           }}
         />

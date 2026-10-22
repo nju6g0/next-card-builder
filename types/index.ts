@@ -96,7 +96,7 @@ export interface Invitation {
   templateId?: string; // 如果從範本建立
   isRestricted?: boolean; // 標記為受限編輯（來自受限模板）
   restrictedTemplateId?: string; // 來源受限模板 ID
-  userValues?: Record<string, any>; // 使用者自訂值 (propertyKey: value)
+  userValues?: Record<string, string | number | boolean>; // 使用者自訂值 (propertyKey: value)
 }
 
 // RSVP 回覆
@@ -115,7 +115,7 @@ export interface EditableProperty {
   label: string; // 使用者介面顯示名稱
   propertyKey: string; // 對應到模板中的屬性 key
   type: "text" | "color" | "image" | "number";
-  defaultValue: any;
+  defaultValue: string | number | boolean;
   constraints?: {
     minLength?: number;
     maxLength?: number;
@@ -172,6 +172,9 @@ export interface CreateInvitationData {
   elements: Element[];
   canvasSize: { width: number; height: number };
   templateId?: string;
+  isRestricted?: boolean;
+  restrictedTemplateId?: string;
+  userValues?: Record<string, string | number | boolean>;
 }
 
 // RSVP 提交資料

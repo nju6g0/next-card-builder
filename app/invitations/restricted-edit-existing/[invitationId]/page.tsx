@@ -70,7 +70,9 @@ export default function RestrictedEditExistingPage() {
   }, [invitationId, currentUser, isAuthenticated]);
 
   // 儲存處理
-  const handleSave = async (userValues: Record<string, any>) => {
+  const handleSave = async (
+    userValues: Record<string, string | number | boolean>,
+  ) => {
     if (!isAuthenticated || !currentUser || !invitation) return;
 
     const response = await invitationsApi.update(currentUser, invitation.id, {

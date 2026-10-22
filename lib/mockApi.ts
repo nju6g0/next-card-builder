@@ -159,9 +159,9 @@ export const invitationsApi = {
         createdBy: email,
         templateId: data.templateId,
         // 受限模板相關欄位
-        isRestricted: (data as any).isRestricted,
-        restrictedTemplateId: (data as any).restrictedTemplateId,
-        userValues: (data as any).userValues,
+        isRestricted: data.isRestricted,
+        restrictedTemplateId: data.restrictedTemplateId,
+        userValues: data.userValues,
       };
 
       invitations.push(newInvitation);

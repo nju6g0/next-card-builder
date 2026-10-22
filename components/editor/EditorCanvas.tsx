@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import { useEditorStore } from "@/stores/editorStore";
+import type { ImageElement } from "@/types";
 import DraggableElement from "./DraggableElement";
 import { motion } from "motion/react";
 import { UploadIcon } from "@/components/icons";
@@ -36,9 +37,11 @@ export default function EditorCanvas({ className = "" }: EditorCanvasProps) {
   };
 
   // 找出背景圖片元素
-  const backgroundImage = elements.find(
-    (el) => el.type === "image" && (el as any).isBackground,
-  );
+  const backgroundImage = elements.find((el): el is ImageElement => {
+    if (el.type !== "image") return false;
+    const imageEl = el as ImageElement;
+    return imageEl.isBackground === true;
+  });
 
   return (
     <div
@@ -63,17 +66,17 @@ export default function EditorCanvas({ className = "" }: EditorCanvasProps) {
             <div
               className="absolute inset-0 pointer-events-none z-0"
               style={{
-                backgroundImage: `url(${(backgroundImage as any).src})`,
+                backgroundImage: `url(${backgroundImage.src})`,
                 backgroundSize:
-                  (backgroundImage as any).objectFit === "contain"
+                  backgroundImage.objectFit === "contain"
                     ? "contain"
-                    : (backgroundImage as any).objectFit === "fill"
+                    : backgroundImage.objectFit === "fill"
                       ? "100% 100%"
                       : "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                filter: (backgroundImage as any).blur
-                  ? `blur(${(backgroundImage as any).blur}px)`
+                filter: backgroundImage.blur
+                  ? `blur(${backgroundImage.blur}px)`
                   : undefined,
               }}
             />
@@ -95,7 +98,14 @@ export default function EditorCanvas({ className = "" }: EditorCanvasProps) {
 
           {/* 渲染所有元件（排除背景圖片，因為它已經被渲染為背景） */}
           {elements
-            .filter((el) => !(el.type === "image" && (el as any).isBackground))
+            .filter(
+              (
+                el,
+              ): el is Exclude<
+                typeof el,
+                ImageElement & { isBackground: true }
+              > => !(el.type === "image" && (el as ImageElement).isBackground),
+            )
             .slice()
             .sort((a, b) => a.zIndex - b.zIndex)
             .map((element) => (

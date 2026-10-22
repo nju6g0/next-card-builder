@@ -39,7 +39,10 @@ export default function TextProperties({ element }: TextPropertiesProps) {
   const { updateElement } = useEditorStore();
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const handleChange = (field: keyof TextElement, value: any) => {
+  const handleChange = (
+    field: keyof TextElement,
+    value: string | number | boolean,
+  ) => {
     updateElement(element.id, { [field]: value });
   };
 

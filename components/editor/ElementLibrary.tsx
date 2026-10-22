@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { motion, AnimatePresence } from "motion/react";
 import type {
+  Element,
   ElementType,
   TextElement,
   ImageElement,
@@ -139,7 +140,7 @@ function DraggableLibraryItem({ template }: { template: ElementTemplate }) {
       height: template.type === "text" ? 50 : 200,
       zIndex: 0,
       ...template.defaultProps,
-    } as any;
+    } as Element;
 
     addElement(newElement);
   };

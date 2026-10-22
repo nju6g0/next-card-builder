@@ -42,7 +42,7 @@ const FormField = ({
 );
 
 interface PartyPreviewProps {
-  userValues: Record<string, any>;
+  userValues: Record<string, string | number | boolean>;
   isPlaying?: boolean;
   invitationId?: string; // 用於 RSVP 提交
   isPublicView?: boolean; // 是否為公開頁面（訪客檢視）
@@ -64,21 +64,39 @@ export default function PartyPreview({
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // 輔助函數：安全地將 userValues 轉換為字符串
+  const getString = (key: string, defaultValue: string): string => {
+    const value = userValues[key];
+    if (typeof value === "string") return value;
+    if (typeof value === "number") return String(value);
+    if (typeof value === "boolean") return String(value);
+    return defaultValue;
+  };
+
+  // 輔助函數：安全地獲取布林值
+  const getBoolean = (key: string, defaultValue: boolean): boolean => {
+    const value = userValues[key];
+    if (typeof value === "boolean") return value;
+    return defaultValue;
+  };
+
   // 從 userValues 獲取值
-  const welcomeText = userValues.welcomeText || "Welcome";
-  const partyText = userValues.partyText || "to the Party!";
-  const introTextColor = userValues.introTextColor || "#000000";
-  const imageUrl =
-    userValues.backgroundImage || "https://picsum.photos/800/600";
+  const welcomeText = getString("welcomeText", "Welcome");
+  const partyText = getString("partyText", "to the Party!");
+  const introTextColor = getString("introTextColor", "#000000");
+  const imageUrl = getString(
+    "backgroundImage",
+    "https://picsum.photos/800/600",
+  );
 
   // RSVP 相關設定
-  const rsvpTitle = userValues.rsvpTitle || "Join the Party!";
-  const rsvpEnabled = userValues.rsvpEnabled !== false; // 預設啟用
-  const submitButtonText = userValues.submitButtonText || "Count Me In!";
-  const formBgColor = userValues.formBgColor || "rgba(255, 255, 255, 0.95)";
-  const formTextColor = userValues.formTextColor || "#1a1a1a";
-  const buttonBgColor = userValues.buttonBgColor || "#ff6b6b";
-  const buttonTextColor = userValues.buttonTextColor || "#ffffff";
+  const rsvpTitle = getString("rsvpTitle", "Join the Party!");
+  const rsvpEnabled = getBoolean("rsvpEnabled", true); // 預設啟用
+  const submitButtonText = getString("submitButtonText", "Count Me In!");
+  const formBgColor = getString("formBgColor", "rgba(255, 255, 255, 0.95)");
+  const formTextColor = getString("formTextColor", "#1a1a1a");
+  const buttonBgColor = getString("buttonBgColor", "#ff6b6b");
+  const buttonTextColor = getString("buttonTextColor", "#ffffff");
 
   const handleRSVP = async () => {
     // 如果是預覽模式或沒有 invitationId，只做前端驗證
@@ -132,10 +150,13 @@ export default function PartyPreview({
   // 重新播放動畫
   useEffect(() => {
     if (isPlaying) {
-      setAnimationComplete(false);
-      setRsvpSubmitted(false);
-      setFormData({ email: "", name: "", attendance: "yes" });
-      setKey((prev) => prev + 1);
+      // 使用 queueMicrotask 延遲狀態更新，避免在 effect 中直接調用 setState
+      queueMicrotask(() => {
+        setAnimationComplete(false);
+        setRsvpSubmitted(false);
+        setFormData({ email: "", name: "", attendance: "yes" });
+        setKey((prev) => prev + 1);
+      });
     }
   }, [isPlaying]);
 
@@ -306,7 +327,7 @@ export default function PartyPreview({
                         className="text-sm"
                         style={{ color: formTextColor }}
                       >
-                        Sorry, can't make it 😢
+                        Sorry, can&apos;t make it 😢
                       </span>
                     </label>
                   </div>

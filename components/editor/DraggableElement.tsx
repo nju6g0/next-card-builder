@@ -11,6 +11,7 @@ import type {
   AnimatedTextPartyElement,
 } from "@/types";
 import { useEditorStore } from "@/stores/editorStore";
+import { isElementLocked, isElementVisible } from "@/lib/utils";
 import TextElementRenderer from "@/components/elements/TextElementRenderer";
 import ImageElementRenderer from "@/components/elements/ImageElementRenderer";
 import RsvpFormElementRenderer from "@/components/elements/RsvpFormElementRenderer";
@@ -290,12 +291,12 @@ export default function DraggableElement({
       ? "grabbing"
       : isEditing
         ? "default"
-        : (element as any).locked
+        : isElementLocked(element)
           ? "not-allowed"
           : isResizing
             ? "default"
             : "grab",
-    opacity: (element as any).visible === false ? 0.3 : 1,
+    opacity: !isElementVisible(element) ? 0.3 : 1,
   };
 
   // 使用臨時尺寸或實際尺寸
@@ -309,7 +310,7 @@ export default function DraggableElement({
   // 開始拖拽元件（移動位置）
   const handleElementDragStart = (e: React.MouseEvent) => {
     // 如果是編輯模式、鎖定或調整大小中，不處理
-    if (isEditing || (element as any).locked || isResizing) {
+    if (isEditing || isElementLocked(element) || isResizing) {
       return;
     }
 
@@ -381,7 +382,7 @@ export default function DraggableElement({
   const handleDoubleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     // 鎖定的元件無法編輯
-    if (!(element as any).locked) {
+    if (!isElementLocked(element)) {
       setEditingElement(element.id);
       onSelect();
     }
@@ -463,12 +464,12 @@ export default function DraggableElement({
       }}
       className={`
         ${isSelected ? "ring-2 ring-primary ring-offset-2" : ""}
-        ${(element as any).locked ? "cursor-not-allowed" : ""}
+        ${isElementLocked(element) ? "cursor-not-allowed" : ""}
         ${isResizing ? "ring-2 ring-blue-500 ring-offset-2" : ""}
       `}
       onClick={handleClick}
       onMouseDown={
-        !isEditing && !(element as any).locked && !isResizing
+        !isEditing && !isElementLocked(element) && !isResizing
           ? handleElementDragStart
           : undefined
       }
@@ -479,7 +480,7 @@ export default function DraggableElement({
       {isSelected &&
         !isDraggingElement &&
         !isEditing &&
-        !(element as any).locked && (
+        !isElementLocked(element) && (
           <>
             {/* 左上角 */}
             <div
@@ -519,14 +520,14 @@ export default function DraggableElement({
       )}
 
       {/* 鎖定指示 */}
-      {(element as any).locked && (
+      {isElementLocked(element) && (
         <div className="absolute top-1 right-1 bg-amber-500 text-white p-1 rounded shadow-sm pointer-events-none">
           <LockIcon className="w-3 h-3" />
         </div>
       )}
 
       {/* 隱藏指示 */}
-      {(element as any).visible === false && (
+      {!isElementVisible(element) && (
         <div className="absolute bottom-1 right-1 bg-neutral-700 text-white p-1 rounded shadow-sm pointer-events-none">
           <EyeOffIcon className="w-3 h-3" />
         </div>

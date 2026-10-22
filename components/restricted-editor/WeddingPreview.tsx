@@ -39,7 +39,7 @@ const FormField = ({
 );
 
 interface WeddingPreviewProps {
-  userValues: Record<string, any>;
+  userValues: Record<string, string | number | boolean>;
   isPlaying?: boolean;
   invitationId?: string; // 用於 RSVP 提交
   isPublicView?: boolean; // 是否為公開頁面（訪客檢視）
@@ -63,22 +63,42 @@ export default function WeddingPreview({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [key, setKey] = useState(0);
 
+  // 輔助函數：安全地將 userValues 轉換為字符串
+  const getString = (key: string, defaultValue: string): string => {
+    const value = userValues[key];
+    if (typeof value === "string") return value;
+    if (typeof value === "number") return String(value);
+    if (typeof value === "boolean") return String(value);
+    return defaultValue;
+  };
+
+  // 輔助函數：安全地獲取布林值
+  const getBoolean = (key: string, defaultValue: boolean): boolean => {
+    const value = userValues[key];
+    if (typeof value === "boolean") return value;
+    return defaultValue;
+  };
+
   // 從 userValues 獲取值
-  const titleText = userValues.titleText || "We're Getting Married!";
-  const descriptionText =
-    userValues.descriptionText || "Lorem ipsum dolor sit...";
-  const textColor = userValues.textColor || "#ffffff";
-  const formBgColor = userValues.formBgColor || "#fffbeb";
-  const formTextColor = userValues.formTextColor || "#134e4a";
-  const buttonBgColor = userValues.buttonBgColor || "#ffffff";
-  const buttonTextColor = userValues.buttonTextColor || "#134e4a";
-  const imageUrl =
-    userValues.backgroundImage || "https://picsum.photos/800/600";
+  const titleText = getString("titleText", "We're Getting Married!");
+  const descriptionText = getString(
+    "descriptionText",
+    "Lorem ipsum dolor sit...",
+  );
+  const textColor = getString("textColor", "#ffffff");
+  const formBgColor = getString("formBgColor", "#fffbeb");
+  const formTextColor = getString("formTextColor", "#134e4a");
+  const buttonBgColor = getString("buttonBgColor", "#ffffff");
+  const buttonTextColor = getString("buttonTextColor", "#134e4a");
+  const imageUrl = getString(
+    "backgroundImage",
+    "https://picsum.photos/800/600",
+  );
 
   // RSVP 相關設定
-  const rsvpTitle = userValues.rsvpTitle || "RSVP";
-  const rsvpEnabled = userValues.rsvpEnabled !== false; // 預設啟用
-  const submitButtonText = userValues.submitButtonText || "Submit";
+  const rsvpTitle = getString("rsvpTitle", "RSVP");
+  const rsvpEnabled = getBoolean("rsvpEnabled", true); // 預設啟用
+  const submitButtonText = getString("submitButtonText", "Submit");
 
   const handleRSVP = async () => {
     // 如果是預覽模式或沒有 invitationId，只做前端驗證
@@ -152,10 +172,13 @@ export default function WeddingPreview({
   // 重新播放動畫
   useEffect(() => {
     if (isPlaying) {
-      setShowArch(true);
-      setRsvpSubmitted(false);
-      setFormData({ email: "", name: "", attendance: "yes" });
-      setKey((prev) => prev + 1);
+      // 使用 queueMicrotask 延遲狀態更新，避免在 effect 中直接調用 setState
+      queueMicrotask(() => {
+        setShowArch(true);
+        setRsvpSubmitted(false);
+        setFormData({ email: "", name: "", attendance: "yes" });
+        setKey((prev) => prev + 1);
+      });
     }
   }, [isPlaying]);
 
@@ -315,7 +338,7 @@ export default function WeddingPreview({
                       style={{ accentColor: formTextColor }}
                     />
                     <span className="text-sm" style={{ color: formTextColor }}>
-                      Yes, I'll be there
+                      Yes, I&apos;ll be there
                     </span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
@@ -334,7 +357,7 @@ export default function WeddingPreview({
                       style={{ accentColor: formTextColor }}
                     />
                     <span className="text-sm" style={{ color: formTextColor }}>
-                      Sorry, I can't make it
+                      Sorry, I can&apos;t make it
                     </span>
                   </label>
                 </div>

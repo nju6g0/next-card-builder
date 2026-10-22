@@ -12,8 +12,10 @@ import { ArrowLeftIcon, ClockIcon, SpinnerIcon } from "@/components/icons";
 interface RestrictedEditorProps {
   template: RestrictedTemplate;
   invitationId?: string; // 編輯現有邀請函時提供
-  initialUserValues?: Record<string, any>; // 編輯現有邀請函時的初始值
-  onSave?: (userValues: Record<string, any>) => Promise<void>;
+  initialUserValues?: Record<string, string | number | boolean>; // 編輯現有邀請函時的初始值
+  onSave?: (
+    userValues: Record<string, string | number | boolean>,
+  ) => Promise<void>;
 }
 
 export default function RestrictedEditor({
@@ -94,7 +96,7 @@ export default function RestrictedEditor({
           isRestricted: true,
           restrictedTemplateId: template.id,
           userValues,
-        } as any);
+        });
 
         if (!response.success) {
           throw new Error(response.error || "儲存失敗");

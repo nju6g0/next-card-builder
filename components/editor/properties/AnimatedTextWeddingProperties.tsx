@@ -35,7 +35,7 @@ export default function AnimatedTextWeddingProperties({
 
   const handleChange = (
     field: keyof AnimatedTextWeddingElement,
-    value: any,
+    value: string | number | boolean,
   ) => {
     updateElement(element.id, { [field]: value });
   };

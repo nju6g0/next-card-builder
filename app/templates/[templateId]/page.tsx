@@ -58,7 +58,7 @@ export default async function RestrictedTemplateDetailPage({
   }
 
   // 準備預設值
-  const defaultUserValues: Record<string, any> = {};
+  const defaultUserValues: Record<string, string | number | boolean> = {};
   template.editableProperties.forEach((prop) => {
     defaultUserValues[prop.propertyKey] = prop.defaultValue;
   });

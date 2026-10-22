@@ -1,8 +1,8 @@
 import { getAllRestrictedTemplates } from "@/lib/templates/templateRegistry";
-import TemplateCard from "@/components/ui/TemplateCard";
 import { Button } from "@/components/ui/Button";
 import TemplatesClient from "@/components/templates/TemplatesClient";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "邀請函範本 - Cardian 卡典",
@@ -42,11 +42,11 @@ export default function TemplatesPage() {
           <p className="text-lg mb-lg opacity-90">
             從空白畫布開始，完全自由地設計您的邀請函
           </p>
-          <a href="/invitations/create">
+          <Link href="/invitations/create">
             <Button variant="primary" size="large">
               建立空白邀請函
             </Button>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

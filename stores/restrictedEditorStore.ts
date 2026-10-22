@@ -8,7 +8,7 @@ interface RestrictedEditorState {
   template: RestrictedTemplate | null;
 
   // 使用者自訂值 (propertyKey: value)
-  userValues: Record<string, any>;
+  userValues: Record<string, string | number | boolean>;
 
   // 預覽狀態
   isPreviewMode: boolean;
@@ -20,9 +20,9 @@ interface RestrictedEditorState {
 
   // Actions
   setTemplate: (template: RestrictedTemplate) => void;
-  setValue: (propertyKey: string, value: any) => void;
-  setValues: (values: Record<string, any>) => void;
-  getValue: (propertyKey: string) => any;
+  setValue: (propertyKey: string, value: string | number | boolean) => void;
+  setValues: (values: Record<string, string | number | boolean>) => void;
+  getValue: (propertyKey: string) => string | number | boolean | undefined;
   resetToDefaults: () => void;
 
   // 預覽控制
@@ -59,7 +59,7 @@ export const useRestrictedEditorStore = create<RestrictedEditorState>()(
       // 設定模板
       setTemplate: (template) => {
         // 從模板的可編輯屬性中提取預設值
-        const defaultValues: Record<string, any> = {};
+        const defaultValues: Record<string, string | number | boolean> = {};
         template.editableProperties.forEach((prop) => {
           defaultValues[prop.propertyKey] = prop.defaultValue;
         });
@@ -112,7 +112,7 @@ export const useRestrictedEditorStore = create<RestrictedEditorState>()(
         const state = get();
         if (!state.template) return;
 
-        const defaultValues: Record<string, any> = {};
+        const defaultValues: Record<string, string | number | boolean> = {};
         state.template.editableProperties.forEach((prop) => {
           defaultValues[prop.propertyKey] = prop.defaultValue;
         });

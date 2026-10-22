@@ -107,7 +107,9 @@ export default function Editor({ onSave, onPreview }: EditorProps) {
         elementType === "rsvp-form" ? 200 : elementType === "text" ? 50 : 150;
 
       // 獲取最終的滑鼠位置（初始位置 + 拖曳偏移）
-      const activatorEvent = (event as any).activatorEvent;
+      const activatorEvent = (
+        event as unknown as { activatorEvent?: MouseEvent }
+      ).activatorEvent;
       let x: number;
       let y: number;
 

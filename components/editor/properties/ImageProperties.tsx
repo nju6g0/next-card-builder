@@ -19,7 +19,10 @@ export default function ImageProperties({ element }: ImagePropertiesProps) {
   const { updateElement, canvasSize } = useEditorStore();
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const handleChange = (field: keyof ImageElement, value: any) => {
+  const handleChange = (
+    field: keyof ImageElement,
+    value: string | number | boolean,
+  ) => {
     updateElement(element.id, { [field]: value });
   };
 

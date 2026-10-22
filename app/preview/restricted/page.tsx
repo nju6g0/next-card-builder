@@ -8,7 +8,7 @@ import type { RestrictedTemplate } from "@/types";
 export default function RestrictedPreviewPage() {
   const [previewData, setPreviewData] = useState<{
     template: RestrictedTemplate;
-    userValues: Record<string, any>;
+    userValues: Record<string, string | number | boolean>;
   } | null>(null);
 
   useEffect(() => {
@@ -16,7 +16,9 @@ export default function RestrictedPreviewPage() {
     const data = sessionStorage.getItem("preview-data");
     if (data) {
       try {
-        setPreviewData(JSON.parse(data));
+        const parsed = JSON.parse(data);
+        // 使用 setTimeout 避免在 effect 中直接調用 setState
+        setTimeout(() => setPreviewData(parsed), 0);
       } catch (err) {
         console.error("解析預覽資料失敗:", err);
       }
