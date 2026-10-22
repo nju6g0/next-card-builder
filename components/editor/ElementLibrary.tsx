@@ -83,10 +83,10 @@ const ELEMENT_TEMPLATES: ElementTemplate[] = [
   {
     type: "animated-text-wedding",
     icon: <SparklesIcon className="w-6 h-6" />,
-    label: "Wedding 動畫",
+    label: "淡入旋轉文字",
     description: "淡入旋轉動畫文字",
     defaultProps: {
-      content: "We're Getting Married!",
+      content: "Welcome to the Party!",
       fontSize: 32,
       fontFamily: "Playfair Display",
       color: "#000000",
@@ -97,13 +97,13 @@ const ELEMENT_TEMPLATES: ElementTemplate[] = [
   {
     type: "animated-text-party",
     icon: <EmojiIcon className="w-6 h-6" />,
-    label: "Party 動畫",
+    label: "逐字飛入文字",
     description: "逐字飛入動畫文字",
     defaultProps: {
-      content: "Welcome to the Party!",
+      content: "We're Getting Married!",
       fontSize: 32,
       fontFamily: "Playfair Display",
-      color: "#ffffff",
+      color: "#000000",
       fontWeight: 600,
       animationDelay: 0,
       charStaggerDelay: 0.05,

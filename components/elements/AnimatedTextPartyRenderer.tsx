@@ -24,10 +24,7 @@ export default function AnimatedTextPartyRenderer({
 
   return (
     <div className="w-full h-full flex items-center justify-center overflow-hidden">
-      <div
-        className="text-center px-2 break-words"
-        style={textStyle}
-      >
+      <div className="text-center px-2 break-words" style={textStyle}>
         {content.split("").map((char, index) =>
           char === " " ? (
             <span key={`${element.id}-char-${index}`}> </span>
@@ -35,17 +32,18 @@ export default function AnimatedTextPartyRenderer({
             <motion.span
               key={`${element.id}-char-${index}`}
               className="inline-block"
-              initial={{ y: 50, rotate: 100 }}
+              initial={{ y: 180, rotate: 100 }}
               animate={{ y: 0, rotate: 0 }}
               transition={{
                 duration: 0.6,
-                delay: element.animationDelay + index * element.charStaggerDelay,
+                delay:
+                  element.animationDelay + index * element.charStaggerDelay,
                 ease: "easeOut",
               }}
             >
               {char}
             </motion.span>
-          )
+          ),
         )}
       </div>
     </div>
